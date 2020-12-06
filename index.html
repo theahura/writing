@@ -258,43 +258,62 @@
         more royal, and -Y to be less royal. 
       </p>
       <div class="image-holder">
-        <img src="sparky_and_lego.jpeg" width="400" />
+        <img src="coords.png" width="400" />
         <p>
           Not a political compass meme.
         </p>
       </div>
       <p>
         With this rough coordinate system, we can <em>embed</em> words by mapping them
-        into coordinates. For example, we might say the word King is mapped to 
+        into x-y values. For example, we might say the word King is mapped to 
         coordinates [1, 1]; the word Queen is mapped to [-1, 1]; the word Man is mapped
-        to [1, 0], and the word Woman is mapped to [-1, 0].
+        to [1, 0]; and the word Woman is mapped to [-1, 0].
       </p>
       <div class="image-holder">
-        <img src="sparky_and_lego.jpeg" width="400" />
+        <img src="coords-mapped.png" width="400" />
         <p>
           Not a political compass meme.
         </p>
       </div>
       <p>
-        For a slightly different framing, I think float vectors are neat because they
-        correspond really well to geography. People aren't great at remembering lots of
-        numbers, but we are pretty good at spatial reasoning. Embeddings allow us
-        to map concepts into geometric spaces. The technical term for this is a
-        N-dimensional manifold. 
+        Mathematically, we can do some interesting things with our embedded concepts.
+        For example, we can take the word 'King', subtract 'Man', add 'Woman', and
+        get 'Queen'. Hopefully its also easy to see how we could add other concepts
+        (and other words) to our basic embedding system. If we wanted to embed words
+        like 'prince' or 'princess', we could add another dimension for 'Age' and plot
+        our points accordingly.
+      </p>
+      <div class="image-holder">
+        <img src="word-math.png" />
+        <p>
+        This example is pretty famous in NLP, often in relation to a word embedding
+        generator called <a href="http://jalammar.github.io/illustrated-word2vec/">Word2Vec</a>.
+        </p>
+      </div>
+      <p>
+        In general, float vectors correspond really well to geometry. Yea, people aren't great
+        at remembering lots of numbers, but we do a pretty good job with spatial reasoning.
+        Embeddings allow us to map concepts into geometric spaces, where metrics like
+        'distance' can be relatively easily quantified. When I think about creating a model
+        to embed cars, I can almost visualize a map of some foreign land, where
+        different points on the map represent specific car makes and models. You have
+        a Mercedes section, which is pretty close to the BMW section, and kinda far from the
+        school bus section. If our map is pretty good at making sure similar things are
+        close to each other, we've solved 90% of the deep learning problem.
       </p>
       <h6>Imperfect Information</h6>
       <p>
         With infinite resources, we could perfectly convert any piece of data from one
         format to another. That's neat, but also just about useless. Most of the time,
         we care about _removing_ information, filtering important data from noise.
-        This is especially true in Deep Learning. A
+        This is especially true in Deep Learning, where a
         <a href="https://www.youtube.com/watch?v=ACmydtFDTGs">hotdog image classifier</a>
         is taking in thousands of pixel values and returning only a single bit. 
       </p>
       <p>
         When we talk about embeddings, we generally refer to a float-vector that compresses
         the relevant information into a smaller, more manageable size while still keeping
-        the important information around.
+        the important information around. 
       </p>
     </div>
   </div>
