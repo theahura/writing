@@ -53,6 +53,6 @@ h6 {
   padding-top: 40px;
 }
 
-.acknowledgements {
+.acknowledgements hg, .acknowledgements p {
   font-size: 14px; 
 }
