@@ -6,6 +6,10 @@ html, body {
   color: rgb(72, 72, 72);
 }
 
+a {
+ color: #875e91; 
+}
+
 h1,
 h3 {
   font-weight: normal;
