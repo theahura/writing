@@ -47,6 +47,8 @@ h6 {
 .image-holder {
   text-align: center;
   font-size: 14px;
+  padding: 30px;
+  padding-top: 40px;
 }
 
 .acknowledgements {
