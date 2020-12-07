@@ -2,6 +2,7 @@ body {
   font-family: Consolas, monaco, monospace;
   padding: 0;
   margin: 0;
+  width: 100%;
 }
 
 h1,
@@ -31,8 +32,8 @@ h6 {
 }
 
 .writing-holder {
-  max-width: 1000px;
-  min-width: 600px;
+  max-width: 800px;
+  padding: 15px;
 }
 
 .writing {
@@ -47,5 +48,5 @@ h6 {
 }
 
 .acknowledgements {
- font-size:14px; 
+  font-size: 14px; 
 }
