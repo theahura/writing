@@ -339,9 +339,15 @@
         have a 'gender' dimension, and a 'royalty' dimension, and an 'age' dimension, and
         they don't mix at all. To work with larger data, we need to treat
         combinations of our float values as having unique meaning. Maybe +Y means
-        'royal' and +Z means 'old', but [+Y, +Z] means 'purple'. Going back to our
+        'royal' and +X means 'masculine', but [+Y, +X] means 'purple'. Going back to our
         imaginary map analogy, North East isn't the average of North and East. 
       </p>
+      <div class="image-holder">
+        <img src="multi-embed.png" width="600" />
+        <p>
+          A rough idea of how an embedding might represent many concepts in only two dimensions.
+        </p>
+      </div>
       <p>
         Why stop at one combination? We can slice our float vectors all sorts of ways, creating
         millions of combinations that a human would never be able to remember or process.
