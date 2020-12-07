@@ -147,6 +147,19 @@
         embedding concept, so this is also going to be an important foundation for
         SimpleDL.
       </p>
+      <h6>TLDR</h6>
+      <p>
+        Embeddings are stores of information that take concepts and plot them to 
+        continuous geometric spaces, kind of like a map. You can store arbitrary
+        information in an embedding, and you can compress information into small
+        embeddings. Deep ML models are composed of stacks of embeddings. During
+        training, the model tries to filter information and shift the embedding
+        'map' around so that the 'territory borders' split the data to fit a loss
+        function. The loss function 'sculpts' the embeddings into the right shape.
+        Having a reasonable embedding is 90% of the battle of deep learning;
+        thinking about how information flows through embeddings will (hopefully)
+        make this all make sense.
+      </p>
       <h6>Embedding Basics</h6>
       <p>
         We'll start with a definition: an embedding is a list of numbers (a float
@@ -271,9 +284,6 @@
       </p>
       <div class="image-holder">
         <img src="coords-mapped.png" width="400" />
-        <p>
-          Not a political compass meme.
-        </p>
       </div>
       <p>
         Mathematically, we can do some interesting things with our embedded concepts.
@@ -293,27 +303,106 @@
       <p>
         In general, float vectors correspond really well to geometry. Yea, people aren't great
         at remembering lots of numbers, but we do a pretty good job with spatial reasoning.
-        Embeddings allow us to map concepts into geometric spaces, where metrics like
+        Embeddings allow us to map concepts into geometric spaces, where measures like
         'distance' can be relatively easily quantified. When I think about creating a model
-        to embed cars (or something), I can almost visualize a map of some foreign land, where
+        to embed cars (or something), I can almost visualize a fantasy map, where
         different points on the map represent specific car makes and models. You have
-        a Mercedes section, which is pretty close to the BMW section, and kinda far from the
-        school bus section. If our map is pretty good at making sure similar things are
+        a Mercedes town, which is pretty close to BMW-burg , and kinda far from the
+        School Bus-ville. If our map is pretty good at making sure similar things are
         close to each other, we've solved 90% of the deep learning problem.
       </p>
+      <div class="image-holder">
+        <img src="car-embed.png" />
+        <p>
+          I couldn't get anyone to draw me a fun fantasy map of Car-Land so we'll have to go
+          with the boring technical version.
+        </p>
+      </div>
       <h6>Imperfect Information</h6>
       <p>
         With infinite resources, we could perfectly convert any piece of data from one
         format to another. That's neat, but also just about useless. Most of the time,
-        we care about _removing_ information, filtering important data from noise.
+        we care about <em>removing</em> information, filtering important data from noise.
         This is especially true in Deep Learning, where a
         <a href="https://www.youtube.com/watch?v=ACmydtFDTGs">hotdog image classifier</a>
-        is taking in thousands of pixel values and returning only a single bit. 
+        might be taking in thousands of pixel values and returning only a single bit. 
       </p>
       <p>
         When we talk about embeddings, we generally refer to a float-vector that compresses
         the relevant information into a smaller, more manageable size while still keeping
-        the important information around. 
+        the important information around. That RGB image of my dogs was roughly 2000x1000
+        pixels. 3x2000x1000 = 6 million. How do we bring 6 million float inputs down to
+        something more reasonable, like 64?
+      </p>
+      <p>
+        So far we've been considering each index in our embedding as isolated -- we
+        have a 'gender' dimension, and a 'royalty' dimension, and an 'age' dimension, and
+        they don't mix at all. To work with larger data, we need to treat
+        combinations of our float values as having unique meaning. Maybe +Y means
+        'royal' and +Z means 'old', but [+Y, +Z] means 'purple'. Going back to our
+        imaginary map analogy, North East isn't the average of North and East. 
+      </p>
+      <p>
+        Why stop at one combination? We can slice our float vectors all sorts of ways, creating
+        millions of combinations that a human would never be able to remember or process.
+        Luckily, we don't need to -- neural networks do it for us. When a deep model is
+        training, it's learning how to draw a super high dimensional map at each layer.
+        And, it can mix and match input data in all sorts of arbitrary ways to figure out
+        where the imaginary lines should be.
+      </p>
+      <h6>Features, Embeddings, and Losses: Making a Model</h6>
+      <p>
+        <em>"...where the imaginary lines should be."</em> 'Should be' based on what?
+      </p>
+      <p>
+        Let's take a step back. Every deep learning model is composed of three parts:
+        the features, the embeddings, and the loss function. A "feature" is just a fancy way of
+        saying input data. And the embeddings are the pieces of the model itself -- every deep
+        model is basically just a stack of embeddings.
+      </p>
+      <p>
+        The loss function is the thing that the model is trying to solve. If you have
+        an image recognition task, for example, the loss will be a measure of how good
+        the model is at recognizing objects in images.
+      </p>
+      <p>
+        Together, the features and the loss function constrain the embeddings. Embeddings can
+        only represent information that is provided in the initial feature set. And the embeddings
+        remove (or emphasize) information based on the loss function. Going back to the car example,
+        if I want my model to emphasize color information, I better make sure that I provide color
+        information to my model, and that my loss somehow keeps track of color. In my head, I think
+        of the features and the loss as a means of sculpting the embeddings of a model -- the features
+        are the clay, and the backpropagating gradients chip away or add to the embeddings so that
+        they are they right shape and size.
+      </p>
+      <p>
+        I think this gets at why Deep ML models are so powerful. You can throw any features
+        and any loss function into the thing, and the inner embeddings will find a way to
+        connect the inputs and outputs. There's also a corollary to this:<b>your models will only
+        ever be as good as your features and as bad as your loss</b>. 
+      </p>
+      <p>
+        I like this framing because it also gives us some insight in how we can change our models
+        so they do what we want. We can add new or more features, to try and give the model more
+        to work with. We can change up the architecture, to try and influence how the underlying
+        embeddings mix and match data. And we can modify the loss(es), to sculpt the underlying
+        information as it flows through the model. Each of these approaches has trade offs. Adding
+        more features will always help the model, but it's not easy to get new data. Changing
+        the architecture in a useful way requires a stroke of inspiration or dumb luck. And modifying
+        the loss is highly volatile.
+      </p>
+      <h6>Conclusions</h6>
+      <p>
+        This is already a pretty long post, and we're starting to move away from embeddings alone,
+        so I'll leave off with some conclusions here.
+      </p>
+      <p>
+        There are probably other ways to reason about Deep Learning, but for me the embedding concept
+        is absolutely critical. When I think about deep models, I beed to visualize how information
+        flows through the embeddings I've constructed. Over the rest of the series, we're going to
+        try this visualization process with a bunch of popular architectures -- Convolutions, LSTMs,
+        GANs, Graph Neural Networks, Transformers, and more. And hopefully in the process, you'll
+        get a bit more intuition for how Deep Learning works.
       </p>
     </div>
   </div>
