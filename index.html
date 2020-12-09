@@ -385,8 +385,9 @@
         <img src="img/multi-embed.png" width="600" />
         <p>
           A rough idea of how an embedding might represent many concepts in only
-          two dimensions. The axes no longer make sense -- it's the combinations
-          that matter. Each semantic meaning has it's own area of the map.
+          two dimensions. The axes aren't relevant anymore -- each point is
+          stiill an X/Y value, but each semantic meaning has it's own area of
+          the map. Homework question: is this a good or bad embedding? Why?
         </p>
       </div>
       <p>
@@ -396,7 +397,8 @@
         it for us. When a deep model is training, it's learning how to draw a
         super high dimensional map at each layer. And, it can mix and match
         input data in all sorts of arbitrary ways to figure out where the
-        imaginary lines should be.
+        imaginary lines should be, and which concepts should be close to other
+        concepts.
       </p>
       <h6>Features, Embeddings, and Losses: Making a Model</h6>
       <p>
@@ -461,6 +463,12 @@
         not easy to get new data. Changing the architecture in a useful way
         requires a stroke of inspiration or dumb luck. And modifying the loss is
         highly volatile.
+      </p>
+      <p>
+        There's one other cool thing about this framing. If we're ever confused
+        about what our model is doing, we can take our model embeddings and plot
+        them in 2D, like an actual map. This will let us see whether similar
+        concepts are appearing close or far away.
       </p>
       <h6>Conclusions</h6>
       <p>
