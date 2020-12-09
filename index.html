@@ -28,7 +28,7 @@
 <div class="content">
   <div class="writing-holder">
     <h4>Simple DL Part 1: Introduction</h4>
-    <h6> November, 2020 </h6>
+    <h6>November, 2020</h6>
 
     <div class="writing">
       <p>
@@ -43,11 +43,11 @@
         actually work. Clearly <i>someone</i> knows what they are doing, because
         surely we aren't driving all those cars on a hunch? (*cough*) But from
         the outside looking in, it's witchcraft. Or, well, it was to me when I
-        got started. 
+        got started.
       </p>
 
       <div class="image-holder">
-        <img src="witches.jpg" width="400" />
+        <img src="img/witches.jpg" width="400" />
         <p>
           Yann LeCun, Geoffrey Hinton, Yoshua Bengio doing Deep Learning,
           probably.
@@ -57,35 +57,37 @@
       <p>
         After five years of actually working on this stuff, I think I've finally
         developed enough intuition to figure out how to actually do something
-        interesting with this technology in a consistent way. And one of the first
-        things I learned is that intuition is the cornerstone of modern Deep
-        Learning practice.
+        interesting with this technology in a consistent way. And one of the
+        first things I learned is that intuition is the cornerstone of modern
+        Deep Learning practice.
       </p>
       <p>
-        I think of ML scientists as the modern equivalent of Roman bridge builders.
-        Humanity wouldn't figure out how to formalize bridge building until Newton
-        came along...but the Romans still made some damn good bridges. The individual
-        engineers all had these mental models of how bridge building worked, and that
-        allowed them to innovate and optimize. Even though every model was wrong, 
-        some of those models were useful. You even see the same kind of rise and
-        fall of 'architectures'. For years everyone builds
-        <a href="https://en.wikipedia.org/wiki/Clapper_bridge">Clapper bridges</a>,
-        and then one day an engineer wakes up and goes 'Hey maybe
+        I think of ML scientists as the modern equivalent of Roman bridge
+        builders. Humanity wouldn't figure out how to formalize bridge building
+        until Newton came along...but the Romans still made some damn good
+        bridges. The individual engineers all had these mental models of how
+        bridge building worked, and that allowed them to innovate and optimize.
+        Even though every model was wrong, some of those models were useful. You
+        even see the same kind of rise and fall of 'architectures'. For years
+        everyone builds
+        <a href="https://en.wikipedia.org/wiki/Clapper_bridge"
+          >Clapper bridges</a
+        >, and then one day an engineer wakes up and goes 'Hey maybe
         <a href="https://en.wikipedia.org/wiki/Arch_bridge">arches</a> would be
-        better' and everyone starts doing that. 
-     </p>
-     <p>
-        The Newton of Deep Learning will show up eventually, but it might take
-        a few hundred years. In the meantime, we have to make due with intuition.
-        Luckily, I think it's possible to build a pretty good mental model of deep ML
-        models through practice. Yea, the first few times a model fails, it'll be a
-        frustrating experience. But eventually you should be able to pattern match
-        and generalize, doing a human form of gradient descent. In that sense, Deep
-        learning is a bit like sculpture or photography -- after a while, you get
-        an eye for it.
-     </p>
+        better' and everyone starts doing that.
+      </p>
+      <p>
+        The Newton of Deep Learning will show up eventually, but it might take a
+        few hundred years. In the meantime, we have to make due with intuition.
+        Luckily, I think it's possible to build a pretty good mental model of
+        deep ML models through practice. Yea, the first few times a model fails,
+        it'll be a frustrating experience. But eventually you should be able to
+        pattern match and generalize, doing a human form of gradient descent. In
+        that sense, Deep learning is a bit like sculpture or photography --
+        after a while, you get an eye for it.
+      </p>
       <div class="image-holder">
-        <img src="david.jpg" width="400" />
+        <img src="img/david.jpg" width="400" />
         <p>
           Michelangelo would've made a decent data scientist.
         </p>
@@ -106,10 +108,12 @@
       </p>
       <p>
         This series is titled SimpleDL because I want to make things simple. But
-        some familiarity with basic computing concepts will be helpful. If you've
-        never touched a computer before, this series probably isn't for you. I'll
-        be aiming for 'intermediate programmer, never worked in ML before' as my
-        audience.
+        some familiarity with basic computing concepts will be helpful. If
+        you've never touched a computer before, this series probably isn't for
+        you. I'll be aiming for 'intermediate programmer, never worked in ML
+        before' as my audience. That said, I think this will be most useful for
+        folks who have maybe taken one or two classes on ML, and know some of
+        the basic terms.
       </p>
       <p>
         Before diving in, I want to highlight a few resources that really helped
@@ -129,290 +133,358 @@
       <p>
         Also, thanks for coming by to read some of the things I write! I hope
         it's useful/interesting. I don't know how frequently I'll update here,
-        but when I do I'll post on <a href="https://twitter.com/theahura_">Twitter</a>.
+        but when I do I'll post on
+        <a href="https://twitter.com/theahura_">Twitter</a>.
       </p>
     </div>
   </div>
 
   <div class="writing-holder">
     <h4>Simple DL Part 2: Embeddings</h4>
-    <h6> December, 2020 </h6>
-    
+    <h6>December, 2020</h6>
+
     <div class="writing">
       <p>
         In my opinion, you cannot begin to understand Deep Learning without
-        wrapping your brain around embeddings. Embeddings are the magic fairy dust
-        that power every Deep Learning model, from ImageNet to GPT-3. All of my
-        future posts in this series are going to refer back extensively to the
-        embedding concept, so this is also going to be an important foundation for
-        SimpleDL.
+        wrapping your brain around embeddings. Embeddings are the magic fairy
+        dust that power every Deep Learning model, from ImageNet to GPT-3. All
+        of my future posts in this series are going to refer back extensively to
+        the embedding concept, so this is also going to be an important
+        foundation for SimpleDL.
       </p>
       <h6>TLDR</h6>
       <p>
-        Embeddings are stores of information that take concepts and plot them to 
+        Embeddings are stores of information that take concepts and plot them to
         continuous geometric spaces, kind of like a map. You can store arbitrary
         information in an embedding, and you can compress information into small
         embeddings. Deep ML models are composed of stacks of embeddings. During
         training, the model tries to filter information and shift the embedding
-        'map' around so that the 'territory borders' split the data to fit a loss
-        function. The loss function 'sculpts' the embeddings into the right shape.
-        Having a reasonable embedding is 90% of the battle of deep learning;
-        thinking about how information flows through embeddings will (hopefully)
-        make this all make sense.
+        'map' around so that the 'territory borders' split the data to fit a
+        loss function. The loss function 'sculpts' the embeddings into the right
+        shape. Having a reasonable embedding is 90% of the battle of deep
+        learning; thinking about how information flows through embeddings will
+        (hopefully) make this all make sense.
       </p>
       <h6>Embedding Basics</h6>
       <p>
-        We'll start with a definition: an embedding is a list of numbers (a float
-        vector) that represents some information. You can have embeddings for just
-        about any kind of information out there. There are
-        <a href="https://en.wikipedia.org/wiki/Word_embedding">word embeddings</a>.
-        There are
-        <a href="https://en.wikipedia.org/wiki/Sentence_embedding">sentence embeddings</a>.
-        There are <a href="https://rom1504.medium.com/image-embeddings-ed1b194d113e">image
-        embeddings</a>. There are
-        <a href="https://en.wikipedia.org/wiki/Graph_embedding">graph embeddings</a>.
-        There are
-        <a href="https://www.cs.cornell.edu/~kb/publications/SIG15ProductNet.pdf">furniture embeddings</a>.
-        Basically, if you can think of a concept, you can represent it as an embedding.
-        If you're more mathematically minded, check out the
-        <a href="https://en.wikipedia.org/wiki/Embedding">embedding wiki page</a> for a
-        formal description/definition of embeddings.
+        We'll start with a definition: an embedding is a list of numbers (a
+        float vector) that represents some information. You can have embeddings
+        for just about any kind of information out there. There are
+        <a href="https://en.wikipedia.org/wiki/Word_embedding"
+          >word embeddings</a
+        >. There are
+        <a href="https://en.wikipedia.org/wiki/Sentence_embedding"
+          >sentence embeddings</a
+        >. There are
+        <a href="https://rom1504.medium.com/image-embeddings-ed1b194d113e"
+          >image embeddings</a
+        >. There are
+        <a href="https://en.wikipedia.org/wiki/Graph_embedding"
+          >graph embeddings</a
+        >. There are
+        <a
+          href="https://www.cs.cornell.edu/~kb/publications/SIG15ProductNet.pdf"
+          >furniture embeddings</a
+        >. Basically, if you can think of a concept, you can represent it as an
+        embedding. If you're more mathematically minded, check out the
+        <a href="https://en.wikipedia.org/wiki/Embedding"
+          >embedding wiki page</a
+        >
+        for a formal description/definition of embeddings.
       </p>
       <h6>Information vs Format</h6>
       <p>
-        This is already kinda weird. How can we take any concept and represent it as
-        a list of numbers? To really grasp this idea, we need to remember that
+        This is already kinda weird. How can we take any concept and represent
+        it as a list of numbers? To really grasp this idea, we need to remember
+        that
         <b>information is not the format</b>. This is a core principle of
-        <a href="https://en.wikipedia.org/wiki/Information_theory">information theory</a>
-        and underpins most of modern computer science. Basically, we can take a piece
-        of information and represent it in any format, and the underlying information
-        won't be any different. Now, we might lose information in the conversion
-        process, but that's due to practical limitations of the format of choice. 
+        <a href="https://en.wikipedia.org/wiki/Information_theory"
+          >information theory</a
+        >
+        and underpins most of modern computer science. Basically, we can take a
+        piece of information and represent it in any format, and the underlying
+        information won't be any different. Now, we might lose information in
+        the conversion process, but that's due to practical limitations of the
+        format of choice.
       </p>
       <p>
-        An example may help nail all this down. Let's say we have a picture of my
-        wonderful dogs, Sparky and Lego.
+        An example may help nail all this down. Let's say we have a picture of
+        my wonderful dogs, Sparky and Lego.
       </p>
       <div class="image-holder">
-        <img src="sparky_and_lego.jpeg" width="600" />
+        <img src="img/sparky_and_lego.jpeg" width="600" />
         <p>
           Dogs!
         </p>
       </div>
       <p>
-        There is a lot of information in this picture. What if we wanted to convert
-        that information to text? Can we perfectly represent the image? Well, we
-        could describe the image. "Two dogs" captures most of the information in
-        the image. "One small brown dog and one medium-sized gold dog on a slate
-        grey surface" captures even more of the image. We can keep going
-        like this, with ever more complex descriptions -- a picture is literally
-        worth a thousand words.
+        There is a lot of information in this picture. What if we wanted to
+        convert that information to text? Can we perfectly represent the image?
+        Well, we could describe the image. "Two dogs" captures most of the
+        information in the image. "One small brown dog and one medium-sized gold
+        dog on a slate grey surface" captures even more of the image. We can
+        keep going like this, with ever more complex descriptions -- a picture
+        is literally worth a thousand words.
       </p>
       <p>
-        But why are we limiting ourselves to such a highly compressed representation?
-        "Two dogs" captures a lot of the information, but its just 8 characters. It will
-        always leave something out. What if we instead went pixel by pixel and wrote out
-        the colors? Starting from the top left, we could write "grey, grey, grey, light
-        grey, light grey, grey, grey...". Not exactly Hemingway, but it would be a
-        perfect representation of the image. We would capture all of the information.
-        Again, the information is not the format. There is nothing inherently 'image-like'
-        about the information captured in the image above.
+        But why are we limiting ourselves to such a highly compressed
+        representation? "Two dogs" captures a lot of the information, but its
+        just 8 characters. It will always leave something out. What if we
+        instead went pixel by pixel and wrote out the colors? Starting from the
+        top left, we could write "grey, grey, grey, light grey, light grey,
+        grey, grey...". Not exactly Hemingway, but it would be a perfect
+        representation of the image. We would capture all of the information.
       </p>
+      <div class="image-holder">
+        <img src="img/img-color.png" width="600" />
+        <img src="img/img-hemingway.png" width="600" />
+        <p>
+          Same information, different formats.
+        </p>
+      </div>
+
       <p>
         Hopefully the leap to an embedding is straightforward. Instead of words,
         we could use RGB values and then flatten those out so that we get a
-        single list -- something like [128, 128, 128, 128, 128, 128...]. We've turned
-        our image into a numeric vector that perfectly captures all of the information
-        in the original image.
+        single list -- something like [128, 128, 128, 128, 128, 128...]. We've
+        turned our image into a numeric vector that perfectly captures all of
+        the information in the original image.
       </p>
       <p>
-        What about text? Can we turn text into an embedding? Well, one strategy could
-        be to turn every letter into a numeric code, like ASCII. This is why a numeric
-        sequence like 104 101 108 108 111 32 119 111 114 108 100 can be read as 'hello
-        world' by a computer. If we had a really long sequence of text, like a book,
-        we could instead turn every unique word into a number from 0 to N, where N is
-        the number of unique words. Again, we've turned our data into a numeric vector
-        that perfectly captures all of the original information.
+        What about text? Can we turn text into an embedding? Well, one strategy
+        could be to turn every letter into a numeric code, like ASCII. This is
+        why a numeric sequence like 104 101 108 108 111 32 119 111 114 108 100
+        can be read as 'hello world' by a computer. If we had a really long
+        sequence of text, like a book, we could instead turn every unique word
+        into a number from 0 to N, where N is the number of unique words. Again,
+        we've turned our data into a numeric vector that perfectly captures all
+        of the original information.
       </p>
+      <div class="image-holder">
+        <img src="img/code.png" width="600" />
+      </div>
       <p>
-        Ok so hopefully by now you have some intuition for what an embedding is. A
-        question: is [0.124, 458.2356, 85.3, 2.01] an embedding? Or is it a random
-        list of numbers? 
+        Ok so hopefully by now you have some intuition for what an embedding is.
+        A question: is [0.124, 458.2356, 85.3, 2.01] an embedding? Or is it a
+        random list of numbers?
       </p>
       <p>
         Hopefully you see the problem with our initial definition.
       </p>
-      <p>        
+      <p>
         An embedding is a list of numbers (a float vector) that represents some
-        information, <em>as well as a mechanism for encoding and decoding that float
-        vector to something useful</em>. In the examples above, our encoding/decoding
-        scheme was RGB or ASCII. In Deep Learning, our encoder/decoder is the Deep
-        ML model.
+        information,
+        <em
+          >as well as a mechanism for encoding and decoding that float vector to
+          something useful</em
+        >. In the examples above, our encoding/decoding scheme was RGB or ASCII.
+        In Deep Learning, our encoder/decoder is the Deep ML model.
       </p>
       <h6>Format Matters</h6>
       <p>
-        Some of you might be wondering why we bother with a float vector in the first
-        place. After all, if we can perfectly capture information in a bunch of
-        different ways, why float vectors? Humans have a really tough time reasoning
-        about float vectors, surely there's an easier representation?
+        Some of you might be wondering why we bother with a float vector in the
+        first place. After all, if we can perfectly capture information in a
+        bunch of different ways, why float vectors? Humans have a really tough
+        time reasoning about float vectors, surely there's an easier
+        representation?
       </p>
       <p>
-        The neat thing about float vectors is that they are continuous representations.
-        You can <em>compare</em> them. You can <em>add them together</em>. You can
-        <em>average</em> them. You can do all these neat mathematical operations on them
-        that let you quickly and efficiently shift your data around. And this is really
-        powerful, because you can turn concepts into computation.
+        The neat thing about float vectors is that they are continuous
+        representations. You can <em>compare</em> them. You can
+        <em>add them together</em>. You can <em>average</em> them. You can do
+        all these neat mathematical operations on them that let you quickly and
+        efficiently shift your data around. And this is really powerful, because
+        you can turn concepts into computation.
       </p>
       <p>
-        Let's say we wanted to represent two concepts: gender, and royal status. We can
-        represent these two concepts as numbers in a vector of size 2. In other words,
-        we can map any coordinate [X, Y] to a gender/royal status pairing. We can 
-        arbitrarily assign +X to be more masculine, -X to be more feminine, +Y to be
-        more royal, and -Y to be less royal. 
+        Let's say we wanted to represent two concepts: gender, and royal status.
+        We can represent these two concepts as numbers in a vector of size 2. In
+        other words, we can map any coordinate [X, Y] to a gender/royal status
+        pairing. We can arbitrarily assign +X to be more masculine, -X to be
+        more feminine, +Y to be more royal, and -Y to be less royal.
       </p>
       <div class="image-holder">
-        <img src="coords.png" width="400" />
+        <img src="img/coords.png" width="400" />
         <p>
           Not a political compass meme.
         </p>
       </div>
       <p>
-        With this rough coordinate system, we can <em>embed</em> words by mapping them
-        into x-y values. For example, we might say the word King is mapped to 
-        coordinates [1, 1]; the word Queen is mapped to [-1, 1]; the word Man is mapped
-        to [1, 0]; and the word Woman is mapped to [-1, 0].
+        With this rough coordinate system, we can <em>embed</em> words by
+        mapping them into x-y values. For example, we might say the word King is
+        mapped to coordinates [1, 1]; the word Queen is mapped to [-1, 1]; the
+        word Man is mapped to [1, 0]; and the word Woman is mapped to [-1, 0].
       </p>
       <div class="image-holder">
-        <img src="coords-mapped.png" width="400" />
+        <img src="img/coords-mapped.png" width="400" />
       </div>
       <p>
-        Mathematically, we can do some interesting things with our embedded concepts.
-        For example, we can take the word 'King', subtract 'Man', add 'Woman', and
-        get 'Queen'. Hopefully its also easy to see how we could add other concepts
-        (and other words) to our basic embedding system. If we wanted to embed words
-        like 'prince' or 'princess', we could add another dimension for 'Age' and plot
-        our points accordingly.
+        Mathematically, we can do some interesting things with our embedded
+        concepts. For example, we can take the word 'King', subtract 'Man', add
+        'Woman', and get 'Queen'. Hopefully its also easy to see how we could
+        add other concepts (and other words) to our basic embedding system. If
+        we wanted to embed words like 'prince' or 'princess', we could add
+        another dimension for 'Age' and plot our points accordingly.
       </p>
       <div class="image-holder">
-        <img src="word-math.png" />
+        <img src="img/word-math.png" />
         <p>
-        This example is pretty famous in NLP, often in relation to a word embedding
-        generator called <a href="http://jalammar.github.io/illustrated-word2vec/">Word2Vec</a>.
+          This example is pretty famous in NLP, often in relation to a word
+          embedding generator called
+          <a href="http://jalammar.github.io/illustrated-word2vec/">Word2Vec</a
+          >.
         </p>
       </div>
       <p>
-        In general, float vectors correspond really well to geometry. Yea, people aren't great
-        at remembering lots of numbers, but we do a pretty good job with spatial reasoning.
-        Embeddings allow us to map concepts into geometric spaces, where measures like
-        'distance' can be relatively easily quantified. When I think about creating a model
-        to embed cars (or something), I can almost visualize a fantasy map, where
-        different points on the map represent specific car makes and models. You have
-        a Mercedes town, which is pretty close to BMW-burg , and kinda far from the
-        School Bus-ville. If our map is pretty good at making sure similar things are
+        In general, float vectors correspond really well to geometry. Yea,
+        people aren't great at remembering lots of numbers, but we do a pretty
+        good job with spatial reasoning. Embeddings allow us to map concepts
+        into geometric spaces, where measures like 'distance' can be relatively
+        easily quantified. When I think about creating a model to embed cars (or
+        something), I can almost visualize a fantasy map, where different points
+        on the map represent specific car makes and models. You have a Mercedes
+        town, which is pretty close to BMW-burg , and kinda far from the School
+        Bus-ville. If our map is pretty good at making sure similar things are
         close to each other, we've solved 90% of the deep learning problem.
       </p>
       <div class="image-holder">
-        <img src="car-embed.png" />
+        <img src="img/car-embed.png" />
         <p>
-          I couldn't get anyone to draw me a fun fantasy map of Car-Land so we'll have to go
-          with the boring technical version.
+          I couldn't get anyone to draw me a fun fantasy map of Car-Land so
+          we'll have to go with the boring technical version.
         </p>
       </div>
       <h6>Imperfect Information</h6>
       <p>
-        With infinite resources, we could perfectly convert any piece of data from one
-        format to another. That's neat, but also just about useless. Most of the time,
-        we care about <em>removing</em> information, filtering important data from noise.
-        This is especially true in Deep Learning, where a
-        <a href="https://www.youtube.com/watch?v=ACmydtFDTGs">hotdog image classifier</a>
-        might be taking in thousands of pixel values and returning only a single bit. 
+        With infinite resources, we could perfectly convert any piece of data
+        from one format to another. That's neat, but also just about useless.
+        Most of the time, we care about <em>removing</em> information, filtering
+        important data from noise. This is especially true in Deep Learning,
+        where a
+        <a href="https://www.youtube.com/watch?v=ACmydtFDTGs"
+          >hotdog image classifier</a
+        >
+        might be taking in thousands of pixel values and returning only a single
+        bit.
       </p>
       <p>
-        When we talk about embeddings, we generally refer to a float-vector that compresses
-        the relevant information into a smaller, more manageable size while still keeping
-        the important information around. That RGB image of my dogs was roughly 2000x1000
-        pixels. 3x2000x1000 = 6 million. How do we bring 6 million float inputs down to
-        something more reasonable, like 64?
+        When we talk about embeddings, we generally refer to a float-vector that
+        compresses the relevant information into a smaller, more manageable size
+        while still keeping the important information around. That RGB image of
+        my dogs was roughly 2000x1000 pixels. 3x2000x1000 = 6 million. How do we
+        bring 6 million float inputs down to something more reasonable, like 64?
       </p>
       <p>
-        So far we've been considering each index in our embedding as isolated -- we
-        have a 'gender' dimension, and a 'royalty' dimension, and an 'age' dimension, and
-        they don't mix at all. To work with larger data, we need to treat
-        combinations of our float values as having unique meaning. Maybe +Y means
-        'royal' and +X means 'masculine', but [+Y, +X] means 'purple'. Going back to our
-        imaginary map analogy, North East isn't the average of North and East. 
+        So far we've been considering each index in our embedding as isolated --
+        we have a 'gender' dimension, and a 'royalty' dimension, and an 'age'
+        dimension, and they don't mix at all. To work with larger data, we need
+        to treat combinations of our float values as having unique meaning.
+        Maybe +Y means 'royal' and +X means 'masculine', but [+Y, +X] means
+        'purple'. Going back to our imaginary map analogy, North East isn't the
+        average of North and East.
       </p>
       <div class="image-holder">
-        <img src="multi-embed.png" width="600" />
+        <img src="img/multi-embed.png" width="600" />
         <p>
-          A rough idea of how an embedding might represent many concepts in only two dimensions.
+          A rough idea of how an embedding might represent many concepts in only
+          two dimensions. The axes no longer make sense -- it's the combinations
+          that matter. Each semantic meaning has it's own area of the map.
         </p>
       </div>
       <p>
-        Why stop at one combination? We can slice our float vectors all sorts of ways, creating
-        millions of combinations that a human would never be able to remember or process.
-        Luckily, we don't need to -- neural networks do it for us. When a deep model is
-        training, it's learning how to draw a super high dimensional map at each layer.
-        And, it can mix and match input data in all sorts of arbitrary ways to figure out
-        where the imaginary lines should be.
+        Why stop at one combination? We can slice our float vectors all sorts of
+        ways, creating millions of combinations that a human would never be able
+        to remember or process. Luckily, we don't need to -- neural networks do
+        it for us. When a deep model is training, it's learning how to draw a
+        super high dimensional map at each layer. And, it can mix and match
+        input data in all sorts of arbitrary ways to figure out where the
+        imaginary lines should be.
       </p>
       <h6>Features, Embeddings, and Losses: Making a Model</h6>
       <p>
-        <em>"...where the imaginary lines should be."</em> 'Should be' based on what?
+        <em>"...where the imaginary lines should be."</em> 'Should be' based on
+        what?
       </p>
       <p>
-        Let's take a step back. Every deep learning model is composed of three parts:
-        the features, the embeddings, and the loss function. A "feature" is just a fancy way of
-        saying input data. And the embeddings are the pieces of the model itself -- every deep
-        model is basically just a stack of embeddings.
+        Let's take a step back. Every deep learning model is composed of three
+        parts: the features, the embeddings, and the loss function. A "feature"
+        is just a fancy way of saying input data. And the embeddings are the
+        pieces of the model itself -- every deep model is basically just a stack
+        of embeddings.
       </p>
       <p>
-        The loss function is the thing that the model is trying to solve. If you have
-        an image recognition task, for example, the loss will be a measure of how good
-        the model is at recognizing objects in images.
+        The loss function is the thing that the model is trying to solve. If you
+        have an image recognition task, for example, the loss will be a measure
+        of how good the model is at recognizing objects in images. During
+        training, the model manipulates the stack of embeddings based on the
+        features and loss.
       </p>
       <p>
-        Together, the features and the loss function constrain the embeddings. Embeddings can
-        only represent information that is provided in the initial feature set. And the embeddings
-        remove (or emphasize) information based on the loss function. Going back to the car example,
-        if I want my model to emphasize color information, I better make sure that I provide color
-        information to my model, and that my loss somehow keeps track of color. In my head, I think
-        of the features and the loss as a means of sculpting the embeddings of a model -- the features
-        are the clay, and the backpropagating gradients chip away or add to the embeddings so that
-        they are they right shape and size.
+        In my head, the features and the loss function <em>constrain</em> the
+        embeddings. Embeddings can only represent information that is provided
+        in the initial feature set. And the embeddings remove (or emphasize)
+        information based on the loss function. Going back to the car example,
+        if I want my model to emphasize car color, I better make sure that a)
+        I'm not using black and white photograph, and b) my loss somehow
+        emphasizes color. In my head, I think of the features and the loss as a
+        means of sculpting the embeddings of a model -- the features are the
+        clay, and the backpropagating gradients chip away or add to the
+        embeddings so that they are they right shape and size.
+      </p>
+      <div class="image-holder">
+        <img src="img/model.png" width="600" />
+        <p>
+          Here, we have two models with the same color/shape feature input. The
+          left model has a loss that is trying to predict color, and the right
+          model has a loss that is trying to predict shape. The embeddings store
+          information accordingly -- the left model embeddings throw away the
+          shape information and retain color, while the right model embeddings
+          throw away color and retain shape.
+        </p>
+      </div>
+      <p>
+        I think this gets at why Deep ML models are so powerful. You can throw
+        any features and any loss function into the thing, and the inner
+        embeddings will find a way to connect the inputs and outputs. There's
+        also a corollary to this:
+        <b
+          >your models will only ever be as good as your features and as bad as
+          your loss</b
+        >.
       </p>
       <p>
-        I think this gets at why Deep ML models are so powerful. You can throw any features
-        and any loss function into the thing, and the inner embeddings will find a way to
-        connect the inputs and outputs. There's also a corollary to this: <b>your models will only
-        ever be as good as your features and as bad as your loss</b>. 
-      </p>
-      <p>
-        I like this framing because it also gives us some insight in how we can change our models
-        so they do what we want. We can add new or more features, to try and give the model more
-        to work with. We can change up the architecture, to try and influence how the underlying
-        embeddings mix and match data. And we can modify the loss(es), to sculpt the underlying
-        information as it flows through the model. Each of these approaches has trade offs. Adding
-        more features will always help the model, but it's not easy to get new data. Changing
-        the architecture in a useful way requires a stroke of inspiration or dumb luck. And modifying
-        the loss is highly volatile.
+        I like this framing because it also gives us some insight in how we can
+        change our models so they do what we want. We can add new or more
+        features, to try and give the model more to work with. We can change up
+        the architecture, to try and influence how the underlying embeddings mix
+        and match data. And we can modify the loss(es), to sculpt the underlying
+        information as it flows through the model. Each of these approaches has
+        trade offs. Adding more features will always help the model, but it's
+        not easy to get new data. Changing the architecture in a useful way
+        requires a stroke of inspiration or dumb luck. And modifying the loss is
+        highly volatile.
       </p>
       <h6>Conclusions</h6>
       <p>
-        This is already a pretty long post, and we're starting to move away from embeddings alone,
-        so I'll leave off with some conclusions here.
+        This is already a pretty long post, and we're starting to move away from
+        embeddings alone, so I'll leave off with some conclusions here.
       </p>
       <p>
-        There are probably other ways to reason about Deep Learning, but for me the embedding concept
-        is absolutely critical. When I think about deep models, I need to visualize how information
-        flows through the embeddings I've constructed. Over the rest of the series, we're going to
-        try this visualization process with a bunch of popular architectures -- Convolutions, LSTMs,
-        GANs, Graph Neural Networks, Transformers, and more. And hopefully in the process, you'll
-        get a bit more intuition for how Deep Learning works.
+        There are probably other ways to reason about Deep Learning, but for me
+        the embedding concept is absolutely critical. When I think about deep
+        models, I need to visualize how information flows through the embeddings
+        I've constructed. Over the rest of the series, we're going to try this
+        visualization process with a bunch of popular architectures --
+        Convolutions, LSTMs, GANs, Graph Neural Networks, Transformers, and
+        more. And hopefully in the process, you'll get a bit more intuition for
+        how Deep Learning works.
       </p>
       <div class="acknowledgements">
-        <h6> Acknowledgements </h6>
-        <p> Special thanks to Aaron Cooper, Azraf Anwar, and Isabel Kim for reading drafts of this work. </p>
+        <h6>Acknowledgements</h6>
+        <p>
+          Special thanks to Aaron Cooper, Azraf Anwar, and Isabel Kim for
+          reading drafts of this work.
+        </p>
       </div>
     </div>
   </div>
