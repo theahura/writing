@@ -49,7 +49,7 @@
       <div class="image-holder">
         <img src="img/witches.jpg" width="400" />
         <p>
-          Yann LeCun, Geoffrey Hinton, Yoshua Bengio doing Deep Learning,
+          Yann LeCun, Geoffrey Hinton, Yoshua Bengio doing deep learning,
           probably.
         </p>
       </div>
@@ -59,7 +59,7 @@
         developed enough intuition to figure out how to actually do something
         interesting with this technology in a consistent way. And one of the
         first things I learned is that intuition is the cornerstone of modern
-        Deep Learning practice.
+        deep learning practice.
       </p>
       <p>
         I think of ML scientists as the modern equivalent of Roman bridge
@@ -77,7 +77,7 @@
         better' and everyone starts doing that.
       </p>
       <p>
-        The Newton of Deep Learning will show up eventually, but it might take a
+        The Newton of deep learning will show up eventually, but it might take a
         few hundred years. In the meantime, we have to make due with intuition.
         Luckily, I think it's possible to build a pretty good mental model of
         deep ML models through practice. Yea, the first few times a model fails,
@@ -125,7 +125,7 @@
         >. If you're interested in doing an actual course on this stuff, I think
         it's hard to beat this class. Second, the
         <a href="https://www.youtube.com/user/ProfNandoDF">
-          Deep Learning Youtube Videos</a
+          deep learning Youtube Videos</a
         >
         also by Nando de Freitas. Nando is an amazing lecturer, and I think he
         does an excellent job mixing theory and practice.
@@ -145,25 +145,23 @@
 
     <div class="writing">
       <p>
-        In my opinion, you cannot begin to understand Deep Learning without
+        In my opinion, you cannot begin to understand deep learning without
         wrapping your brain around embeddings. Embeddings are the magic fairy
-        dust that power every Deep Learning model, from ImageNet to GPT-3. All
+        dust that power every deep learning model, from ImageNet to GPT-3. All
         of my future posts in this series are going to refer back extensively to
         the embedding concept, so this is also going to be an important
         foundation for SimpleDL.
       </p>
       <h6>TLDR</h6>
       <p>
-        Embeddings are stores of information that take concepts and plot them to
-        continuous geometric spaces, kind of like a map. You can store arbitrary
-        information in an embedding, and you can compress information into small
-        embeddings. Deep ML models are composed of stacks of embeddings. During
-        training, the model tries to filter information and shift the embedding
-        'map' around so that the 'territory borders' split the data to fit a
-        loss function. The loss function 'sculpts' the embeddings into the right
-        shape. Having a reasonable embedding is 90% of the battle of deep
-        learning; thinking about how information flows through embeddings will
-        (hopefully) make this all make sense.
+        Embeddings are stores of arbitrary information that take concepts and
+        plot them to continuous geometric spaces, kind of like a map. This
+        allows us to visualize them and reason about them as if they are objects
+        (points) in 3D space. Having a reasonable embedding, where similar
+        information is 'close' to each other in our map, is 90% of the battle of
+        deep learning. Thinking visually about how information flows through
+        embeddings will (hopefully) make many deep learning concepts more
+        intuitive.
       </p>
       <h6>Embedding Basics</h6>
       <p>
@@ -278,7 +276,7 @@
           >as well as a mechanism for encoding and decoding that float vector to
           something useful</em
         >. In the examples above, our encoding/decoding scheme was RGB or ASCII.
-        In Deep Learning, our encoder/decoder is the Deep ML model.
+        In deep learning, our encoder/decoder is the Deep ML model.
       </p>
       <h6>Format Matters</h6>
       <p>
@@ -359,7 +357,7 @@
         With infinite resources, we could perfectly convert any piece of data
         from one format to another. That's neat, but also just about useless.
         Most of the time, we care about <em>removing</em> information, filtering
-        important data from noise. This is especially true in Deep Learning,
+        important data from noise. This is especially true in deep learning,
         where a
         <a href="https://www.youtube.com/watch?v=ACmydtFDTGs"
           >hotdog image classifier</a
@@ -470,14 +468,14 @@
         embeddings alone, so I'll leave off with some conclusions here.
       </p>
       <p>
-        There are probably other ways to reason about Deep Learning, but for me
+        There are probably other ways to reason about deep learning, but for me
         the embedding concept is absolutely critical. When I think about deep
         models, I need to visualize how information flows through the embeddings
         I've constructed. Over the rest of the series, we're going to try this
         visualization process with a bunch of popular architectures --
         Convolutions, LSTMs, GANs, Graph Neural Networks, Transformers, and
         more. And hopefully in the process, you'll get a bit more intuition for
-        how Deep Learning works.
+        how deep learning works.
       </p>
       <div class="acknowledgements">
         <h6>Acknowledgements</h6>
