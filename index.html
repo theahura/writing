@@ -138,36 +138,43 @@
       </p>
     </div>
   </div>
-
   <div class="writing-holder">
+    <hr />
     <h4>Simple DL Part 2: Embeddings</h4>
     <h6>December, 2020</h6>
 
     <div class="writing">
       <p>
-        In my opinion, you cannot begin to understand deep learning without
-        wrapping your brain around embeddings. Embeddings are the magic fairy
-        dust that power every deep learning model, from ImageNet to GPT-3. All
-        of my future posts in this series are going to refer back extensively to
-        the embedding concept, so this is also going to be an important
-        foundation for SimpleDL.
+        In my opinion, you need to understand embeddings to really 'get' deep
+        learning. Embeddings are the magic fairy dust that power every deep
+        learning model, from ImageNet to GPT-3. I think in embeddings.
+        Embeddings are the foundation for any intuition I have about DL, so all
+        of my future posts in this series are going to refer back to the
+        embedding concept.
       </p>
+
       <h6>TLDR</h6>
       <p>
-        Embeddings are stores of arbitrary information that take concepts and
-        plot them to continuous geometric spaces, kind of like a map. This
-        allows us to visualize them and reason about them as if they are objects
-        (points) in 3D space. Having a reasonable embedding, where similar
-        information is 'close' to each other in our map, is 90% of the battle of
-        deep learning. Thinking visually about how information flows through
-        embeddings will (hopefully) make many deep learning concepts more
-        intuitive.
+        Embeddings are stores of arbitrary information plot concepts on
+        continuous geometric spaces, kind of like how you can draw a map of some
+        complex territory and get the general idea across. A good embedding is
+        one where similar information is 'close' to each other in our map. We
+        can visualize embeddings and reason about them as if they are objects
+        (points) in space, and use mathematical operations on them to turn
+        concepts into computation. Embeddings are constrained by the input data
+        (features) and the loss function. The features limit what the embeddings
+        can learn, and the loss tells the model what to prioritize. Models are
+        as good as their features and as bad as their loss. We can improve a
+        model's performance by changing the features, the architecture, or the
+        loss function. No matter what approach we use, we should consider
+        (visualize) how the changes impact the information in our embeddings.
       </p>
       <h6>Embedding Basics</h6>
       <p>
-        We'll start with a definition: an embedding is a list of numbers (a
-        float vector) that represents some information. You can have embeddings
-        for just about any kind of information out there. There are
+        Ok now for the long version. We'll start with a definition: an embedding
+        is a list of numbers (AKA a float vector) that represents some
+        information. You can have embeddings for just about any kind of
+        information out there. There are
         <a href="https://en.wikipedia.org/wiki/Word_embedding"
           >word embeddings</a
         >. There are
@@ -201,9 +208,9 @@
         >
         and underpins most of modern computer science. Basically, we can take a
         piece of information and represent it in any format, and the underlying
-        information won't be any different. Now, we might lose information in
-        the conversion process, but that's due to practical limitations of the
-        format of choice.
+        information won't be any different. We might lose information in the
+        conversion process, but that's due to practical limitations of the
+        format.
       </p>
       <p>
         An example may help nail all this down. Let's say we have a picture of
@@ -216,62 +223,58 @@
         </p>
       </div>
       <p>
-        There is a lot of information in this picture. What if we wanted to
-        convert that information to text? Can we perfectly represent the image?
-        Well, we could describe the image. "Two dogs" captures most of the
-        information in the image. "One small brown dog and one medium-sized gold
-        dog on a slate grey surface" captures even more of the image. We can
-        keep going like this, with ever more complex descriptions -- a picture
-        is literally worth a thousand words.
+        There is a lot of information in this picture. Can we convert that
+        information to text without losing any info? We could try describing the
+        image. "Two dogs" captures most of the information. "One small brown dog
+        and one medium-sized gold dog on a slate grey surface" captures even
+        more. We can keep going like this, with ever more complex descriptions
+        -- a picture worth a thousand words, after all.
       </p>
       <p>
-        But why are we limiting ourselves to such a highly compressed
-        representation? "Two dogs" captures a lot of the information, but its
-        just 8 characters. It will always leave something out. What if we
-        instead went pixel by pixel and wrote out the colors? Starting from the
-        top left, we could write "grey, grey, grey, light grey, light grey,
-        grey, grey...". Not exactly Hemingway, but it would be a perfect
+        Can we do better? "Two dogs" captures a lot of the information, but its
+        just 8 characters. It will always leave something out. Instead, we could
+        go pixel by pixel and write out the colors. Starting from the top left,
+        we could write "grey, grey, grey, light grey, light grey, grey,
+        grey...". Not exactly Hemingway, but it <em>would</em> be a perfect
         representation of the image. We would capture all of the information.
+      </p>
+      <p>
+        The leap to an embedding is straightforward. Instead of words, we could
+        use RGB values -- something like [(128, 128, 128), (128, 128, 128)...].
+        Flatten that out, and we've successfully turned our image into a numeric
+        vector that perfectly captures all of original information.
       </p>
       <div class="image-holder">
         <img src="img/img-color.png" width="600" />
         <img src="img/img-hemingway.png" width="600" />
+        <img src="img/img-embed.png" width="600" />
         <p>
           Same information, different formats.
         </p>
       </div>
-
-      <p>
-        Hopefully the leap to an embedding is straightforward. Instead of words,
-        we could use RGB values and then flatten those out so that we get a
-        single list -- something like [128, 128, 128, 128, 128, 128...]. We've
-        turned our image into a numeric vector that perfectly captures all of
-        the information in the original image.
-      </p>
       <p>
         What about text? Can we turn text into an embedding? Well, one strategy
-        could be to turn every letter into a numeric code, like ASCII. This is
-        why a numeric sequence like 104 101 108 108 111 32 119 111 114 108 100
-        can be read as 'hello world' by a computer. If we had a really long
-        sequence of text, like a book, we could instead turn every unique word
-        into a number from 0 to N, where N is the number of unique words. Again,
-        we've turned our data into a numeric vector that perfectly captures all
-        of the original information.
+        could be to turn every character into a unique number, like ASCII. This
+        is why a numeric sequence like 104 101 108 108 111 32 119 111 114 108
+        100 can be read as 'hello world' by a computer. If we had a really long
+        sequence of text, like a book, we could instead turn every unique
+        <em>word</em> into a unique number. So even though we started with text,
+        we can pretty easily convert to a numeric representation.
       </p>
       <div class="image-holder">
         <img src="img/code.png" width="600" />
       </div>
       <p>
         Ok so hopefully by now you have some intuition for what an embedding is.
-        A question: is [0.124, 458.2356, 85.3, 2.01] an embedding? Or is it a
+        Question: is [0.124, 458.2356, 85.3, 2.01] an embedding? Or is it a
         random list of numbers?
       </p>
       <p>
-        Hopefully you see the problem with our initial definition.
+        We need to make a small change to our initial definition.
       </p>
       <p>
-        An embedding is a list of numbers (a float vector) that represents some
-        information,
+        An embedding is a list of numbers (AKA a float vector) that represents
+        some information,
         <em
           >as well as a mechanism for encoding and decoding that float vector to
           something useful</em
@@ -280,26 +283,24 @@
       </p>
       <h6>Format Matters</h6>
       <p>
-        Some of you might be wondering why we bother with a float vector in the
-        first place. After all, if we can perfectly capture information in a
-        bunch of different ways, why float vectors? Humans have a really tough
-        time reasoning about float vectors, surely there's an easier
-        representation?
+        Why do we bother with a float vector in the first place? If we can
+        perfectly capture information in a bunch of different ways, why lists of
+        numbers? The boring answer is that computers can operate on numbers
+        really easily. The more interesting answer is that different formats let
+        you manipulate your data in different ways.
       </p>
+
       <p>
-        The neat thing about float vectors is that they are continuous
-        representations. You can <em>compare</em> them. You can
-        <em>add them together</em>. You can <em>average</em> them. You can do
-        all these neat mathematical operations on them that let you quickly and
-        efficiently shift your data around. And this is really powerful, because
-        you can turn concepts into computation.
+        Float vectors are continuous representations. You can
+        <em>compare</em> them. You can <em>add them together</em>. You can
+        <em>average</em> them. You can do all these neat mathematical operations
+        on them to quickly and efficiently shift your data around. And this is
+        really powerful, because you can turn concepts into computation.
       </p>
       <p>
         Let's say we wanted to represent two concepts: gender, and royal status.
-        We can represent these two concepts as numbers in a vector of size 2. In
-        other words, we can map any coordinate [X, Y] to a gender/royal status
-        pairing. We can arbitrarily assign +X to be more masculine, -X to be
-        more feminine, +Y to be more royal, and -Y to be less royal.
+        We can represent these as axes on an XY coordinate plane, so that any
+        coordinate [X, Y] corresponds to a gender/royal status pairing.
       </p>
       <div class="image-holder">
         <img src="img/coords.png" width="400" />
@@ -317,33 +318,34 @@
         <img src="img/coords-mapped.png" width="400" />
       </div>
       <p>
-        Mathematically, we can do some interesting things with our embedded
-        concepts. For example, we can take the word 'King', subtract 'Man', add
-        'Woman', and get 'Queen'. Hopefully its also easy to see how we could
-        add other concepts (and other words) to our basic embedding system. If
-        we wanted to embed words like 'prince' or 'princess', we could add
-        another dimension for 'Age' and plot our points accordingly.
+        Now we can do some really cool stuff. We could average words together to
+        find other words near their conceptual midpoints. We could subtract
+        words to remove their meaning, or add words together to search for
+        specific related concepts. We could add new dimensions, like a Z-axis
+        for 'Age'. In other words, we can quantify words and use math to analyze
+        them.
       </p>
       <div class="image-holder">
         <img src="img/word-math.png" />
         <p>
-          This example is pretty famous in NLP, often in relation to a word
-          embedding generator called
+          We can do things like this. This example is pretty famous in NLP,
+          thanks to a word embedding generator called
           <a href="http://jalammar.github.io/illustrated-word2vec/">Word2Vec</a
           >.
         </p>
       </div>
       <p>
-        In general, float vectors correspond really well to geometry. Yea,
-        people aren't great at remembering lots of numbers, but we do a pretty
-        good job with spatial reasoning. Embeddings allow us to map concepts
-        into geometric spaces, where measures like 'distance' can be relatively
-        easily quantified. When I think about creating a model to embed cars (or
-        something), I can almost visualize a fantasy map, where different points
-        on the map represent specific car makes and models. You have a Mercedes
-        town, which is pretty close to BMW-burg , and kinda far from the School
-        Bus-ville. If our map is pretty good at making sure similar things are
-        close to each other, we've solved 90% of the deep learning problem.
+        We can do all of this magic because float vectors correspond really well
+        to geometry. And that, to me, is the core of deep learning intuition.
+        People aren't great at remembering lots of numbers, but we do a great
+        job with spatial reasoning. Embeddings allow us to turn concepts into
+        points in space, where we can visualize things like 'distance' or
+        'surfaces'. When I think about creating a model to embed cars I imagine
+        a fantasy map, where different points on the map represent specific car
+        makes and models. You have a Mercedes town, which is pretty close to
+        BMW-burg , and kinda far from the Bus-ville. If our map does a good
+        keeping similar things close to each other, we've solved 90% of the deep
+        learning problem.
       </p>
       <div class="image-holder">
         <img src="img/car-embed.png" />
@@ -366,44 +368,48 @@
         bit.
       </p>
       <p>
-        When we talk about embeddings, we generally refer to a float-vector that
-        compresses the relevant information into a smaller, more manageable size
-        while still keeping the important information around. That RGB image of
-        my dogs was roughly 2000x1000 pixels. 3x2000x1000 = 6 million. How do we
-        bring 6 million float inputs down to something more reasonable, like 64?
+        Embeddings go hand-in-hand with information compression -- the challenge
+        of a good embedding is to take all of the important parts of the really
+        large input, and keep the relevant stuff. Our map doesn't need to draw
+        every tree and mountain in high resolution detail, but it does need to
+        make sure the borders are in the right spot.
       </p>
       <p>
-        So far we've been considering each index in our embedding as isolated --
-        we have a 'gender' dimension, and a 'royalty' dimension, and an 'age'
-        dimension, and they don't mix at all. To work with larger data, we need
-        to treat combinations of our float values as having unique meaning.
-        Maybe +Y means 'royal' and +X means 'masculine', but [+Y, +X] means
-        'purple'. Going back to our imaginary map analogy, North East isn't the
-        average of North and East.
+        But how do we compress information?
+      </p>
+      <p>
+        So far we've been isolating the axes of our embedding -- we have a
+        'gender' dimension, and a 'royalty' dimension, and maybe an 'age'
+        dimension, and they don't mix at all. This makes it easy to draw a map,
+        but the map isn't going to carry a lot of info. To work with larger
+        data, we need to get rid of axes and look at regions instead. Instead of
+        saying "+Y = royalty", we would say "the area around coordinates [0, 1]
+        is associated with royalty". Notice how we are defining the region with
+        both coordinates. This gives us much more freedom to represent different
+        concepts.
       </p>
       <div class="image-holder">
         <img src="img/multi-embed.png" width="600" />
         <p>
           A rough idea of how an embedding might represent many concepts in only
           two dimensions. The axes aren't relevant anymore -- each point is
-          stiill an X/Y value, but each semantic meaning has it's own area of
-          the map. Homework question: is this a good or bad embedding? Why?
+          still an X/Y value, but each semantic meaning has it's own area of the
+          map. Homework question: is this a good or bad embedding? Why?
         </p>
       </div>
       <p>
-        Why stop at one combination? We can slice our float vectors all sorts of
-        ways, creating millions of combinations that a human would never be able
-        to remember or process. Luckily, we don't need to -- neural networks do
-        it for us. When a deep model is training, it's learning how to draw a
-        super high dimensional map at each layer. And, it can mix and match
-        input data in all sorts of arbitrary ways to figure out where the
-        imaginary lines should be, and which concepts should be close to other
-        concepts.
+        Because we can slice our float vectors all sorts of ways, we can create
+        millions of semantic combinations that a human would never be able to
+        remember or process. Luckily, we don't need to -- neural networks do it
+        for us. When a deep model is training, it's learning how to draw a super
+        high dimensional map at each layer. And, it can mix and match input data
+        in all sorts of arbitrary ways to figure out where the imaginary lines
+        should be, and which concepts should be close to other concepts.
       </p>
       <h6>Features, Embeddings, and Losses: Making a Model</h6>
       <p>
-        <em>"...where the imaginary lines should be."</em> 'Should be' based on
-        what?
+        Wait. How <em>does</em> a deep model decide where the imaginary lines
+        should be? What does it mean for concepts to be 'close together'?
       </p>
       <p>
         Let's take a step back. Every deep learning model is composed of three
@@ -420,16 +426,13 @@
         features and loss.
       </p>
       <p>
-        In my head, the features and the loss function <em>constrain</em> the
-        embeddings. Embeddings can only represent information that is provided
-        in the initial feature set. And the embeddings remove (or emphasize)
-        information based on the loss function. Going back to the car example,
-        if I want my model to emphasize car color, I better make sure that a)
-        I'm not using black and white photograph, and b) my loss somehow
-        emphasizes color. In my head, I think of the features and the loss as a
-        means of sculpting the embeddings of a model -- the features are the
-        clay, and the backpropagating gradients chip away or add to the
-        embeddings so that they are they right shape and size.
+        Each embedding is trying to draw a map based on the information provided
+        by the input features. If we want to identify vehicles, the
+        embedding-map needs to have a clear border between busses and sports
+        cars. If we want to classify text, the embedding-map needs to be able to
+        separate a frown from a smile. And, if a human can't figure out how to
+        draw a reasonable separation boundary for a few data points...well, you
+        probably want to think about your problem and your data some more.
       </p>
       <div class="image-holder">
         <img src="img/model.png" width="600" />
@@ -437,11 +440,20 @@
           Here, we have two models with the same color/shape feature input. The
           left model has a loss that is trying to predict color, and the right
           model has a loss that is trying to predict shape. The embeddings store
-          information accordingly -- the left model embeddings throw away the
-          shape information and retain color, while the right model embeddings
-          throw away color and retain shape.
+          information based on the loss -- the left model embeddings throw away
+          the shape information and retain color, while the right model
+          embeddings throw away color information and retain shape.
         </p>
       </div>
+      <p>
+        Overall, the features and the loss function <em>constrain</em> the
+        embeddings. Embeddings can only represent information that is provided
+        in the initial feature set. And the embeddings remove (or emphasize)
+        information based on the loss function. In my head, it's like sculpture
+        -- the features are the clay, the loss is the final vision, and the
+        backpropagating gradients chip away or add to the embeddings so that
+        they are they right shape and size.
+      </p>
       <p>
         I think this gets at why Deep ML models are so powerful. You can throw
         any features and any loss function into the thing, and the inner
@@ -454,21 +466,22 @@
       </p>
       <p>
         I like this framing because it also gives us some insight in how we can
-        change our models so they do what we want. We can add new or more
-        features, to try and give the model more to work with. We can change up
-        the architecture, to try and influence how the underlying embeddings mix
-        and match data. And we can modify the loss(es), to sculpt the underlying
-        information as it flows through the model. Each of these approaches has
-        trade offs. Adding more features will always help the model, but it's
-        not easy to get new data. Changing the architecture in a useful way
-        requires a stroke of inspiration or dumb luck. And modifying the loss is
-        highly volatile.
+        change our models so they do what we want. There are really only three
+        levers: we can add new or more features, to try and give the model more
+        to work with; we can change up the architecture, to try and influence
+        how the underlying embeddings mix and match data; or we can modify the
+        loss(es), to sculpt the underlying information as it flows through the
+        model. Each of these approaches has trade offs. Adding more features
+        will always help the model, but getting new data is really hard.
+        Changing the architecture in a useful way requires a stroke of
+        inspiration or dumb luck. And modifying the loss is highly volatile.
       </p>
       <p>
         There's one other cool thing about this framing. If we're ever confused
         about what our model is doing, we can take our model embeddings and plot
         them in 2D, like an actual map. This will let us see whether similar
-        concepts are appearing close or far away.
+        concepts are appearing close or far away. We'll get into debugging
+        models down the line, but Google 'TSNE plots' if you're curious.
       </p>
       <h6>Conclusions</h6>
       <p>
@@ -488,8 +501,8 @@
       <div class="acknowledgements">
         <h6>Acknowledgements</h6>
         <p>
-          Special thanks to Aaron Cooper, Azraf Anwar, and Isabel Kim for
-          reading drafts of this work.
+          Special thanks to Aaron Cooper, Azraf Anwar, Hunter Larco, and Isabel
+          Kim for reading drafts of this work.
         </p>
       </div>
     </div>
