@@ -232,15 +232,15 @@
       </p>
       <p>
         Can we do better? "Two dogs" captures a lot of the information, but its
-        just 8 characters. It will always leave something out. Instead, we could
-        go pixel by pixel and write out the colors. Starting from the top left,
-        we could write "grey, grey, grey, light grey, light grey, grey,
-        grey...". Not exactly Hemingway, but it <em>would</em> be a perfect
-        representation of the image. We would capture all of the information.
+        just 8 characters. It will always leave something out. Instead, lets go
+        pixel by pixel and write out the colors. Starting from the top left, we
+        could write "grey, grey, grey, light grey, light grey, grey, grey...".
+        Not exactly Hemingway, but it <em>would</em> be a perfect representation
+        of the image. We would capture all of the information.
       </p>
       <p>
-        The leap to an embedding is straightforward. Instead of words, we could
-        use RGB values -- something like [(128, 128, 128), (128, 128, 128)...].
+        The leap to an embedding is straightforward. Replace our words/colors
+        with RGB values -- something like [(128, 128, 128), (128, 128, 128)...].
         Flatten that out, and we've successfully turned our image into a numeric
         vector that perfectly captures all of original information.
       </p>
@@ -380,9 +380,9 @@
         'gender' dimension, and a 'royalty' dimension, and maybe an 'age'
         dimension, and they don't mix at all. This makes it easy to draw a map,
         but the map isn't going to carry a lot of info. To work with larger
-        data, we need to get rid of axes and look at regions instead. Instead of
-        saying "+Y = royalty", we would say "the area around coordinates [0, 1]
-        is associated with royalty". Notice how we are defining the region with
+        data, we need to get rid of axes and look at regions. Instead of saying
+        "+Y = royalty", we would say "the area around coordinates [0, 1] is
+        associated with royalty". Notice how we are defining the region with
         both coordinates. This gives us much more freedom to represent different
         concepts.
       </p>
