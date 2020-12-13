@@ -112,7 +112,9 @@
         you. I'll be aiming for 'intermediate programmer, never worked in ML
         before' as my audience. That said, I think this will be most useful for
         folks who have maybe taken one or two classes on ML, and know some of
-        the basic terms.
+        the basic terms. If you know that a ML model has two modes, and that
+        they are called training and inference, but you don't know more beyond
+        that, you're in the sweet spot.
       </p>
       <p>
         Before diving in, I want to highlight a few resources that really helped
@@ -408,7 +410,9 @@
         for us. When a deep model is training, it's learning how to draw a super
         high dimensional map at each layer. And, it can mix and match input data
         in all sorts of arbitrary ways to figure out where the imaginary lines
-        should be, and which concepts should be close to other concepts.
+        should be, and which concepts should be close to other concepts. Then,
+        during inference, the model reads the map back on some new data point to
+        see what's nearby, and use the map to make decisions.
       </p>
       <h6>Features, Embeddings, and Losses: Making a Model</h6>
       <p>
