@@ -1,0 +1,86 @@
+<title>writing</title>
+<meta name="viewport" content="width=800" />
+<link rel="icon" href="spy.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="spy.ico" type="image/x-icon" />
+<link rel="stylesheet" href="theme.css" />
+
+<style></style>
+<!-- Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-131666667-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "UA-131666667-1");
+</script>
+
+<div class="header">
+  <h1>Writing</h1>
+  <h3>Amol Kapoor</h3>
+</div>
+
+<div class="content">
+  <div class="writing-holder">
+    <hr />
+    <h4>Simple DL Part 2: Embeddings</h4>
+    <h6>December, 2020</h6>
+
+    <div class="writing">
+      <p>
+        In my opinion, you need to understand embeddings to really 'get' deep
+        learning. Embeddings are the magic fairy dust that power every deep
+        learning model, from ImageNet to GPT-3. I think in embeddings.
+        Embeddings are the foundation for any intuition I have about DL, so all
+        of my future posts in this series are going to refer back to the
+        embedding concept.
+      </p>
+      <p>
+        Because this is important foundation, I'll be splitting this section
+        into two parts. The <a href="./simpledl_2a.html">first section</a> tries
+        to define embeddings, while the
+        <a href="./simpledl_2b.html">second part</a> explains why they work.
+      </p>
+
+      <h6>TLDR</h6>
+      <ul>
+        <li>
+          Embeddings are float-vector representations of information.
+        </li>
+        <li>
+          Float-vectors are unique because they are continuous, which means we
+          can think of them like points on a map (or, more generally, points on
+          an N-dimensional surface).
+        </li>
+        <li>
+          A good embedding is one where similar information is 'close' to each
+          other in our map.
+        </li>
+        <li>
+          Because embeddings are lists of floats that represent concepts, we can
+          turn concepts into computation.
+        </li>
+        <li>
+          A deep learning model is made of a stack of embeddings. Embeddings are
+          constrained by the input data (features) and the loss function.
+        </li>
+        <li>
+          The features limit what the embeddings can learn, and the loss tells
+          the model what to prioritize. Models are as good as their features and
+          as bad as their loss.
+        </li>
+        <li>
+          We can improve a model's performance by changing the features, the
+          architecture, or the loss function. These change the embeddings, which
+          changes the underlying information map.
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer"></div>
+</div>

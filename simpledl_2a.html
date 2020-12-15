@@ -1,0 +1,180 @@
+<title>Simple DL Part 2a: Embeddings</title>
+<meta name="viewport" content="width=800" />
+<link rel="icon" href="spy.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="spy.ico" type="image/x-icon" />
+<link rel="stylesheet" href="theme.css" />
+
+<style></style>
+<!-- Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-131666667-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "UA-131666667-1");
+</script>
+
+<div class="header">
+  <h1>Writing</h1>
+  <h3>Amol Kapoor</h3>
+</div>
+
+<div class="content">
+  <div class="writing-holder">
+    <hr />
+    <h4>Simple DL Part 2a: What are Embeddings?</h4>
+    <h6>December, 2020</h6>
+
+    <div class="writing">
+      <h6>Embedding Basics</h6>
+      <p>
+        Ok now for the long version. We'll start with a definition: an embedding
+        is a list of numbers (AKA a float vector) that represents some
+        information. You can have embeddings for just about any kind of
+        information out there. There are
+        <a href="https://en.wikipedia.org/wiki/Word_embedding"
+          >word embeddings</a
+        >. There are
+        <a href="https://en.wikipedia.org/wiki/Sentence_embedding"
+          >sentence embeddings</a
+        >. There are
+        <a href="https://rom1504.medium.com/image-embeddings-ed1b194d113e"
+          >image embeddings</a
+        >. There are
+        <a href="https://en.wikipedia.org/wiki/Graph_embedding"
+          >graph embeddings</a
+        >. There are
+        <a
+          href="https://www.cs.cornell.edu/~kb/publications/SIG15ProductNet.pdf"
+          >furniture embeddings</a
+        >. Basically, if you can think of a concept, you can represent it as an
+        embedding.
+      </p>
+      <p>
+        If you're more mathematically minded, the
+        <a href="https://en.wikipedia.org/wiki/Embedding"
+          >embedding wiki page</a
+        >
+        has a pretty good formal description/definition of embeddings. The core
+        idea is that an embedding is a mapping between some object (or space) X
+        to some object (or space) Y, such that the 'important' structure of X is
+        preserved. For most deep learning applications, we care about embeddings
+        in metric spaces.
+      </p>
+      <h6>Information vs Format</h6>
+      <p>
+        This is already kinda weird. How can we take any concept and represent
+        it as a list of numbers? To really grasp this idea, we need to remember
+        that
+        <b>information is not the format</b>. This is a core principle of
+        <a href="https://en.wikipedia.org/wiki/Information_theory"
+          >information theory</a
+        >
+        and underpins most of modern computer science. Basically, we can take a
+        piece of information and represent it in any format, and the underlying
+        information won't be any different. We might lose information in the
+        conversion process, but that's due to practical limitations of the
+        format.
+      </p>
+      <p>
+        An example may help nail all this down. Let's say we have a picture of
+        my wonderful dogs, Sparky and Lego.
+      </p>
+      <div class="image-holder">
+        <img src="img/sparky_and_lego.jpeg" width="600" />
+        <p>
+          Dogs!
+        </p>
+      </div>
+      <p>
+        There is a lot of information in this picture. Can we convert that
+        information to text without losing any info? We could try describing the
+        image. "Two dogs" captures most of the information. "One small brown dog
+        and one medium-sized gold dog on a slate grey surface" captures even
+        more. We can keep going like this, with ever more complex descriptions
+        -- a picture worth a thousand words, after all.
+      </p>
+      <p>
+        Can we do better? "Two dogs" captures a lot of the information, but its
+        just 8 characters. It will always leave something out. Instead, lets go
+        pixel by pixel and write out the colors. Starting from the top left, we
+        could write "grey, grey, grey, light grey, light grey, grey, grey...".
+        Not exactly Hemingway, but it <em>would</em> be a perfect representation
+        of the image. We would capture all of the information.
+      </p>
+      <p>
+        The leap to an embedding is straightforward. Replace our words/colors
+        with RGB values -- something like [(128, 128, 128), (128, 128, 128)...].
+        Flatten that out, and we've successfully turned our image into a numeric
+        vector that perfectly captures all of original information.
+      </p>
+      <div class="image-holder">
+        <img src="img/img-color.png" width="600" />
+        <img src="img/img-hemingway.png" width="600" />
+        <img src="img/img-embed.png" width="600" />
+        <p>
+          Same information, different formats.
+        </p>
+      </div>
+      <p>
+        What about text? Can we turn text into an embedding? Well, one strategy
+        could be to turn every character into a unique number, like ASCII. This
+        is why a numeric sequence like 104 101 108 108 111 32 119 111 114 108
+        100 can be read as 'hello world' by a computer. If we had a really long
+        sequence of text, like a book, we could instead turn every unique
+        <em>word</em> into a unique number. So even though we started with text,
+        we can pretty easily convert to a numeric representation.
+      </p>
+      <div class="image-holder">
+        <img src="img/code.png" width="600" />
+      </div>
+      <p>
+        Ok so hopefully by now you have some intuition for what an embedding is.
+        Question: is [0.124, 458.2356, 85.3, 2.01] an embedding? Or is it a
+        random list of numbers?
+      </p>
+      <p>
+        We need to make a small change to our initial definition.
+      </p>
+      <p>
+        An embedding is a list of numbers (AKA a float vector) that represents
+        some information,
+        <em
+          >as well as a mechanism for encoding and decoding that float vector to
+          something useful</em
+        >. In the examples above, our encoding/decoding scheme was RGB or ASCII.
+        In deep learning, our encoder/decoder is the Deep ML model.
+      </p>
+      <h6>Conclusions</h6>
+      <p>
+        Embeddings are a super unintuitive concept, and I think to really reason
+        about them you have to clear two huge hurdles. For me, figuring out
+        information vs. format was one of those hurdles -- once I could separate
+        the abstract concept of data from the format it was presented, I began
+        to think in terms of flowing information. And information as a concept
+        is really something that can only live in your head. Data is converted
+        from bits on a disk to pixels on a screen, which is interpreted as
+        lightwaves by our retinas, which is converted electrical signals in our
+        brain...ALL of that is format. The actual information is abstract,
+        existing in a void that cannot ever be actually materialized.
+      </p>
+      <p>
+        Ok enough poetry.
+      </p>
+      <p>
+        This section covered how information can be represeneted in a bunch of
+        different formats. In the next section, we'll talk about why different
+        formats matter, and what we can do with embeddings that make them so
+        powerful for Deep ML.
+      </p>
+    </div>
+  </div>
+
+  <div class="footer"></div>
+</div>
