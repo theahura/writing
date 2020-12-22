@@ -211,14 +211,13 @@
         Let's ground this in a specific example. Say I'm the embodiment of
         $SELF_DRIVING_CAR_COMPANY and I want to create an ML model that
         identifies NYC taxis, because NYC taxis behave erratically on the road.
-        NYC taxis are bright yellow. So, to improve model outcomes, I could make
-        remove all other colors EXCEPT for yellow in my input features. Reducing
-        the color input gives the model less data to work with, ensuring that
-        our embeddings will have more of the color information we care about.
-        Or, I could tweak my loss function to have the model predict color as
-        well as whether or not there is a taxi. Adding color to the loss
-        encourages the model to retain color information in the underlying
-        embedding-map.
+        NYC taxis are bright yellow. So, to improve model outcomes, I could
+        remove all other colors EXCEPT for yellow in my input features; or, I
+        could tweak my loss function to have the model predict color as well as
+        whether or not there is a taxi. Reducing the color input gives the model
+        less data to work with, ensuring that our embeddings will have more of
+        the color information we care about. Adding color to the loss encourages
+        the model to retain color information in the underlying embedding-map.
       </p>
       <p>
         Overall, the features and the loss function <em>constrain</em> the
