@@ -62,6 +62,58 @@
           it will have.
         </li>
       </ul>
+      <h6>What is a loss function?</h6>
+      <p>
+        A deep neural network takes in some piece of data represented as an
+        embedding (i.e. a list of numbers). It passes the data through a stack
+        of transformations, each of which produces an intermediate embedding.
+        And then the model outputs some final embedding, depending on what the
+        task is.
+      </p>
+      <div class="image-holder">
+        <img src="img/turtles.jpg" width="400" />
+        <p>
+          It's embeddings all the way down.
+        </p>
+      </div>
+      <p>
+        During training, we want to quantify how good that final output is -- we
+        do this with a loss function. In practice, the loss function takes the
+        output of the DNN and produces a single number. The DNN tries to
+        minimize that number. We're not gonna dive into <i>how</i> the model
+        minimizes the loss, because I think in practice it's rarely relevant for
+        understanding DNNs. But if you're interested take a look at the wiki
+        page for
+        <a href="https://en.wikipedia.org/wiki/Backpropagation">backprop</a>.
+      </p>
+      <p>
+        If we want to try and put this into a single sentence, a loss function
+        is a function f(x) or f(x, y) that measures how well the model output x
+        matches a specific piece of information, possibly defined by some
+        external source y. When thinking about a whole training set, the loss
+        function is a measure of how well the model output matches a certain
+        distribution.
+      </p>
+      <div class="image-holder">
+        <img src="" width="400" />
+        <p>
+          TODO: Get loss distribution image.
+        </p>
+      </div>
+      <h6>How do we change the loss function?</h6>
+      <p>
+        It's hard to figure out exactly how changing the loss will impact the
+        model -- I mean, we can calculate the outcomes with math but
+        realistically that does not provide us with a great understanding of how
+        the model will respond. As a result, changing the losses of a model is
+        pretty volatile. To a first approximation, we can tune our model by
+        thinking about how the data is correlated with the outcomes we want, and
+        adding losses that emphasize that data.
+      </p>
+      <p>
+        There's already an example of this in the embeddings post; I'll try and
+        use a different example here.
+      </p>
     </div>
   </div>
   <div class="footer"></div>
