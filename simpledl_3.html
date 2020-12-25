@@ -1,0 +1,68 @@
+<title>writing</title>
+<meta name="viewport" content="width=800" />
+<link rel="icon" href="spy.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="spy.ico" type="image/x-icon" />
+<link rel="stylesheet" href="theme.css" />
+
+<style></style>
+<!-- Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-131666667-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "UA-131666667-1");
+</script>
+
+<div class="header">
+  <h1>Writing</h1>
+  <h3>Amol Kapoor</h3>
+</div>
+
+<div class="content">
+  <div class="writing-holder">
+    <h4>Simple DL Part 3: Losses</h4>
+    <h6>December, 2020</h6>
+
+    <div class="writing">
+      <h6>Recap</h6>
+      <p>
+        In the <a href="./simple2l_2.html">last section</a> we talked
+        extensively about embeddings: what they are, how they worked, and why
+        they are important. An embedding as a list of floats that carries some
+        information about a concept; because embeddings are continuous
+        representations, they can turn concepts into computation. A set of
+        embeddings can be thought of as points on a map, that somehow represents
+        the underlying 'important' structure of the things we are learning
+        about. Loss functions are used to manipulate embeddings in a deep neural
+        network -- in this section, we look at loss functions in more depth.
+      </p>
+      <h6>TLDR</h6>
+      <ul>
+        <li>
+          Loss functions are how we tell the model what information to emphasize
+          or to throw away.
+        </li>
+        <li>
+          If an embedding is a map, the loss is the cartographer.
+        </li>
+        <li>
+          When thinking about losses, we care about three things: what the model
+          produces, what we are comparing against, and how we do the comparison.
+        </li>
+        <li>
+          Losses can be placed on any embedding -- they do not just have to be
+          at the end. The closer a loss is to an embedding, the more influence
+          it will have.
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer"></div>
+</div>
