@@ -27,7 +27,7 @@
 
 <div class="content">
   <div class="writing-holder">
-    <h4>Simple DL Part 3: Losses</h4>
+    <h4>Simple DL Part 3: Losses and Features</h4>
     <h6>December, 2020</h6>
 
     <div class="writing">
@@ -40,21 +40,23 @@
         representations, they can turn concepts into computation. A set of
         embeddings can be thought of as points on a map, that somehow represents
         the underlying 'important' structure of the things we are learning
-        about. Loss functions are used to manipulate embeddings in a deep neural
-        network -- in this section, we look at loss functions in more depth.
+        about. Loss functions and features are used to manipulate embeddings in
+        a deep neural network -- in this section, we look at these in more
+        depth.
       </p>
       <h6>TLDR</h6>
       <ul>
         <li>
-          Loss functions are how we tell the model what information to emphasize
-          or to throw away.
-        </li>
-        <li>
-          If an embedding is a map, the loss is the cartographer.
+          Features are the baseline input data to our model. Loss functions are
+          how we tell the model what information to emphasize or to throw away.
         </li>
         <li>
           When thinking about losses, we care about three things: what the model
           produces, what we are comparing against, and how we do the comparison.
+        </li>
+        <li>
+          Models will cheat if they can. We need to be careful about our data as
+          a result.
         </li>
         <li>
           Losses can be placed on any embedding -- they do not just have to be
@@ -62,7 +64,7 @@
           it will have.
         </li>
       </ul>
-      <h6>What is a loss function?</h6>
+      <h6>Definitions</h6>
       <p>
         A deep neural network takes in some piece of data represented as an
         embedding (i.e. a list of numbers). It passes the data through a stack
@@ -95,24 +97,72 @@
         distribution.
       </p>
       <div class="image-holder">
-        <img src="" width="400" />
+        <img src="img/loss-distribution.png" width="600" />
         <p>
-          TODO: Get loss distribution image.
+          For most tasks, the loss is defined as some kind of distance between
+          two distributions -- the model output and some external truth
+          distribution -- that quantifies the model's performance.
         </p>
       </div>
-      <h6>How do we change the loss function?</h6>
+      <p>
+        Features are a bit easier to define -- the features are the input data.
+        For a given input, we generally have multiple features describing that
+        input. If we input an image, we could include the pixel data, the GPS
+        metadata, camera parameters, and more. Each one of these would be a
+        single feature.
+      </p>
+      <h6>Models Cheat</h6>
       <p>
         It's hard to figure out exactly how changing the loss will impact the
         model -- I mean, we can calculate the outcomes with math but
         realistically that does not provide us with a great understanding of how
         the model will respond. As a result, changing the losses of a model is
-        pretty volatile. To a first approximation, we can tune our model by
-        thinking about how the data is correlated with the outcomes we want, and
-        adding losses that emphasize that data.
+        pretty volatile.
       </p>
       <p>
-        There's already an example of this in the embeddings post; I'll try and
-        use a different example here.
+        Part of what makes loss functions hard to reason about is that models
+        will 'cheat' if they can. If a model has an easy way to minimize the
+        loss, it will take it. Let's say we wanted to train a model to identify
+        cats and dogs. If we only feed in images of cats during training, our
+        model will never figure out how to predict dogs.
+      </p>
+      <div class="image-holder">
+        <img src="img/only-cats.png" width="600" />
+        <p>
+          If we only use images of cats during training, the model will 'cheat'.
+          It will learn to ignore all of the input features -- no matter what
+          you put in, it will predict cat.
+        </p>
+      </div>
+      <p>
+        So let's just include some dogs in our training set, right? It's not
+        that easy. If we accidentally have correlations in our data that let the
+        model minimize the loss, the model will use it. It will cheat.
+      </p>
+      <div class="image-holder">
+        <img src="img/colorswitch.png" width="600" />
+        <p>
+          If we only train on white cats and black dogs, the model isn't going
+          to learn anything about cats and dogs. It's only going to learn about
+          color. If the model sees a black cat, it will predict 'dog'. And if it
+          sees a white dog, it'll predict 'cat'. Obviously we could try and play
+          with the data distributions,
+        </p>
+      </div>
+      <p>
+        This is why we have to care about the input features. Data matters,
+        whether we're training a pet identifier or a
+        <a href="https://www.jefftk.com/p/detecting-tanks">tank detector</a>.
+      </p>
+      <h6>So how do we change loss functions?</h6>
+      <p>
+        To a first approximation, we can tune our model by thinking about how
+        the data is correlated with the outcomes we want, and adding losses that
+        emphasize that data.
+      </p>
+      <p>
+        What helped this all click for me was thinking about imbalanced label
+        distributions.
       </p>
     </div>
   </div>
