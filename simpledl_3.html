@@ -113,18 +113,11 @@
       </p>
       <h6>Models Cheat</h6>
       <p>
-        It's hard to figure out exactly how changing the loss will impact the
-        model -- I mean, we can calculate the outcomes with math but
-        realistically that does not provide us with a great understanding of how
-        the model will respond. As a result, changing the losses of a model is
-        pretty volatile.
-      </p>
-      <p>
-        Part of what makes loss functions hard to reason about is that models
-        will 'cheat' if they can. If a model has an easy way to minimize the
-        loss, it will take it. Let's say we wanted to train a model to identify
-        cats and dogs. If we only feed in images of cats during training, our
-        model will never figure out how to predict dogs.
+        Part of what makes models hard to reason about is that models will
+        'cheat' if they can. If a model has an easy way to minimize the loss, it
+        will take it. Let's say we wanted to train a model to identify cats and
+        dogs. If we only feed in images of cats during training, our model will
+        never figure out how to predict dogs.
       </p>
       <div class="image-holder">
         <img src="img/only-cats.png" width="600" />
@@ -137,7 +130,7 @@
       <p>
         So let's just include some dogs in our training set, right? It's not
         that easy. If we accidentally have correlations in our data that let the
-        model minimize the loss, the model will use it. It will cheat.
+        model minimize the loss, the model will use it.
       </p>
       <div class="image-holder">
         <img src="img/colorswitch.png" width="600" />
@@ -152,13 +145,29 @@
         This is why we have to care about the input features. Data matters,
         whether we're training a pet identifier or a
         <a href="https://www.jefftk.com/p/detecting-tanks">tank detector</a>.
+        The more training data we have, the better the input will match the true
+        data distributions, and the better our model will perform.
+      </p>
+      <p>
+        Ok so we just get enough data and that solves the problem, right? I work
+        at Google, which arguably has the most data access in the world, and let
+        me tell you it's not that simple. Getting access to more data is
+        <i>hard</i>. At a large enough scale, it's inefficient.
       </p>
       <h6>So how do we change loss functions?</h6>
+      <p>
+        It's hard to figure out exactly how changing the loss will impact the
+        model -- I mean, we can calculate the outcomes with math but
+        realistically that does not provide us with a great understanding of how
+        the model will respond. As a result, changing the losses of a model is
+        pretty volatile.
+      </p>
       <p>
         To a first approximation, we can tune our model by thinking about how
         the data is correlated with the outcomes we want, and adding losses that
         emphasize that data.
       </p>
+
       <p>
         What helped this all click for me was thinking about imbalanced label
         distributions.
