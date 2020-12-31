@@ -73,12 +73,27 @@
         one-hot or multi-hot vectors. And singleton features (e.g. price, date,
         location, etc.) are generally represented as raw floats.
       </p>
+      <h6>Feature Preprocessing</h6>
       <p>
-        Generally we transform our features using normalization, like standard
-        scaling. This is to make sure all of the inputs are roughly along the
-        same scale (we'll talk more about this subject later on in a tips and
-        hacks section of SimpleDL).
+        We often preprocess that data before feeding it into the model.
+        Generally we transform our data using different kinds of scaling
+        methods, like dividing all of the data by the average of the dataset.
+        This is to make sure all of the inputs are roughly along the same scale
+        -- between -1 and 1, ideally (we'll talk about this a bit more in the
+        tips and tricks section down the line).
       </p>
+      <p>
+        A quick mention: if we're working on images, we often want to 'augment'
+        our inputs. We can do that by rotating the images, scaling them all
+        sorts of ways, changing the brightness, contrast, coloring, etc.
+      </p>
+      <div class="image-holder">
+        <img src="img/cat-augment.png" width="600" />
+        <p>
+          An example of image augmentation. Homework question: why do we do
+          this? (Answer below)
+        </p>
+      </div>
       <h6>Models Cheat</h6>
       <p>
         Part of what makes models hard to reason about is that models will
@@ -111,7 +126,8 @@
           If we only train on white cats and black dogs, the model isn't going
           to learn anything about cats and dogs. It's only going to learn about
           color. If the model sees a black cat, it will predict 'dog'. And if it
-          sees a white dog, it'll predict 'cat'.
+          sees a white dog, it'll predict 'cat'. This is why we augment our
+          input features.
         </p>
       </div>
       <p>
