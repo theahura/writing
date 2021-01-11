@@ -23,12 +23,13 @@
 <div class="header">
   <h1>Writing</h1>
   <h3>Amol Kapoor</h3>
+  <a href="./index.html">Back to table of contents.</a>
 </div>
 
 <div class="content">
   <div class="writing-holder">
     <h4>Simple DL Part 4: Losses</h4>
-    <h6>December, 2020</h6>
+    <h6>January, 2020</h6>
 
     <div class="writing">
       <h6>TLDR</h6>
@@ -58,7 +59,7 @@
       <div class="image-holder">
         <img src="img/turtles.jpg" width="400" />
         <p>
-          It's embeddings all the way down.
+          It's embeddings all the way down. Also, I like turtles.
         </p>
       </div>
       <p>
@@ -170,11 +171,13 @@
         this. In a lot of medical applications, we care a lot about false
         positives or false negatives, but rarely both. For an uninvasive COVID
         screen, we want to make sure we don't accidentally let people who are
-        infected through even if it means getting some false positives. So we
-        increase the weight of infected patients, to make it less likely that
-        the model misses infected patients on the edge. On the flip side, for a
-        more invasive surgical procedure, we definitely want to make sure that
-        the model predicts right.
+        infected through even if it means getting some false positives. So, we
+        increase the penalty for missing infected patients, making the model
+        more likely to flag all the infected. On the flip side, for a more
+        invasive surgical procedure, we definitely want to make sure that the
+        model is really sure that a patient has COVID. So, we increase the
+        penalty of misdiagnosing healthy patients, making the model less likely
+        to send a healthy person to surgery.
       </p>
       <p>
         Instead of perfectly balancing the loss function, we can bias the model
@@ -192,9 +195,22 @@
         functions, the closer a loss is to an embedding layer, the more impact
         the loss will have on that layer.
       </p>
+      <p>
+        To use a real world medical example, let's say we had a model that was
+        trying to predict whether or not a patient had diabetic retinopathy
+        given an image of a retina. We could build a simple classifier, but we
+        may be throwing away a lot of useful labeled data like measuring the
+        amount of new veins in the eye or the presence of fluid in the retina
+        (both symptoms of diabetic retinopathy). To make sure our embeddings
+        contain the right information, we can add these additional symptoms to
+        our loss function with multiple model outputs.
+      </p>
       <div class="image-holder">
-        <img src="" width="600" />
-        <p>TODO: image of multiple losses with multiple heads</p>
+        <img src="./img/drmodel.png" width="600" />
+        <p>
+          Adding symptom information as multihead losses so the underlying
+          embeddings capture more useful information.
+        </p>
       </div>
       <p>
         I've kinda been pretending that losses on other model layers are rare,
@@ -206,7 +222,18 @@
         GANs, and more.
       </p>
       <h6>Conclusions</h6>
-      <p></p>
+      <p>
+        Loss functions are hard to understand, because changing them doesn't
+        always do what you expect in the model. But they are also super
+        important, because without the loss we have no way to actually control
+        what the model is doing. It's like doing surgery with a hammer. Messy.
+        And it's rarely the right answer, if you have a working model that
+        you're trying to improve.
+      </p>
+      <p>
+        But if you have a model that doesn't work at all, change the loss.
+        Change it with abandon, because your current loss isn't right at all.
+      </p>
     </div>
   </div>
   <div class="footer">
