@@ -56,57 +56,7 @@
         </p>
       </div>
     </div>
-    <h4>Reflection</h4>
-    <div class="writing">
-      <div><a id="Letters" href="#">Letters</a></div>
-    </div>
   </div>
 
   <div class="footer"></div>
-  <script>
-    document.getElementById("Letters").addEventListener("click", async () => {
-      // Password protect Letters so that only the right people read them.
-      const password = prompt(
-        "What book did I loan you that you never read? (all lowercase)"
-      );
-
-      // Send an email to keep track of who is trying to access this page with
-      // which password.
-      let request = $.ajax({
-        url: "https://formspree.io/f/xdoppyzj",
-        method: "POST",
-        data: { message: password },
-        dataType: "json"
-      });
-      request.done(msg => {
-        console.log(msg);
-      });
-      request.fail((jqXHR, textStatus) => {
-        console.log(textStatus);
-      });
-
-      // The code to generate this is stored offline.
-      const encrypted = `-----BEGIN PGP MESSAGE-----
-Version: OpenPGP.js v4.10.9
-Comment: https://openpgpjs.org
-
-wy4ECQMIKXRXbaCiOizgheXv49pnaleRrjXsRs5ig+XreWmvcJBiPTojRBdn
-4o5W0oABGpjArnxWfK8bx3HLqFIMsJy7+BphEYk/izX/iCHiNXUWcjWDWOWf
-3O1rRb5+KGEI6cnrfFwwTkFaREvmC3hem+E0KO6YXrSmghiXhyt3tqP7Dxe8
-7eSo8TtxYvk7e4nhB/BpfbJXnrnClAMdMp00xkurEfAqcOQpY70Nk30sFQ==
-=yIzz
------END PGP MESSAGE-----`;
-      try {
-        const decrypted = await openpgp.decrypt({
-          message: await openpgp.message.readArmored(encrypted),
-          passwords: [password]
-        });
-        const cleartext = decrypted.data;
-        console.log(cleartext);
-        document.location.href = cleartext;
-      } catch {
-        alert("Wrong password.");
-      }
-    });
-  </script>
 </div>
