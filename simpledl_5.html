@@ -28,13 +28,87 @@
 <div class="content">
   <div class="writing-holder">
     <h4>Simple DL Part 5: Canonical Tasks</h4>
-    <h6>December, 2020</h6>
+    <h6>February, 2021</h6>
 
     <div class="writing">
       <h6>TLDR</h6>
       <ul>
         <li>TODO</li>
       </ul>
+
+      <h6>What is a Canonical Task?</h6>
+      <p>
+        There is a lot of chaos in deep learning literature. Every year, it
+        seems like hundreds of models are published, each with dozens of
+        possible applications. It can be tough to figure out what a model
+        actually does and how it can be used.
+      </p>
+      <p>
+        Over time, I developed this idea of a Canonical Task to help me get
+        through the noise. For me, a Canonical Task is some sort of indivisible
+        thing that defines a models purpose. Depending on what's more intuitive,
+        you can think of these tasks based on what the model produces, or based
+        on what the model does. It turns out that even though there are so many
+        different models, there are only three canonical tasks. These are:
+      </p>
+      <ul>
+        <li>Classification</li>
+        <li>Multi-Classification</li>
+        <li>Regression</li>
+      </ul>
+      <p>
+        Every deep learning model in the whole world can be broken down into
+        these three tasks. And each of these tasks comes with a set of 'default'
+        loss functions too. So if you have a never-before-solved problem, the
+        first thing to do is figure out which task your problem falls under, and
+        then pick a corresponding loss, and you've already solved half the issue
+        in front of you.
+      </p>
+      <p>
+        Let's talk about what each of these Canonical Tasks mean in a bit more
+        detail.
+      </p>
+
+      <p>
+        A <b>classification</b> task is when you train a model to predict
+        whether an input is one of a set of mutually exclusive things. Imagine
+        we want to train a pet classifier. We want to pass the model some input,
+        maybe an image. On the output, the model needs to decide whether the
+        input represented a dog, a cat, or a fish. The model cannot say the
+        input was a dog AND a cat AND a fish -- these are mutually exclusive
+        categories. If the model is more confident that the input is a cat, it
+        has to be less confident that the input is a dog or a fish.
+      </p>
+      <p>
+        Classification tasks are really common. Self driving cars classify
+        bikers, cars, and pedestrians. Spam detectors classify into spam or
+        not-spam. Medical technology classifies into different disease states.
+        In general, if you have some kind of mutually exclusivity in your
+        problem, you have a classification task.
+      </p>
+      <p>
+        Common losses include: softmax cross entropy, ...
+      </p>
+
+      <p>
+        A <b>multi-classification</b> task is similar to a classification task,
+        except this time the possible outputs are not mutually exclusive.
+      </p>
+      <p>
+        Common losses include: sigmoid cross entropy, ...
+      </p>
+
+      <p>
+        A <b>regression</b> task is when you train a model to predict continuous
+        values.
+      </p>
+      <p>
+        Common losses include: mean squared error, mean squared log error, ...
+      </p>
+
+      <h6>Unsupervised learning</h6>
+
+      <h6>Outputs vs. Tasks</h6>
     </div>
   </div>
   <div class="footer">
