@@ -4,7 +4,6 @@
 <link rel="shortcut icon" href="spy.ico" type="image/x-icon" />
 <link rel="stylesheet" href="theme.css" />
 
-<style></style>
 <!-- Google Analytics -->
 <script
   async
@@ -80,35 +79,64 @@
         has to be less confident that the input is a dog or a fish.
       </p>
       <p>
-        Classification tasks are really common. Self driving cars classify
-        bikers, cars, and pedestrians. Spam detectors classify into spam or
-        not-spam. Medical technology classifies into different disease states.
-        In general, if you have some kind of mutually exclusivity in your
-        problem, you have a classification task.
+        A really common loss for classification tasks is softmax cross entropy
+        loss. This loss works best if you can represent groundtruth labels as a
+        one-hot vector representing the label. We use a softmax nonlinearity to
+        reweight the model outputs because softmax adjusts every value in the
+        vector relative to the others such that the total sums to one. Since the
+        output vector sums to one, we can think of it as a probability
+        distribution. The easiest way to interpret the model output with this
+        loss is to examine the weight that is highest, and call that the model's
+        prediction. If many values are close, we can say the model is not so
+        confident.
       </p>
-      <p>
-        Common losses include: softmax cross entropy, ...
-      </p>
-
       <p>
         A <b>multi-classification</b> task is similar to a classification task,
-        except this time the possible outputs are not mutually exclusive.
+        except this time the possible outputs are not mutually exclusive. Maybe
+        we have a dataset of zoo animals, and so it's possible for an image to
+        contain cats and dogs and fish. We would use a multi-classification
+        model to represent this data.
       </p>
       <p>
-        Common losses include: sigmoid cross entropy, ...
+        A pretty common multi-classification loss is sigmoid cross entropy. This
+        loss is similar to the softmax cross entropy, but we use a sigmoid
+        nonlinearity because that is applied per element and simply converts
+        each individual element to a value between 0 and 1. Because the
+        individual elements aren't constrained by each other, multiple elements
+        can be set to 1 (i.e. 'predicted'). One way to think about this model
+        output is to imagine that each individual element is its own predictive
+        function, and any value above a threshold (commonly 0.5) is therefore
+        considered a model prediction.
       </p>
 
       <p>
         A <b>regression</b> task is when you train a model to predict continuous
-        values.
+        values. The other two types of tasks predict categories that don't have
+        any directional relation to each other. By comparison, regression tasks
+        produce outputs where predicting a higher or lower value matters because
+        of the numerical relationship between those values. For example, if we
+        wanted to predict housing prices, or case counts for some disease, or
+        some embedding value from a different model, we want to use regression.
       </p>
       <p>
-        Common losses include: mean squared error, mean squared log error, ...
+        There are a bunch of possible losses here, such as difference, mean
+        squared error or mean squared log error. There are theoretical reasons
+        to prefer a log error, but basically as long as you have some measure of
+        distance between the ground truth and the model prediction as your loss,
+        you are probably good.
       </p>
 
-      <h6>Unsupervised learning</h6>
-
       <h6>Outputs vs. Tasks</h6>
+      <p>
+        The tasks above aren't necessarily the same thing as the model output.
+        These tasks basically define ways for us to think about and categorize
+        models (or subsets of models). The actual outputs can be anything within
+        the model. For example, we may want to train a model with a
+        multiclassification loss on images, in order to pull out the top layer
+        of the model as an image embedding. For your own intuition, it's
+        important to avoid confusing these two concepts (even though they are
+        fairly similar in many learning tasks).
+      </p>
     </div>
   </div>
   <div class="footer">
