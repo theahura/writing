@@ -68,28 +68,75 @@
         detail.
       </p>
 
+      <h6>Classification</h6>
       <p>
-        A <b>classification</b> task is when you train a model to predict
-        whether an input is one of a set of mutually exclusive things. Imagine
-        we want to train a pet classifier. We want to pass the model some input,
-        maybe an image. On the output, the model needs to decide whether the
-        input represented a dog, a cat, or a fish. The model cannot say the
-        input was a dog AND a cat AND a fish -- these are mutually exclusive
-        categories. If the model is more confident that the input is a cat, it
-        has to be less confident that the input is a dog or a fish.
+        A classification task is when you train a model to predict whether an
+        input is one of a set of mutually exclusive things. Imagine we want to
+        train a pet classifier. We want to pass the model some input, maybe an
+        image. On the output, the model needs to decide whether the input
+        represented a dog, a cat, or a fish. The model cannot say the input was
+        a dog AND a cat AND a fish -- these are mutually exclusive categories.
+        If the model is more confident that the input is a cat, it has to be
+        less confident that the input is a dog or a fish.
+      </p>
+      <div class="image-holder">
+        <img src="img/classification.jpg" width="400" />
+        <p>An ML model learning a classification task.</p>
+      </div>
+      <p>
+        What kind of loss would we use for classification? Well, as we said in
+        <a href="simpledl_4.html">Part 4</a>, we care about three things: what
+        the model produces, what we are comparing against, and how we do the
+        comparison.
       </p>
       <p>
-        A really common loss for classification tasks is softmax cross entropy
-        loss. This loss works best if you can represent groundtruth labels as a
-        one-hot vector representing the label. We use a softmax nonlinearity to
-        reweight the model outputs because softmax adjusts every value in the
-        vector relative to the others such that the total sums to one. Since the
-        output vector sums to one, we can think of it as a probability
-        distribution. The easiest way to interpret the model output with this
-        loss is to examine the weight that is highest, and call that the model's
-        prediction. If many values are close, we can say the model is not so
-        confident.
+        Going back to our pet example, we want the model to produce a prediction
+        for three categories. And, these three categories are totally unrelated
+        from each other, except that they are mutually exclusive. So we can say
+        that the model outputs a vector of size three (or an embedding layer of
+        size three), and as long as we are consistent we can arbitrarily assign
+        each spot in the vector to an animal -- so, spot 0 is 'dog', spot 1 is
+        'cat', spot 2 is 'fish'. If the model puts a really high value in spot
+        0, it's predicting dog.
       </p>
+      <p>
+        One problem. Right now, there's nothing stopping the model from putting
+        super high weights on more than one value! What if the model outputs
+        something like [1, 1, 1] -- it thinks the input image is a dog and a cat
+        and a fish. Since we know our inputs are mutually exclusive, we can
+        force the model to behave by constraining the inputs relative to each
+        other. Softmax to the rescue! The softmax function takes in an input
+        vector and reweights it so that the total value of all of the parts of
+        the vector sum to one. Since we constrain the sum, the model has to make
+        a choice -- if it puts more weight on one part of the vector, it has to
+        put less weight on other parts of the vector. And, because it sums to 1,
+        we can think of the output of the softmax as a probability distribution.
+      </p>
+      <p>
+        A softmax also gives us a pretty natural way to represent our ground
+        truth. We can compare the model's outputs against a 'perfect' output.
+        So, if we input a picture of a cat, we expect the model to output
+        something like [0, 1, 0]. Or if we put in a picture of a dog, we want
+        the model to output [1, 0, 0].
+      </p>
+      <p>
+        Ok, so we know what the model outputs, and what we compare against. How
+        do we do the comparison? We can use something called a cross entropy
+        loss. Explaining cross entropy is kinda out of scope for this piece, and
+        also kinda irrelevant. Think of it as a black box that measures the
+        difference between two probability distributions. Take a look at the
+        [wiki page](https://en.wikipedia.org/wiki/Cross_entropy) for more.
+      </p>
+      <div class="image-holder">
+        <img src="" width="400" />
+      </div>
+      <p>
+        This setup is so common for classification tasks that it's basically the
+        default. Every stats package worth its salt has a function called
+        softmax cross entropy, that calculates the loss above.
+      </p>
+
+      <h6>Multi-Classification</h6>
       <p>
         A <b>multi-classification</b> task is similar to a classification task,
         except this time the possible outputs are not mutually exclusive. Maybe
@@ -109,6 +156,7 @@
         considered a model prediction.
       </p>
 
+      <h6>Regression</h6>
       <p>
         A <b>regression</b> task is when you train a model to predict continuous
         values. The other two types of tasks predict categories that don't have
