@@ -92,20 +92,34 @@
       <p>
         Going back to our pet example, we want the model to produce a prediction
         for three categories. And, these three categories are totally unrelated
-        from each other, except that they are mutually exclusive. So we can say
-        that the model outputs a vector of size three (or an embedding layer of
-        size three), and as long as we are consistent we can arbitrarily assign
-        each spot in the vector to an animal -- so, spot 0 is 'dog', spot 1 is
-        'cat', spot 2 is 'fish'. If the model puts a really high value in spot
-        0, it's predicting dog.
+        from each other, except that they are mutually exclusive. How do we
+        actually represent abstract concepts in a model? Well, a model only has
+        one building block -- the embedding. Remember, a model is just a stack
+        of embeddings. So we basically have to enforce an external constraint on
+        the last embedding of a model, and call that the output. This gives us a
+        lot of flexibility -- we can say that the model outputs a vector of size
+        three (or an embedding layer of size three), and as long as we are
+        consistent we can arbitrarily assign each spot in the vector to an
+        animal -- so, spot 0 is 'dog', spot 1 is 'cat', spot 2 is 'fish'. If the
+        model puts a really high value in spot 0, it's predicting dog.
       </p>
+      <div class="image-holder">
+        <img src="img/pet-classifer.png" width="400" />
+        <p>
+          A categorical pet classifier. Each spot in the output vector is
+          associated with a speific animal. Homework question 1: one possible
+          design is for the model to output a numeric value from 0 to 2, and
+          then have if statements that threshold (e.g. if 0 &lt; x &lt; 1,
+          assume the model is predicting dog). Why is this a bad approach?
+        </p>
+      </div>
       <p>
         One problem. Right now, there's nothing stopping the model from putting
         super high weights on more than one value! What if the model outputs
         something like [1, 1, 1] -- it thinks the input image is a dog and a cat
-        and a fish. Since we know our inputs are mutually exclusive, we can
+        and a fish. Since we know our inputs are mutually exclusive, we need to
         force the model to behave by constraining the inputs relative to each
-        other. Softmax to the rescue! The softmax function takes in an input
+        other. Softmax to the rescue. The softmax function takes in an input
         vector and reweights it so that the total value of all of the parts of
         the vector sum to one. Since we constrain the sum, the model has to make
         a choice -- if it puts more weight on one part of the vector, it has to
@@ -124,11 +138,23 @@
         do we do the comparison? We can use something called a cross entropy
         loss. Explaining cross entropy is kinda out of scope for this piece, and
         also kinda irrelevant. Think of it as a black box that measures the
-        difference between two probability distributions. Take a look at the
-        [wiki page](https://en.wikipedia.org/wiki/Cross_entropy) for more.
+        difference between two probability distributions. Basically, it will
+        look at the model's output, and look at the ground truth, and calculate
+        a difference between them that the model can minimize. Take a look at
+        the
+        <a href="https://en.wikipedia.org/wiki/Cross_entropy">wiki page</a> for
+        more.
       </p>
       <div class="image-holder">
-        <img src="" width="400" />
+        <img src="img/classificationloss.png" width="800" />
+        <p>
+          An end to end classification example, where the model is 72% confident
+          that the input image is a dog. For intuition purposes, it is much more
+          important to understand what each building block is doing, than it is
+          to really understand the numeric values. For example, I personally
+          don't really care that the loss is .324, I only care that the loss is
+          being minimized in a way that makes sense over many steps.
+        </p>
       </div>
       <p>
         This setup is so common for classification tasks that it's basically the
@@ -138,11 +164,11 @@
 
       <h6>Multi-Classification</h6>
       <p>
-        A <b>multi-classification</b> task is similar to a classification task,
-        except this time the possible outputs are not mutually exclusive. Maybe
-        we have a dataset of zoo animals, and so it's possible for an image to
-        contain cats and dogs and fish. We would use a multi-classification
-        model to represent this data.
+        A multi-classification task is really similar to a classification task,
+        except this time the possible outputs are <b>not</b> mutually exclusive.
+        Maybe we have a dataset of zoo animals, and so it's possible for an
+        image to contain dogs and cats and fish in the same image. We would use
+        a multi-classification model to represent this data.
       </p>
       <p>
         A pretty common multi-classification loss is sigmoid cross entropy. This
@@ -152,19 +178,35 @@
         individual elements aren't constrained by each other, multiple elements
         can be set to 1 (i.e. 'predicted'). One way to think about this model
         output is to imagine that each individual element is its own predictive
-        function, and any value above a threshold (commonly 0.5) is therefore
-        considered a model prediction.
+        function, and any value above a threshold is therefore considered a
+        model prediction.
       </p>
-
+      <div class="image-holder">
+        <img src="img/multiclassloss.png" width="800" />
+        <p>
+          An end to end multi-classification example, where the model is 98%
+          confident that the input image has a dog, and 96% confident the input
+          image has a fish. Note that the sigmoid function calculates a loss per
+          element, so to get the final loss as a single number we need to
+          calculate an average or a sum. Homework question 2: given the above,
+          what might a reasonable threshold be to determine when we consider a
+          model output a 'prediction'?
+        </p>
+      </div>
+      <p>
+        This setup is also really common! So, as you might expect, every stats
+        package also has a function called sigmoid cross entropy, that
+        calculates the loss above.
+      </p>
       <h6>Regression</h6>
       <p>
-        A <b>regression</b> task is when you train a model to predict continuous
+        A regression task is when you train a model to predict continuous
         values. The other two types of tasks predict categories that don't have
         any directional relation to each other. By comparison, regression tasks
         produce outputs where predicting a higher or lower value matters because
-        of the numerical relationship between those values. For example, if we
-        wanted to predict housing prices, or case counts for some disease, or
-        some embedding value from a different model, we want to use regression.
+        of the numerical relationship between those values. If we wanted to
+        predict housing prices, or case counts for some disease, or some
+        embedding value from a different model, we want to use regression.
       </p>
       <p>
         There are a bunch of possible losses here, such as difference, mean
@@ -185,6 +227,27 @@
         important to avoid confusing these two concepts (even though they are
         fairly similar in many learning tasks).
       </p>
+      <h6>Homework Answers</h6>
+      <ol>
+        <li>
+          A model has no default understanding of categories. We need to enforce
+          that on the model. Otherwise, the model will assume that everything is
+          continuous, and therefore numerically comparable. If we had a model
+          that only output a single value, the model would interpret the
+          categories as having some sort of mathematical relationship -- namely,
+          that a 'fish' is larger than a 'dog'. This doesn't make sense, and
+          would likely result in a bad training scheme.
+        </li>
+        <li>
+          It's tempting to say something like 0.5, and just assume that whenever
+          a model predicts above 50% probability it's a 'prediction'. But most
+          real world tasks aren't that simple, and there is a meta level of
+          tuning required to find an appropriate threshold. If we just used 0.5
+          in the above example, the model would have predicted 'cat' with 52%
+          accuracy. If we set the threshold to something like 0.75, it would
+          only (correctly) predict 'dog' and 'fish'.
+        </li>
+      </ol>
     </div>
   </div>
   <div class="footer">
