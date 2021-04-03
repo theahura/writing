@@ -200,13 +200,14 @@
       </p>
       <h6>Regression</h6>
       <p>
-        A regression task is when you train a model to predict continuous
-        values. The other two types of tasks predict categories that don't have
-        any directional relation to each other. By comparison, regression tasks
-        produce outputs where predicting a higher or lower value matters because
-        of the numerical relationship between those values. If we wanted to
-        predict housing prices, or case counts for some disease, or some
-        embedding value from a different model, we want to use regression.
+        Regression tasks are pretty different from the other two. In
+        classification and multiclassification tasks, you have to bucket your
+        outputs into discrete categories. With regression, you train a model to
+        predict <i>continuous</i> values instead. In other words, regression
+        tasks produce outputs where predicting a higher or lower value matters
+        because of there is a numerical relationship between those values. If we
+        wanted to predict housing prices, or case counts for some disease, or
+        some embedding value from a different model, we want to use regression.
       </p>
       <p>
         There are a bunch of possible losses here, such as difference, mean
@@ -215,6 +216,17 @@
         distance between the ground truth and the model prediction as your loss,
         you are probably good.
       </p>
+      <div class="image-holder">
+        <img src="img/regression.png" width="800" />
+        <p>
+          An end to end regression example, where we are training a model to try
+          and predict the outputs of another model. This is really common in ML
+          research. Let's say we have a really big model that is very accurate,
+          but too large to be practical. We can train a smaller model by having
+          the smaller model predict the larger model's embeddings. This is known
+          as 'distillation' in ML terminology, and is a classic regression task.
+        </p>
+      </div>
 
       <h6>Outputs vs. Tasks</h6>
       <p>
@@ -225,7 +237,7 @@
         multiclassification loss on images, in order to pull out the top layer
         of the model as an image embedding. For your own intuition, it's
         important to avoid confusing these two concepts (even though they are
-        fairly similar in many learning tasks).
+        the same for many learning tasks).
       </p>
       <h6>Homework Answers</h6>
       <ol>
