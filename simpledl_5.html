@@ -32,7 +32,15 @@
     <div class="writing">
       <h6>TLDR</h6>
       <ul>
-        <li>TODO</li>
+        <li>A canonical task defines how a model learns.</li>
+        <li>
+          There are three canonical tasks: classification, multiclassification,
+          and regression.
+        </li>
+        <li>
+          Each canonical task has a canonical loss: softmax cross entropy,
+          sigmoid cross entropy, and mean squared log error, respectively.
+        </li>
       </ul>
 
       <h6>What is a Canonical Task?</h6>
@@ -46,8 +54,8 @@
         Over time, I developed this idea of a Canonical Task to help me get
         through the noise. For me, a Canonical Task is some sort of indivisible
         thing that defines a models purpose. Depending on what's more intuitive,
-        you can think of these tasks based on what the model produces, or based
-        on what the model does. It turns out that even though there are so many
+        you can define these tasks based on what the model produces, or based on
+        how the model learns. It turns out that even though there are so many
         different models, there are only three canonical tasks. These are:
       </p>
       <ul>
@@ -238,6 +246,18 @@
         of the model as an image embedding. For your own intuition, it's
         important to avoid confusing these two concepts (even though they are
         the same for many learning tasks).
+      </p>
+      <h6>Conclusions</h6>
+      <p>
+        Whenever I get stuck with a new ML problem, I always start with
+        canonical tasks. If I can fit my problem into one of the canonical tasks
+        above, I've already solved half the problem. Alternatively, if I have a
+        bunch of data lying around that I know will work for one of the tasks
+        above, I can try to restate the problem such that that data becomes
+        useful in some way. Thinking about ML building blocks like this will
+        inevitably help save a lot of time and frustration. A lot of the
+        SimpleDL series has been focused on intuition, but I think this piece in
+        particular is critical for anyone who is hoping to do ML in practice.
       </p>
       <h6>Homework Answers</h6>
       <ol>
