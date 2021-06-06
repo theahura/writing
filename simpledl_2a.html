@@ -15,9 +15,9 @@
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag("js", new Date());
+  gtag('js', new Date());
 
-  gtag("config", "UA-131666667-1");
+  gtag('config', 'UA-131666667-1');
 </script>
 
 <div class="header">
@@ -88,25 +88,25 @@
       </p>
       <div class="image-holder">
         <img src="img/sparky_and_lego.jpeg" width="600" />
-        <p>
-          Dogs!
-        </p>
+        <p>Dogs!</p>
       </div>
       <p>
-        There is a lot of information in this picture. Can we convert that
-        information to text without losing any info? We could try describing the
-        image. "Two dogs" captures most of the information. "One small brown dog
-        and one medium-sized gold dog on a slate grey surface" captures even
-        more. We can keep going like this, with ever more complex descriptions
-        -- a picture is worth a thousand words, after all.
+        There is a lot of &#39;information&#39; in this picture. Can we convert
+        that &#39;information&#39; to text without losing any of it? We could
+        try describing the image. "Two dogs" captures most of the information.
+        "One small brown dog and one medium-sized gold dog on a slate grey
+        surface" captures even more. We can keep going like this, with ever more
+        complex descriptions -- a picture is worth a thousand words, after all.
       </p>
       <p>
         Can we do better? "Two dogs" captures a lot of the information, but its
-        just 8 characters. It will always leave something out. Instead, lets go
-        pixel by pixel and write out the colors. Starting from the top left, we
-        could write "grey, grey, grey, light grey, light grey, grey, grey...".
-        Not exactly Hemingway, but it <em>would</em> be a perfect representation
-        of the image. We would capture all of the information.
+        just 8 characters. Information has a compression limit; 8ch is simply
+        not enough data storage capacity. It will always leave something out.
+        Instead, lets go pixel by pixel and write out the colors. Starting from
+        the top left, we could write "grey, grey, grey, light grey, light grey,
+        grey, grey...". Not exactly Hemingway, but it <em>would</em> be a
+        perfect representation of the image. We would capture all of the
+        information.
       </p>
       <p>
         The leap to an embedding is straightforward. Replace our words/colors
@@ -118,9 +118,7 @@
         <img src="img/img-color.png" width="600" />
         <img src="img/img-hemingway.png" width="600" />
         <img src="img/img-embed.png" width="600" />
-        <p>
-          Same information, different formats.
-        </p>
+        <p>Same information, different formats.</p>
       </div>
       <p>
         What about text? Can we turn text into an embedding? Well, one strategy
@@ -139,9 +137,7 @@
         Question: is [0.124, 458.2356, 85.3, 2.01] an embedding? Or is it a
         random list of numbers?
       </p>
-      <p>
-        We need to make a small change to our initial definition.
-      </p>
+      <p>We need to make a small change to our initial definition.</p>
       <p>
         An embedding is a list of numbers (AKA a float vector) that represents
         some information,
@@ -164,9 +160,7 @@
         of that is format. The actual information is abstract, existing in a
         void that cannot ever be actually materialized.
       </p>
-      <p>
-        Ok enough poetry.
-      </p>
+      <p>Ok enough poetry.</p>
       <p>
         This section covered how information can be represeneted in a bunch of
         different formats. In the <a href="./simpledl_2b.html">next section</a>,

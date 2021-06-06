@@ -15,9 +15,9 @@
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag("js", new Date());
+  gtag('js', new Date());
 
-  gtag("config", "UA-131666667-1");
+  gtag('config', 'UA-131666667-1');
 </script>
 
 <div class="header">
@@ -34,16 +34,12 @@
     <div class="writing">
       <h6>TLDR</h6>
       <ul>
-        <li>
-          Features are the baseline input data to our model.
-        </li>
+        <li>Features are the baseline input data to our model.</li>
         <li>
           Models will cheat if they can. We need to be careful about our data as
           a result.
         </li>
-        <li>
-          More data is always better, but it can be hard to get and use.
-        </li>
+        <li>More data is always better, but it can be hard to get and use.</li>
       </ul>
       <h6>Thinking about Features</h6>
       <p>
@@ -55,9 +51,7 @@
       </p>
       <div class="image-holder">
         <img src="img/turtles.jpg" width="400" />
-        <p>
-          It's embeddings all the way down.
-        </p>
+        <p>It's embeddings all the way down.</p>
       </div>
       <p>
         I think of input features as the 0th layer embedding, the foundational
@@ -91,8 +85,8 @@
       <div class="image-holder">
         <img src="img/cat-augment.png" width="600" />
         <p>
-          An example of image augmentation. Homework question: why do we do
-          this? (Answer below)
+          An example of image augmentation. Homework question 1: why do we do
+          this?
         </p>
       </div>
       <h6>Models Cheat</h6>
@@ -173,6 +167,19 @@
         way to get some bang for your buck. After all, your data is the
         foundation for everything else.
       </p>
+      <h6>Homework Answers</h6>
+      <ol>
+        <li>
+          Image augmentation -- and data augmentation in general -- is used to
+          increase the functional size of the dataset and make the model
+          invariant to common changes in the data. This makes the training
+          dataset more reflective of real world data, and helps avoid issues
+          with
+          <a href="https://www.jefftk.com/p/detecting-tanks">tank detection</a>.
+          Note that there is no such thing as a free lunch: if you augment your
+          data, your model capacity needs to increase as well.
+        </li>
+      </ol>
     </div>
   </div>
   <div class="footer">
