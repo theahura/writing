@@ -40,18 +40,75 @@
         At this point, you hopefully have a high level understanding of some key
         deep learning principles: features, embeddings, losses, and how they all
         interact with each other. Unfortunately for me, some of my readers
-        complained that this was hardly enough. Without walking through an end
-        to end example that showed how the intuition could be applied, this
-        whole project was meaningless. <b>sigh</b>. Even though I was really
-        hoping to avoid digging into the specifics of a deep learning library,
-        my readers are probably right.
+        complained that this was not enough, and that without an end to end
+        example that showed how the intuition could be applied, this whole
+        project was meaningless. <b>sigh</b>. Even though I was really hoping to
+        avoid digging into the specifics of a deep learning library, I think my
+        readers are probably right.
       </p>
-      <p></p>
-
+      <p>
+        There are
+        <a href="https://nextjournal.com/gkoehler/pytorch-mnist">countless</a>
+        <a href="https://www.tensorflow.org/tutorials/quickstart/beginner"
+          >starter</a
+        >
+        <a href="https://roberttlange.github.io/posts/2020/03/blog-post-10/"
+          >examples</a
+        >
+        for deep learning. Most of these implement a small neural network that
+        can learn to classify handwritten numbers from 0 to 9 (aka
+        <a href="https://en.wikipedia.org/wiki/MNIST_database">MNIST</a>). Many
+        of these tutorials are quite good for understanding the particular
+        syntax of a specific library, but they do a poor job of linking the code
+        to some deeper understanding of ML. In part that is because the deeper
+        understanding doesn't really exist -- the answer to 'why' is 'because'.
+      </p>
+      <div class="image-holder">
+        <img src="img/Because.png" width="500" />
+        <p>
+          I wish I could say that this frustration goes away. It doesn't. I
+          still feel like this when I read new ML papers.
+        </p>
+      </div>
+      <p>
+        In this tutorial, I'll instead do something totally different by
+        teaching you how to implement a small neural network that can learn to
+        classify handwritten numbers from 0 to 9. We're not going to touch code
+        until the very end -- instead, we'll spend a lot of time trying to think
+        through the problem in order to build some intuition of what we should
+        be doing. All parts of the tutorial will be grounded in the previous
+        SimpleDL lessons. Even though MNIST is a really well known dataset with
+        countless 'solutions', I'll try to approach the task as if it was a real
+        world learning problem.
+      </p>
       <h6>The Problem</h6>
+      <p>
+        You work for the IRS. You have to deal with millions of tax filings --
+        over 150M, according to a random website called Google. That's a ton of
+        filings. Most people do these on printed forms, filling in fields by
+        hand. The techs over at the Department of Technology have scanned all
+        the filings. Now they need to pull out all of the numbers.
+      </p>
+      <p>One problem: the scans are all unparsed images.</p>
+      <p>
+        We need to build a system that can convert images of numbers into actual
+        numbers in some programming language or database, so that we can do more
+        number crunching down the line. Unfortunately, there are tons of edge
+        cases, which makes most statistical/geometric/traditional computer
+        vision approaches obsolete. A human can probably figure out most of
+        them, but humans are expensive and slow. Can we use deep learning?
+      </p>
+      <div class="image-holder">
+        <img src="img/No-image-found.jpg" width="300" />
+        <p>Pictured: the US Federal Department of Technology logo.</p>
+      </div>
+
+      <h6>Canonical Tasks</h6>
+      <p></p>
       <h6>Features</h6>
       <h6>Model</h6>
       <h6>Loss</h6>
+      <h6>Review: Why MNIST?</h6>
       <h6>Conclusion</h6>
     </div>
   </div>
