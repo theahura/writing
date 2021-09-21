@@ -37,14 +37,14 @@
 
       <h6>Overview</h6>
       <p>
-        At this point, you hopefully have a high level understanding of some key
-        deep learning principles: features, embeddings, losses, and how they all
-        interact with each other. Unfortunately for me, some of my readers
-        complained that this was not enough, and that without an end to end
-        example that showed how the intuition could be applied, this whole
-        project was meaningless. <b>sigh</b>. Even though I was really hoping to
-        avoid digging into the specifics of a deep learning library, I think my
-        readers are probably right.
+        At this point, you hopefully have a high level understanding of some
+        key deep learning principles: features, embeddings, losses, and how
+        they all interact with each other. Unfortunately for me, some of my
+        readers complained that this was not enough, and that without an end to
+        end example that showed how the intuition could be applied, this whole
+        project was meaningless. <b>sigh</b>. Even though I was really hoping
+        to avoid digging into the specifics of a deep learning library, I think
+        my readers are probably right.
       </p>
       <p>
         There are
@@ -59,9 +59,10 @@
         can learn to classify handwritten numbers from 0 to 9 (aka
         <a href="https://en.wikipedia.org/wiki/MNIST_database">MNIST</a>). Many
         of these tutorials are quite good for understanding the particular
-        syntax of a specific library, but they do a poor job of linking the code
-        to some deeper understanding of ML. In part that is because the deeper
-        understanding doesn't really exist -- the answer to 'why' is 'because'.
+        syntax of a specific library, but they do a poor job of linking the
+        code to some deeper understanding of ML. In part that is because the
+        deeper understanding doesn't really exist -- the answer to 'why' is
+        'because'.
       </p>
       <div class="image-holder">
         <img src="img/Because.png" width="500" />
@@ -74,12 +75,12 @@
         In this tutorial, I'll instead do something totally different by
         teaching you how to implement a small neural network that can learn to
         classify handwritten numbers from 0 to 9. We're not going to touch code
-        until the very end -- instead, we'll spend a lot of time trying to think
-        through the problem in order to build some intuition of what we should
-        be doing. All parts of the tutorial will be grounded in the previous
-        SimpleDL lessons. Even though MNIST is a really well known dataset with
-        countless 'solutions', I'll try to approach the task as if it was a real
-        world learning problem.
+        until the very end -- instead, we'll spend a lot of time trying to
+        think through the problem in order to build some intuition of what we
+        should be doing. All parts of the tutorial will be grounded in the
+        previous SimpleDL lessons. Even though MNIST is a really well known
+        dataset with countless 'solutions', I'll try to approach the task as if
+        it was a real world learning problem.
       </p>
       <h6>The Problem</h6>
       <p>
@@ -91,23 +92,122 @@
       </p>
       <p>One problem: the scans are all unparsed images.</p>
       <p>
-        We need to build a system that can convert images of numbers into actual
-        numbers in some programming language or database, so that we can do more
-        number crunching down the line. Unfortunately, there are tons of edge
-        cases, which makes most statistical/geometric/traditional computer
-        vision approaches obsolete. A human can probably figure out most of
-        them, but humans are expensive and slow. Can we use deep learning?
+        We need to build a system that can convert images of numbers into
+        actual numbers in some programming language or database, so that we can
+        do more number crunching down the line. Unfortunately, there are tons
+        of edge cases, which makes most statistical/geometric/traditional
+        computer vision approaches obsolete. A human can probably figure out
+        most of them, but humans are expensive and slow. Can we use deep
+        learning?
       </p>
       <div class="image-holder">
         <img src="img/No-image-found.jpg" width="300" />
-        <p>Pictured: the US Federal Department of Technology logo.</p>
+        <p>
+          Pictured: the US Federal Department of Technology logo (the joke is
+          that there's no such thing).
+        </p>
       </div>
 
-      <h6>Canonical Tasks</h6>
+      <h6>Using Canonical Tasks: Loss</h6>
+      <p>
+        In <a href="./simpledl_5.html">Part 5</a>, we laid out three canonical
+        tasks: classification, multiclassification, and regression. If we
+        figure out which bucket our IRS problem falls in, we can infer a
+        default loss for our model. Let's work through each possibility in
+        reverse, starting with regression.
+      </p>
+      <p>
+        A regression task is one where we try to predict a continuous output.
+        It is tempting to look at the IRS problem and say that since we are
+        predicting numeric output, the problem space must be continuous.
+        Unfortunately, that way lies madness. The trick is that even though we
+        are predicting numbers, we are treating each number as a discrete
+        category. In other words, if the true label is '1', the model is
+        equally wrong if it predicts '1' or '9'. If the ordering output doesn't
+        matter, it's not a regression problem.
+      </p>
+      <p>
+        What about multiclassification? The main difference between
+        classification and multiclassification is whether the categories are
+        mutually exclusive. In our IRS problem, each input could only be one of
+        ten digits (0 - 9). In other words, they ARE mutually exclusive.
+      </p>
+      <p>
+        That leaves classification as the only remaining option. In Part 5, we
+        showed that the Softmax Cross Entropy is a standard loss for
+        classification tasks. Following the example, we can label our training
+        data with a one-hot vector of size 10, where the hot index is the true
+        number. We make the model output a vector (logits) of size 10, so we
+        can compare the output with the ground truth labels. And then we just
+        pass these into
+        <a
+          href="https://www.tensorflow.org/api_docs/python/tf/nn/softmax_cross_entropy_with_logits"
+          >the appropriate function</a
+        >
+        and call it a day.
+      </p>
+      <p>If this all made sense, congrats. This is the hardest part.</p>
+      <h6>What about the Features?</h6>
+      <p>
+        Some people think feature selection is a fine art. Those people are
+        wrong. In deep learning, feature selection is something of a misnomer
+        -- if you have features available, you should use them. The problem is
+        that features are really hard to get, because they have to be
+        consistent across all of the training and test data.
+      </p>
+      <p>
+        In our IRS problem, we can't be sure we have any metadata available
+        consistently. People forget to add names, or addresses, or whatever. In
+        fact, the only thing we <i>can</i> be sure of is that we have the raw
+        pixels of the number we're trying to predict. So...let's just use that
+        as our features.
+      </p>
+      <p>
+        But of course we can't just pass an image directly into a model from a
+        filepath (ignoring
+        <a
+          href="https://www.tensorflow.org/api_docs/python/tf/keras/utils/load_img"
+          >this</a
+        >). You have to convert all features into a numeric vector
+        representation first. Luckily, for images this is really easy -- each
+        pixel is already a numeric RGB value. We can convert the images to
+        numbers using a
+        <a href="https://pillow.readthedocs.io/en/stable/reference/Image.html"
+          >python library of choice</a
+        >
+        and then use that as input. Each image ends up being a 3D input, with
+        shape [Batch, Height, Width , Channels]. If we want to feed multiple
+        images in at once, we can stack the vectors on a new axis, resulting in
+        a [Batch, Height, Width, Channels]. O, and you are going to want to
+        <a href="https://en.wikipedia.org/wiki/Feature_scaling">normalize</a>
+        the features, but that's a conversation for later.
+      </p>
+      <h6>What about the Model?</h6>
+      <p>
+        At this point, we know the input (image matrices) and the output (a
+        logits vector of size 10). So we can slot in just about any model we
+        want, as long as it constrains to the input and output.
+      </p>
+      <p>
+        Does the model choice matter? Well, kinda. Models have a certain
+        'capacity' that limits what kind of problems it can effectively solve.
+        The problem is, we haven't really figured out how to calculate or
+        define 'capacity'. Most engineers use the number of parameters in the
+        model as a rough heuristic. More parameters = more capacity. On some
+        level this is intuitive, but we also recognize that a multi-layer model
+        is better than a flat model, even if they have the same parameter size.
+      </p>
+      <p>I digress.</p>
+      <p>
+        As long as we choose a model that isn't literally a single flat layer,
+        we should be alright. In the industry, we broadly slice models by task
+        -- convolutional networks for image/video processing, transformers for
+        language processing, graph neural networks for graphs, who-knows-what
+        for audio, etc. Since we are using images, we can use a single layer
+        convolutional network.
+      </p>
+      <h6>What about...everything else?</h6>
       <p></p>
-      <h6>Features</h6>
-      <h6>Model</h6>
-      <h6>Loss</h6>
       <h6>Review: Why MNIST?</h6>
       <h6>Conclusion</h6>
     </div>
