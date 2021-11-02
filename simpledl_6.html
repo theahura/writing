@@ -4,6 +4,12 @@
 <link rel="shortcut icon" href="spy.ico" type="image/x-icon" />
 <link rel="stylesheet" href="theme.css" />
 
+<!-- Syntax highlighting -->
+<link
+  rel="stylesheet"
+  href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css"
+/>
+
 <!-- Google Analytics -->
 <script
   async
@@ -44,7 +50,8 @@
         end example that showed how the intuition could be applied, this whole
         project was meaningless. <b>sigh</b>. Even though I was really hoping
         to avoid digging into the specifics of a deep learning library, I think
-        my readers are probably right.
+        my readers are probably right. Hold on tight folks, this one is going
+        to be a long one.
       </p>
       <p>
         There are
@@ -203,13 +210,113 @@
         we should be alright. In the industry, we broadly slice models by task
         -- convolutional networks for image/video processing, transformers for
         language processing, graph neural networks for graphs, who-knows-what
-        for audio, etc. Since we are using images, we can use a single layer
-        convolutional network.
+        for audio, etc. Since we are using images, we can use a convolutional
+        network.
       </p>
       <h6>What about...everything else?</h6>
-      <p></p>
-      <h6>Review: Why MNIST?</h6>
-      <h6>Conclusion</h6>
+      <p>
+        It is a little reductive to say that the above is all you need -- in
+        practice, it's about 95% of what you need. There are two pieces left.
+      </p>
+      <p>
+        One piece that we're missing is called an optimizer. Optimizers are
+        algorithms that calculate how to turn your model's output loss into
+        gradients for each part of the model. Generally, you can set a learning
+        rate and a few other parameters that determine how much each step of
+        training impacts the model. A deep dive into how optimizers work isn't
+        really in scope here. Suffice to say, there's a lot of interesting
+        kinds of optimizers out there, and they all do slightly different
+        things, and you pretty much always want to use the AdamOptimizer with a
+        learning rate of 0.0001.
+      </p>
+      <div class="image-holder">
+        <img src="" width="500" />
+        <p>This is Adam. He optimizes things.</p>
+      </div>
+      <p>
+        The other piece of the puzzle is our batching algorithm. Ideally, we
+        could feed our model every piece of data in the dataset in one go.
+        Unfortunately, for really large datasets, we don't have the computer
+        memory to do that. So we instead sample the dataset into 'batches' and
+        train the model one batch at a time. When we go through the entire
+        dataset, we say that the model has trained for one 'epoch'.
+      </p>
+      <div class="image-holder">
+        <img src="" width="500" />
+        <p>One epoch is many batches.</p>
+      </div>
+      <p>
+        A deep dive into how batching works isn't really in scope here either.
+        Suffice to say, there are a lot of batching algorithms, and a lot of
+        people are doing really cool work understanding how sampling strategies
+        impact model training, and you pretty much always want to use random
+        sampling with the largest batch size you can.
+      </p>
+      <h6>Let's code!</h6>
+      <pre><code class='language-python'>
+def get_features(paths):
+  pass
+
+def get_model():
+  pass
+
+def get_loss(logits, labels):
+  pass
+
+def get_optimizer():
+  pass
+
+def batch(iterable, batch_size=1):
+  """Given an iterable, produce batches of size batch_size."""
+  for idx in range(0, len(iterable), batch_size):
+    yield iterable[idx:min(idx + batch_size, len(iterable))]
+
+if __name__ == '__main__':
+  PATHS = glob.glob('path/to/images/*')
+  EPOCHS = 10
+  BATCH_SIZE = 64
+  model = get_model()
+  optimizer = get_optimizer()
+  for epoch in range(EPOCHS):
+    # randomize the paths for each epoch.
+    for batch in batch(PATHS, BATCH_SIZE):
+      data, labels = features(batch)
+      logits = model(data)
+      loss = get_loss(logits, labels)
+      optimizer(model, loss)
+
+    print(f'Loss at epoch {epoch} is {loss}')
+
+  INFER_PATHS = glob.glob('path/to/inference/images/*')
+  data, labels = features(INFER_PATHS)
+  logits = model(data)
+  predictions = np.argmax(logits)
+  accuracy = get_accuracy(predictions, labels)
+  print('Model accuracy: ', predictions)
+
+      </code></pre>
+      <h6>Conclusions</h6>
+      <p>
+        Deep learning isn't really software engineering. A software engineer
+        spends time thinking about data structures, and interfaces, and
+        abstractions, and representing all of these things with code. In
+        contrast, the little bit of code that deep learning engineers actually
+        write is more like setting up scaffolding. It's not that hard to write
+        any specific part of a deep learning pipeline; the hard part is making
+        sure your data pipeline does what you want.
+      </p>
+      <p>
+        This is why people use MNIST as an introduction, and why experts will
+        use MNIST to debug their models when things go wrong. It's pretty easy
+        to set up an MNIST data pipeline because the data is in a format that
+        is very easy to use. All the images are the same size, in the same
+        format, with accurate labels. The entire dataset is small enough that
+        you can actually iterate in a reasonable timeframe. And a simple MNIST
+        solution accurately demonstrates the rough skeleton for tackling deep
+        learning: features, model, loss. Figure out how to turn your data into
+        an embedding that makes sense for your specific problem, and you're
+        good to go.
+      </p>
     </div>
   </div>
   <div class="footer">
@@ -217,5 +324,6 @@
   </div>
 </div>
 
-<!--Code highlighting-->
-<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
