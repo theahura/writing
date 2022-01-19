@@ -1,0 +1,366 @@
+<title>A Founder&#39;s Guide: Corkscrew Development</title>
+<meta name="viewport" content="width=800" />
+<link rel="icon" href="spy.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="spy.ico" type="image/x-icon" />
+<link rel="stylesheet" href="theme.css" />
+
+<style></style>
+
+<!-- Syntax highlighting -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+
+<!-- Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-131666667-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'UA-131666667-1');
+</script>
+
+<div class="header">
+  <h1>Writing</h1>
+  <h3>Amol Kapoor</h3>
+  <a href="./index.html">Back to table of contents.</a>
+</div>
+
+<div class="content">
+  <div class="writing-holder">
+    <h4>A Founder&#39;s Guide: Corkscrew Development</h4>
+    <h6>Written Jan, 2022. Published Jan, 2022.</h6>
+
+    <div class="writing">
+      <h4>Objective</h4>
+      <p>
+        This document acts as a journal entry of sorts, that describes Amol’s
+        miscellaneous thoughts on project management and how to prioritize
+        speed vs quality.
+      </p>
+      <h4>Cycles</h4>
+      <p>Generally, the process of creating a change looks something like:</p>
+      <pre><code class='language-python'>
+def build_feature(feature):
+  app = build_app()
+  while not app.has(feature):
+    make_changes()
+    app = build_app()
+  return app
+      </code></pre>
+      <p>
+        You can incorporate code review (and privacy review, security review,
+        etc.) and testing into this process, obviously:
+      </p>
+      <pre><code class='language-python'>
+def build_feature(feature):
+  app = build_app 
+  while (not app.has(feature) and
+         not passes_review(app) and
+         not passes_tests(app)):
+    make_changes()
+    app = build_app()
+  return app
+      </code></pre>
+      <p>
+        Inside many organizations, the feature process is embedded in an even
+        larger technical process that spans beyond the engineers. It might look
+        something like:
+      </p>
+      <pre><code class='language-python'>
+while True:
+  feedback = get_customer_feedback(users)
+  selected_feature = prioritize_features(feedback)
+  app = build_feature(selected_feature)
+  media = publicize_feature(app)
+  users = get_users(media)  
+      </code></pre>
+
+      <p>
+        From the top down view, when looking at any individual change, this is
+        a circular process.
+      </p>
+
+      <div class="image-holder">
+        <img src="img/project_management_lifecycle.png" width="600" />
+        <p></p>
+      </div>
+
+      <h4>Corkscrews</h4>
+      <p>
+        But we don't want to just keep going in a circle! We want to make
+        forward progress! More than that, we want exponential growth!
+      </p>
+      <p>
+        Programming is all about building reusable pieces that can be combined
+        in new ways. These reusable pieces provide compounding value, measured
+        in time saved. Automating a process that needs to be done thousands of
+        times provides more value than automating a process that needs to be
+        done a few times. Building a library that gets used everywhere is more
+        valuable than building an example that gets used once. And so on. Every
+        piece of code ever written can provide compounding value.
+      </p>
+      <p>
+        This is something that is unique about programming, that many other
+        domains do not have. A biologist running an experiment can't easily
+        'reuse' components from previous runs. A manufacturer can't easily
+        plug-and-play assembly line pieces. In many other fields, special tools
+        or processes need to be developed outside the usual development cycle
+        to create reusable components. Not so in programming. The very act of
+        development produces something that can be used again.
+      </p>
+
+      <div class="left-wrap-image-holder">
+        <img src="img/corkscrew.png" width="200" />
+        <p>
+          There are steps you can take to increase the amount of compound value
+          code will provide. Code that is well written, well documented, and
+          has a clean interface is more likely to be reused – not just by you,
+          but also by other people. Going a step further, code that is easily
+          packaged into a binary that requires no technical knowledge to run
+          is, potentially, even more valuable. These steps increase the number
+          of people who can or will actually use that code later. The more
+          people who can use your code, the more likely it will be reused, the
+          more its compounding value.
+        </p>
+      </div>
+
+      <p>
+        At a startup, time is literally money. The more time things take, the
+        more runway you burn, the closer you get to shutting down the shop. So
+        doing things that can save time is incredibly important. And this
+        should start early. Compounding has a multiplicative effect – if you
+        build strong foundations early on, those pay off far into the future
+        repeatedly.
+      </p>
+
+      <h4>Time Horizons</h4>
+      <p>
+        <i
+          >"The graveyard of startups is littered with immaculate
+          codebases."</i
+        >
+        – Will Stockwell
+      </p>
+
+      <p>
+        There are a few basic things you can do – like running an automatic
+        linter – that will reduce development time <b>and</b> make your code
+        more reusable. But in general, doing things the 'right' reusable way
+        will almost always take more time than not. No free lunch.
+      </p>
+
+      <p>
+        If you had infinite time, you would want to make every piece of code as
+        reusable as possible because it would compound infinitely. But you
+        don't have infinite time. This means that you need to be very conscious
+        about the time horizons for your development. If a piece of code is
+        going to take a really long time to get right, you need to consider how
+        frequently you are going to reuse it, over what time frame. In the
+        extreme case, where your startup doesn't have product market fit, you
+        might be throwing out virtually everything you wrote and starting from
+        scratch.
+      </p>
+
+      <h4>Prioritizing Quality and Speed: A Formula You Shouldnt Use</h4>
+      A very smart person once said:
+      <a
+        href="https://slatestarcodex.com/2013/05/02/if-its-worth-doing-its-worth-doing-with-made-up-statistics/"
+        >if it's worth doing it's worth doing with made up statistics</a
+      >. So let's try and put some made up (but common sense) numbers to
+      understand how much polish someone might need to put on code. First let's
+      think of a few factors that might go into the decision.
+
+      <ul>
+        <li>
+          <b>T</b>, how much time code could 'live' for (measured in days).
+        </li>
+        <li>
+          <b>N</b>, the number of times (per day) the code will be reused. Is
+          this a one-off experiment, or is this a core library function?
+        </li>
+        <li>
+          <b>R</b>, how much time is saved for a single person (in days) by
+          making the code more reusable, compared to writing the same code as
+          fast/hacky as possible.
+        </li>
+        <li>
+          <b>P</b>, how many people need to use the code. If a lot of people
+          need to use the code, or at least have to read it, then it's probably
+          worth running some code formatters.
+        </li>
+        <li>
+          <b>D</b>, the difficulty of the proposed quality increase (measured
+          in days taken to implement). Running automatic formatters and static
+          code analyzers is easy. Redefining an entire API is a bit harder.
+        </li>
+        <li>
+          <b>V</b>, the amount of value generated by having the code available
+          earlier. If something is blocking a ton of engineers, or if there is
+          a major bug that is disrupting clients, getting the code out ASAP
+          takes precedence over usability.
+        </li>
+      </ul>
+      <p>
+        If <b>T * N * R * P > D * V</b> then you should spend the time to make
+        the code more usable.
+      </p>
+      <p>
+        A lot of these numbers are surprisingly easy to evaluate, or at least
+        to bound. For upper bounds, <b>T</b> could be until money-runs-out-day
+        for the company, while <b>P</b> is approximately the size of your
+        engineering team. For a lower bound, <b>R</b> is easily approximated as
+        'the time it took to write the code'. D is a bit trickier to handle.
+        Here are some common values I might use for an average change/refactor:
+      </p>
+      <table class="styled-table">
+        <tr>
+          <th>
+            <b>Proposed Change</b>
+          </th>
+          <th><b>D days</b></th>
+        </tr>
+        <tr>
+          <th>Formatting</th>
+          <th>0.0000001 (~0)</th>
+        </tr>
+        <tr>
+          <th>Linting</th>
+          <th>0.005 (~7min)</th>
+        </tr>
+        <tr>
+          <th>Writing docs (design, README, etc)</th>
+          <th>0.25 - 3</th>
+        </tr>
+        <tr>
+          <th>Creating a CLI utility/interface</th>
+          <th>0.25 - 5</th>
+        </tr>
+        <tr>
+          <th>Writing (and Passing) Tests</th>
+          <th>0.5 - 5</th>
+        </tr>
+        <tr>
+          <th>Code Review</th>
+          <th>0.5 - ???</th>
+        </tr>
+        <tr>
+          <th>Thoughtful System Architecture</th>
+          <th>1 - ???</th>
+        </tr>
+      </table>
+
+      <p>
+        <b>N</b> and <b>V</b> (and in more abstract cases, <b>R</b>) are
+        trickier because there is more guesswork. Some heuristics that I
+        generally use:
+      </p>
+      <ul>
+        <li>
+          If you don't know whether a feature/piece of code is going to be
+          useful or even work, <b>V</b> is very high because we may not even
+          need that code.
+        </li>
+
+        <li>
+          The more foundational something is, the higher <b>N</b> and
+          <b>R</b> are. Broadly speaking, code written early in the company is
+          more foundational, so is more likely to have higher
+          <b>N/R</b> values.
+        </li>
+        <li>
+          Devops (e.g. kubernetes setup, AWS configuration, terraform, CI/CD)
+          in particular have super high <b>N/R</b> values. If you set up your
+          scripts and configs correctly once, every future interaction with
+          every part of your codebase will benefit. At a microscale, this
+          applies to things like setting up development environments, like
+          formatting-on-save or syntax highlighting.
+        </li>
+        <li>
+          System architecture implementations tradeoff high <b>N/R</b> for high
+          <b>V</b>. You basically need to decide on a case-by-case basis
+          whether the amount of time it takes to implement well is worth
+          blocking the system from getting off the ground.
+        </li>
+      </ul>
+      <p>
+        I don't expect anyone to ever actually put numbers to every programming
+        decision. If you ever actually do this, you're probably not spending
+        your time very efficiently. But thinking through this process once
+        might help build intuition for what things are valuable when.
+      </p>
+
+      <h4>Implications and Takeaways</h4>
+      <p>
+        This was a relatively unfocused write up, but I think there's some
+        interesting nuggets.
+      </p>
+      <p>
+        It seems pretty obvious to me that all code should be linted and
+        formatted at minimum. It's automatic, it has basically no cost, and it
+        has pretty significant compounding value. Documentation is pretty close
+        behind. It's maybe not the case that every piece of code needs
+        documentation, but something as simple as a README could be a
+        step-function increase in the amount of reusability. I suspect that
+        writing some documentation for a command line utility is more impactful
+        than writing like five similar utilities without any docs.
+      </p>
+      <p>
+        Corkscrew development impacts prioritization. Code compounds based on
+        how long it is around for. Doing things that have high compounding
+        value early on is strictly better. By the same token, everything has
+        super high compounding value in the first few months of a startup, so
+        building for the future is paramount early on. Obviously contrary to
+        the 'go fast and break things' mantra.
+      </p>
+
+      <p>
+        Corkscrew development also impacts how code is written. If you know
+        that your code has to be reusable from the beginning, you'll develop
+        with a different mindset. I think that the hallmarks of
+        corkscrew-focused development are good definitions for API boundaries
+        (which demarcate 'black boxest'), lots of modularity, interpretable
+        function/variable naming, and lots of patterns to match to.
+      </p>
+
+      <p>
+        Even if a full feature may not be super reusable, individual pieces may
+        be highly reusable. It is critical to identify these places during
+        development/code review.
+      </p>
+
+      <p>
+        Often, the simplest thing to increase code reusability is just telling
+        other people it exists! Having a robust indexing and search system
+        combined with cultural norms around where certain pieces of code 'go'
+        can help reuse tremendously.
+      </p>
+
+      <p>
+        A lot of these lines of thinking apply to the general startup process.
+        Doing things like having a team glossary or building a culture of
+        transparent Q&A can pay off pretty high dividends over time. The end
+        goal is to build a repository of knowledge that can feed into future
+        knowledge building. If you are siloed, or throwing away development
+        artifacts, or not sharing your work, you aren't accessing any of the
+        multipliers necessary to turn a startup into a rocketship.
+      </p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="./index.html">Back to Writing</a>
+  </div>
+
+  <script>
+    hljs.highlightAll();
+  </script>
+</div>
