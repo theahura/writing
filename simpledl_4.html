@@ -1,5 +1,28 @@
 <title>SimpleDL Part 4: Losses</title>
 <meta name="viewport" content="width=800" />
+
+<meta name="description" content="Building intuition about deep learning." />
+<meta property="og:title" content="SimpleDL pt 4: Losses" />
+<meta property="og:type" content="website" />
+<meta
+  property="og:description"
+  content="Building intuition about deep learning."
+/>
+<meta
+  property="og:image"
+  content="https://amolkapoor.com/writing/img/networkeffects.jpg"
+/>
+<meta name="twitter:title" content="SimpleDL pt 4: Losses" />
+<meta
+  name="twitter:description"
+  content="Building intuition about deep learning."
+/>
+<meta
+  name="twitter:image"
+  content="https://amolkapoor.com/writing/img/networkeffects.jpg"
+/>
+<meta name="twitter:card" content="summary_large_image" />
+
 <link rel="icon" href="spy.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="spy.ico" type="image/x-icon" />
 <link rel="stylesheet" href="theme.css" />
@@ -15,9 +38,9 @@
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag("js", new Date());
+  gtag('js', new Date());
 
-  gtag("config", "UA-131666667-1");
+  gtag('config', 'UA-131666667-1');
 </script>
 
 <div class="header">
@@ -35,12 +58,13 @@
       <h6>TLDR</h6>
       <ul>
         <li>
-          Loss functions are how we tell the model what information to emphasize
-          or to throw away.
+          Loss functions are how we tell the model what information to
+          emphasize or to throw away.
         </li>
         <li>
-          When thinking about losses, we care about three things: what the model
-          produces, what we are comparing against, and how we do the comparison.
+          When thinking about losses, we care about three things: what the
+          model produces, what we are comparing against, and how we do the
+          comparison.
         </li>
         <li>
           Losses can be placed on any embedding -- they do not just have to be
@@ -58,9 +82,7 @@
       </p>
       <div class="image-holder">
         <img src="img/turtles.jpg" width="400" />
-        <p>
-          It's embeddings all the way down. Also, I like turtles.
-        </p>
+        <p>It's embeddings all the way down. Also, I like turtles.</p>
       </div>
       <p>
         During training, we want to quantify how good that final output is. We
@@ -86,10 +108,10 @@
         carries some information, and check to see how well it matches the
         information in an external embedding. During training, the model is
         trying to minimize the loss. It minimizes the loss by making sure the
-        information needed to construct the final layer is present in the second
-        to last layer. And by making sure the information needed to construct
-        the second to last layer is present in the third to last layer. And so
-        on, all the way to the input features.
+        information needed to construct the final layer is present in the
+        second to last layer. And by making sure the information needed to
+        construct the second to last layer is present in the third to last
+        layer. And so on, all the way to the input features.
       </p>
       <p>
         I kinda think of a loss function as having some kind of gravitational
@@ -101,51 +123,51 @@
       <h6>Making a loss function</h6>
       <p>
         To a first approximation, we can tune our model by thinking about how
-        the data is correlated with the outcomes we want, and adding losses that
-        emphasize that data. When creating a loss function, we need to consider
-        three things: the model output, the thing we're comparing against, and
-        the method of doing the comparison. In the simplest case, where we're
-        trying to learn some really basic data distribution y = f(x), our loss
-        function is really simple. For a given datapoint x, we look at the model
-        output f(x), compare it against the ground truth value y, and calculate
-        the loss as L = |y - f(x)|. The model is trying to minimize the loss, so
-        over time f(x) will match y.
+        the data is correlated with the outcomes we want, and adding losses
+        that emphasize that data. When creating a loss function, we need to
+        consider three things: the model output, the thing we're comparing
+        against, and the method of doing the comparison. In the simplest case,
+        where we're trying to learn some really basic data distribution y =
+        f(x), our loss function is really simple. For a given datapoint x, we
+        look at the model output f(x), compare it against the ground truth
+        value y, and calculate the loss as L = |y - f(x)|. The model is trying
+        to minimize the loss, so over time f(x) will match y.
       </p>
       <p>
         Why do we use an absolute value in our loss? Because if we don't, the
-        model will minimize the loss by making f(x) really really large, thereby
-        making the loss (infinitely) negative. Remember, models cheat.
+        model will minimize the loss by making f(x) really really large,
+        thereby making the loss (infinitely) negative. Remember, models cheat.
       </p>
       <div class="image-holder">
         <img src="img/loss-distribution.png" width="600" />
         <p>
           For most tasks, the loss is defined as some kind of distance between
           two distributions -- the model output and some external truth
-          distribution -- that quantifies the model's performance. In this case,
-          the distribution is pretty straightforward because we're dealing with
-          only two dimensions. But we can do the same with much higher
-          dimensional data, say a 64d embedding.
+          distribution -- that quantifies the model's performance. In this
+          case, the distribution is pretty straightforward because we're
+          dealing with only two dimensions. But we can do the same with much
+          higher dimensional data, say a 64d embedding.
         </p>
       </div>
       <h6>So how do we change a loss function?</h6>
       <p>
         It's hard to figure out exactly how changing the loss will impact the
         model -- I mean, we can calculate the outcomes with math but
-        realistically that does not provide us with a great understanding of how
-        the model will respond, because of the whole cheating model thing. As a
-        result, changing the losses of a model can be pretty volatile.
+        realistically that does not provide us with a great understanding of
+        how the model will respond, because of the whole cheating model thing.
+        As a result, changing the losses of a model can be pretty volatile.
       </p>
       <p>
         One real world application that helped this all click for me was
         thinking about problems where you have a really skewed distribution of
-        data. In <a href="./simpledl_3.html">Part 3</a> we talked about how it's
-        important to make sure there are no hidden correlations in your data.
-        But sometimes you don't have any other choice. Most medical/health
-        problems run into this issue -- most of your data is from people who
-        don't have the disease. For some rarer diseases, you might have a
-        healthy/unhealthy data ratio of 1:1000. Which, on its own, will
-        basically just result in the model returning a 'healthy' verdict for
-        every single input. Not exactly that useful.
+        data. In <a href="./simpledl_3.html">Part 3</a> we talked about how
+        it's important to make sure there are no hidden correlations in your
+        data. But sometimes you don't have any other choice. Most
+        medical/health problems run into this issue -- most of your data is
+        from people who don't have the disease. For some rarer diseases, you
+        might have a healthy/unhealthy data ratio of 1:1000. Which, on its own,
+        will basically just result in the model returning a 'healthy' verdict
+        for every single input. Not exactly that useful.
       </p>
       <p>
         Let's say we're working with COVID patients. We can't get more COVID
@@ -160,10 +182,11 @@
         <p></p>
       </div>
       <p>
-        In short: every time the model sees an infected patient, we multiply the
-        loss by 1000x. In other words, the model will 'care' about the unhealthy
-        patients 1000 times more than the healthy ones. Mathematically, this is
-        because the loss is now much more impacted by the unhealthy patients.
+        In short: every time the model sees an infected patient, we multiply
+        the loss by 1000x. In other words, the model will 'care' about the
+        unhealthy patients 1000 times more than the healthy ones.
+        Mathematically, this is because the loss is now much more impacted by
+        the unhealthy patients.
       </p>
       <p>
         Since there are way more healthy patients than unhealthy ones, it all
@@ -216,10 +239,10 @@
         I've kinda been pretending that losses on other model layers are rare,
         but actually, they're really common. Just about every deep learning
         model uses some kind of regularization loss (for example, l2 loss) to
-        prevent the weights from growing too large. The ability to add arbitrary
-        losses on different layers is also what powers a ton of unique deep
-        learning models, including: multi-modal inputs/outputs, distillation,
-        GANs, and more.
+        prevent the weights from growing too large. The ability to add
+        arbitrary losses on different layers is also what powers a ton of
+        unique deep learning models, including: multi-modal inputs/outputs,
+        distillation, GANs, and more.
       </p>
       <h6>Conclusions</h6>
       <p>

@@ -1,5 +1,28 @@
 <title>SimpleDL Part 3: Features</title>
 <meta name="viewport" content="width=800" />
+
+<meta name="description" content="Building intuition about deep learning." />
+<meta property="og:title" content="SimpleDL pt 3: Features" />
+<meta property="og:type" content="website" />
+<meta
+  property="og:description"
+  content="Building intuition about deep learning."
+/>
+<meta
+  property="og:image"
+  content="https://amolkapoor.com/writing/img/networkeffects.jpg"
+/>
+<meta name="twitter:title" content="SimpleDL pt 3: Features" />
+<meta
+  name="twitter:description"
+  content="Building intuition about deep learning."
+/>
+<meta
+  name="twitter:image"
+  content="https://amolkapoor.com/writing/img/networkeffects.jpg"
+/>
+<meta name="twitter:card" content="summary_large_image" />
+
 <link rel="icon" href="spy.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="spy.ico" type="image/x-icon" />
 <link rel="stylesheet" href="theme.css" />
@@ -36,8 +59,8 @@
       <ul>
         <li>Features are the baseline input data to our model.</li>
         <li>
-          Models will cheat if they can. We need to be careful about our data as
-          a result.
+          Models will cheat if they can. We need to be careful about our data
+          as a result.
         </li>
         <li>More data is always better, but it can be hard to get and use.</li>
       </ul>
@@ -55,11 +78,11 @@
       </div>
       <p>
         I think of input features as the 0th layer embedding, the foundational
-        embedding that all other embeddings build on (or remove from). The input
-        will often be a super high dimension compared to the rest of the model
-        embeddings, because it is the most full representation of our data
-        (noise and all). The model's job is to take this super high dimensional
-        embedding, and whittle it down to something useful.
+        embedding that all other embeddings build on (or remove from). The
+        input will often be a super high dimension compared to the rest of the
+        model embeddings, because it is the most full representation of our
+        data (noise and all). The model's job is to take this super high
+        dimensional embedding, and whittle it down to something useful.
       </p>
       <p>
         In more practical terms, the features are the input data transformed
@@ -92,45 +115,45 @@
       <h6>Models Cheat</h6>
       <p>
         Part of what makes models hard to reason about is that models will
-        'cheat' if they can. If a model has an easy way to minimize the loss, it
-        will take it. Let's say we wanted to train a model to identify cats and
-        dogs. If we only feed in images of cats during training, our model will
-        never figure out how to predict dogs.
+        'cheat' if they can. If a model has an easy way to minimize the loss,
+        it will take it. Let's say we wanted to train a model to identify cats
+        and dogs. If we only feed in images of cats during training, our model
+        will never figure out how to predict dogs.
       </p>
       <div class="image-holder">
         <img src="img/only-cats.png" width="600" />
         <p>
-          If we only use images of cats during training, the model will 'cheat'.
-          It will learn to ignore all of the input features -- no matter what
-          you put in, it will predict cat.
+          If we only use images of cats during training, the model will
+          'cheat'. It will learn to ignore all of the input features -- no
+          matter what you put in, it will predict cat.
         </p>
       </div>
       <p>
         So let's just include some dogs in our training set, right? It's not
-        that simple. Even in this straightforward case, we have to make sure the
-        dog/cat ratio is roughly even -- after all, if we have 1 dog for 99
+        that simple. Even in this straightforward case, we have to make sure
+        the dog/cat ratio is roughly even -- after all, if we have 1 dog for 99
         cats, the model will still just predict 'cat' every time. More
-        generally, if we accidentally have correlations in our data that let the
-        model minimize the loss, the model will use it. So we not only have to
-        make sure the ratios are good, we also need to make sure there aren't
-        hidden relationships in size, shape, color, or anything else.
+        generally, if we accidentally have correlations in our data that let
+        the model minimize the loss, the model will use it. So we not only have
+        to make sure the ratios are good, we also need to make sure there
+        aren't hidden relationships in size, shape, color, or anything else.
       </p>
       <div class="image-holder">
         <img src="img/colorswitch.png" width="600" />
         <p>
           If we only train on white cats and black dogs, the model isn't going
           to learn anything about cats and dogs. It's only going to learn about
-          color. If the model sees a black cat, it will predict 'dog'. And if it
-          sees a white dog, it'll predict 'cat'. This is why we augment our
+          color. If the model sees a black cat, it will predict 'dog'. And if
+          it sees a white dog, it'll predict 'cat'. This is why we augment our
           input features.
         </p>
       </div>
       <p>
         This is why we have to care about the input features. Data matters,
         whether we're training a pet identifier or a
-        <a href="https://www.jefftk.com/p/detecting-tanks">tank detector</a>. As
-        a general rule of thumb, <b>more data is better</b>. The more training
-        data we have, the better the input will match the true data
+        <a href="https://www.jefftk.com/p/detecting-tanks">tank detector</a>.
+        As a general rule of thumb, <b>more data is better</b>. The more
+        training data we have, the better the input will match the true data
         distributions, and the better our model will perform. And, the more
         varied our input data features are, the more baseline information the
         model has to work with, and the better the underlying embeddings will
@@ -141,14 +164,14 @@
         In a sense, yes, actually. A lot of the big problems in deep learning
         are really data acquisition problems. If you have a good source of data
         that correlates well with the problem you're trying to solve, you're
-        probably 80% of the way to getting good embeddings, which in turn is 90%
-        of solving a deep learning problem.
+        probably 80% of the way to getting good embeddings, which in turn is
+        90% of solving a deep learning problem.
       </p>
       <p>
         But it's not that easy. There's always a catch. I work at Google, which
         arguably has the most data access in the world, and even in my day job
-        we struggle with getting data, cleaning it, labeling it, and ensuring it
-        works for our problem space. Overall, accessing more data is
+        we struggle with getting data, cleaning it, labeling it, and ensuring
+        it works for our problem space. Overall, accessing more data is
         <i>hard</i>. And at a large enough scale, it's super inefficient. We'll
         talk a bit more in future sections about what else we can do when we
         can't get more data.
@@ -156,8 +179,8 @@
 
       <h6>Conclusion</h6>
       <p>
-        Features are the foundation of every ML model. Your model can only be as
-        good as the input features, because the input features are an upper
+        Features are the foundation of every ML model. Your model can only be
+        as good as the input features, because the input features are an upper
         limit on the quality of the information available. Shit goes in, shit
         comes out. But ML models really want to succeed, and they can find all
         sorts of correlations in the data that may not be obvious even to an
@@ -175,9 +198,9 @@
           invariant to common changes in the data. This makes the training
           dataset more reflective of real world data, and helps avoid issues
           with
-          <a href="https://www.jefftk.com/p/detecting-tanks">tank detection</a>.
-          Note that there is no such thing as a free lunch: if you augment your
-          data, your model capacity needs to increase as well.
+          <a href="https://www.jefftk.com/p/detecting-tanks">tank detection</a
+          >. Note that there is no such thing as a free lunch: if you augment
+          your data, your model capacity needs to increase as well.
         </li>
       </ol>
     </div>
