@@ -1,0 +1,412 @@
+<title>Programming: Simplicity in Prototypes</title>
+<meta name="viewport" content="width=800" />
+
+<meta
+  name="description"
+  content="Why prototypes really REALLY need good code."
+/>
+
+<meta property="og:title" content="Programming: Simplicity in Prototypes" />
+<meta property="og:type" content="website" />
+<meta
+  property="og:description"
+  content="Why prototypes really REALLY need good code."
+/>
+<meta
+  property="og:image"
+  content="https://amolkapoor.com/writing/img/advancedsystempattern.png"
+/>
+
+<meta name="twitter:title" content="Programming: Simplicity in Prototypes" />
+<meta
+  name="twitter:description"
+  content="Why prototypes really REALLY need good code."
+/>
+<meta
+  name="twitter:image"
+  content="https://amolkapoor.com/writing/img/advancedsystempattern.png"
+/>
+
+<link rel="icon" href="spy.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="spy.ico" type="image/x-icon" />
+<link rel="stylesheet" href="theme.css" />
+
+<!-- Syntax highlighting -->
+<link
+  rel="stylesheet"
+  href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css"
+/>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+
+<!-- Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-131666667-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'UA-131666667-1');
+</script>
+
+<div class="header">
+  <h1>Writing</h1>
+  <h3>Amol Kapoor</h3>
+  <a href="./index.html">Back to table of contents.</a>
+</div>
+
+<div class="content">
+  <div class="writing-holder">
+    <h4>Programming: Simplicity in Prototypes</h4>
+    <h6>March, 2022</h6>
+
+    <div class="writing">
+      <h6>Prelude: add10</h6>
+      <p>
+        Here is a deceptively simple question. Let's say I have the following
+        code:
+      </p>
+      <pre><code class="language-python">x = 5
+
+def add10():
+  return x + 10
+
+print(add10())</code></pre>
+      <p>What does add10() return?</p>
+      <p>
+        One could make a case that <code>add10()</code> returns 15, but they
+        would be wrong. A more cynical person might (rightfully) point out that
+        <code>add10()</code> is dependent on x, so we can only answer the
+        question if we know what <code>x</code> is. Closer, but I didn't ask
+        what <code>add10()</code> returns for a given value of <code>x</code>.
+        I asked what does <code>add10()</code> return?
+      </p>
+      <p>
+        I would argue that we can never know what this function returns. The
+        best that we can do is know what this function returns at a specific
+        time. x can change, and with it so will our function.
+      </p>
+      <p>
+        If, in the middle of your code, you encounter a line of code like
+        <code>value = add10()</code>, you're now in stateful hell. Enjoy
+        backtracking through the code to try and figure out what
+        <code>value</code> is.
+      </p>
+      <h6>Simplicity</h6>
+      <p>
+        I recently stumbled upon Rich Hickey's 2011 talk,
+        <a href="https://www.youtube.com/watch?v=SxdOUGdseq4"
+          >Simple Made Easy</a
+        >. Rich has a 30 year SWE career and is known as the creator of
+        Clojure, a lisp dialect built on top of the JVM. He's been around the
+        block. In the talk, Rich defines simplicity as 'the property of being
+        un-entangled. Simplicity is the opposite of complexity – therefore, a
+        complex thing is highly entangled.
+      </p>
+      <p>
+        What does 'entangled' mean? Most obviously, entanglement describes
+        things that are joined together in some way. But I prefer a slightly
+        more subtle definition:
+        <i
+          >things that are entangled cannot be understood separately from the
+          whole</i
+        >. So a complex thing has a lot of pieces that cannot be separately
+        understood. A set of simple things, by contrast, are as easy to
+        understand separately as they are together.
+      </p>
+      <div class="image-holder">
+        <img src="img/plaiting.png" width="400" />
+      </div>
+
+      <p>Let's get the basics out of the way. This code:</p>
+      <pre><code class="language-python">x = 5
+
+def add10():
+  return x + 10
+
+print(add10())</code></pre>
+      <p>
+        is complex. It is complex because the function <code>add10()</code> is
+        entangled with the value of <code>x</code>. More than that, every
+        single thing that touches <code>x</code> is entangled with every other
+        thing that touches <code>x</code>, in a combinatorial way. You cannot
+        know the value of <code>add10</code> unless you know what previous code
+        was run and how that impacted the value of <code>x</code>.
+      </p>
+      <pre><code class="language-python">def add10():
+  return x + 10
+
+def append10():
+  x = [x]
+  return x.append(10)
+
+def update10():
+  x = {x}
+  x.update(10)
+</code></pre>
+      <p>
+        If you run <code>add10()</code> and get a type error from the code
+        above, a) you deserve it, and b) debugging is going to be very hard. I
+        can stare at the definition of <code>add10()</code> all I want, but I
+        won't be able to find the source of the type error unless I understand
+        the code as a whole. If your codebase is larger than 200 lines, this
+        absolutely sucks.
+      </p>
+      <h6>Why Do People Entangle?</h6>
+      <p>
+        Hopefully everyone will agree that building anything long term and
+        sustainable in the environment above is difficult. But people do things
+        like this all the time. Why?
+      </p>
+      <p>
+        Because it's easy. Not in the sense that it's easy to understand – we
+        just laid out above that this kind of entanglement is anything but easy
+        to understand. Rather, it's easy to write. You need to store a new
+        piece of state? Great, just throw it at the top of your file (in global
+        scope), and now you know that every other part of your code has access
+        to it. No need to keep track of pesky function parameters, or threading
+        variables between different areas of your code.
+      </p>
+      <p>
+        Let's look at an example. Imagine you're trying to add a new hit()
+        function to our blackjack game below. Which is easier to write?
+      </p>
+      <div
+        style="
+          display: grid;
+          grid-template-columns: 400px 400px;
+          grid-gap: 5px;
+        "
+      >
+        <div>
+          <pre><code class="language-python">deck = [1, 2, 3, 4, 5]
+hand = []
+
+def deal():
+  hand.append(deck.pop())
+  hand.append(deck.pop())
+  
+def shuffle():
+  random.shuffle(deck)
+
+def hit():
+  hand.append(deck.pop())
+
+
+
+
+</code></pre>
+        </div>
+        <div>
+          <pre><code class="language-python">def create_deck(): 
+  return [1, 2, 3, 4, 5]
+
+def deal_initial_hand(deck):
+  return [deck.pop(), deck.pop()]
+
+def shuffle(deck):
+  return random.shuffle(deck)
+
+def hit(hand, deck):
+  return hand.append(deck.pop())
+
+def main():
+  deck = create_deck()
+  hand = deal_initial_hand(deck)
+  hand = hit(hand, deck)</code></pre>
+        </div>
+      </div>
+      <p>
+        In order to do anything on the right side, you have to think about
+        where the data lives and how it gets to your code. By comparison, on
+        the left side all of the state you could ever need is right there.
+      </p>
+      <p>
+        Entanglement is the programmer's equivalent of eyeballing a measurement
+        or cutting a corner. We could route our variables around such that each
+        function is isolated, but it's tedious and requires thinking about
+        interfaces. Much faster to write code quickly and see what pops out in
+        the terminal and iterate on that till it works.
+      </p>
+      <p>
+        But it's important to note that programmers aren't just being lazy,
+        this temptation is often grounded in logic. Justification comes in two
+        flavors.
+      </p>
+      <p>
+        First, programmers have deadlines, and a mountain of tasks. The
+        programmer knows that it is hard to evaluate benefits that pay off over
+        many weeks against a hypothetical. So if a client or manager needs
+        something ASAP, the programmer takes on a lot of risk by saying 'no,
+        this will take a while because it has to be done correctly' even if
+        that is better for the long term. And those programmers who do request
+        additional time might still be pressured into doing things 'quickly',
+        because they may be convinced that they don't have the full scope
+        necessary to prioritize short and long term goals. This is a failure of
+        management and company culture, and while it <i>is</i> harmful, it's a
+        thread to follow in a future piece.
+      </p>
+      <p>
+        Second, a lot of otherwise very smart people make the argument that the
+        benefit of getting things out quickly outweighs the downstream costs.
+        In my experience, the argument is generally some variation of: "by
+        seeing this code in action we will have more clarity, and we might
+        decide to throw this code out entirely. Writing it fast will help us
+        decide what code to write later and thereby save us time in the long
+        run". Those same people will also say something like "obviously if
+        we're writing code that is built to live a long time, we should do it
+        the right way. But for prototyping, it's ok or even good to do things
+        fast." This is much more interesting to me, because…
+      </p>
+      <h6>The Tools are not the Artifact</h6>
+      <p>
+        …I strongly disagree. For prototyping, it's much better to produce good
+        simple code that may have been harder to write, than bad complex
+        entangled code that was easy to write.
+      </p>
+      <p>
+        In most disciplines, the tools are not the artifact. Pianists don't
+        <i>make</i> pianos, they make music. Authors don't make word
+        processors, they create characters and worlds (we make the word
+        processors!). In general, most engineers don't make the tools they use.
+        Mechanical engineers working in a shop don't make the drills and
+        presses; electrical engineers don't make the opamps and breadboards.
+      </p>
+      <div class="image-holder">
+        <img src="img/mozart.jpg" width="400" />
+        <p>Pictured: someone who can't build pianos.</p>
+      </div>
+      <p>
+        In other fields, when you're working on a prototype, you buy tools that
+        are explicitly designed for prototyping. These tools are flexible,
+        modular, built to support rapid iteration and change. These tools are
+        high quality.
+      </p>
+      <p>
+        Programming is a bit unique. Everything we do is code. Our artifacts
+        are code. The things we use to produce those artifacts -- libraries,
+        frameworks, whatever -- that's also code. It's code all the way down.
+        And so it's really easy to blur the lines between the tool and the
+        artifact.
+      </p>
+      <p>Don't do this.</p>
+      <p>
+        It's because of that blurriness that smart people will say something
+        crazy like 'we can write bad code because this is a prototype'. Can you
+        imagine if we said that for any other field? Can you imagine an author
+        going 'hey yea, this is just a draft so I'll be writing it using a
+        shittier computer'? That doesn't even make sense! It's not even wrong!
+      </p>
+      <p>
+        In every other field, the tools used for prototyping have the
+        <i>most</i> simplicity. A machine shop vs an assembly line. A bread
+        board vs a printed circuit. The tools used for prototyping are MORE
+        modular, MORE separated. It’s no different in software engineering
+        (which is, contrary to a certain strain of thinking, ALSO an
+        engineering discipline!). The tools used to build the prototype are not
+        the prototype.
+      </p>
+      <div class="image-holder">
+        <img src="img/ee-prototypes.png" width="600" />
+        <p>
+          The breadboard on the left is what electrical engineers use to
+          prototype. Look how modular and separable everything is! Every wire,
+          every resistor, every opamp is modular and can easily be moved and
+          adjusted, especially compared to the right side. Prototype with
+          breadboards, not circuit boards.
+        </p>
+      </div>
+      <p>
+        Prototypes that involve CS are rarely, very rarely, testing the code
+        itself. Rather, we are prototyping something built with code. A UI. A
+        web app. A load balancer. These are applications, put to use by end
+        users. And end users don't care about code. They don't care about how
+        pretty it is, or how nice it is to read -- they only care about whether
+        the code does what was asked. The number one property of a prototype is
+        that it is subject to rapid change. <i>That is the ask</i>. That means
+        you need to build the underlying tools in a way that will support rapid
+        change.
+      </p>
+      <p>
+        Take a look at that blackjack code again, and imagine that you are now
+        tasked with adding another player. Is the code on the left easy to
+        change? No. In fact, if the design specification changes at all, you
+        basically have to throw everything out and start over. This is
+        incredibly slow, which means it is a bad prototype.
+      </p>
+      <p>
+        When writing easy code, the artifacts that are created are
+        fundamentally entangled with the task at hand. You cannot understand
+        the value of the artifact without knowing about the task; without the
+        task, the artifact has no value. This breaks the cardinal idea behind
+        <a href="https://amolkapoor.com/writing/founders_4.html"
+          >corkscrew-programming</a
+        >, which is that every piece of generated code can be used to speed up
+        and power all future code. If all of the code you create is entangled
+        with the specific task it was created for, it can't be reused.
+      </p>
+      <h6>How To Write a Simple Prototype</h6>
+      <p>
+        There are a bunch of general heuristics about how to write simple code
+        that apply here.
+      </p>
+      <ul>
+        <li>
+          Write
+          <a href="https://en.wikipedia.org/wiki/Pure_function"
+            >pure functions</a
+          >. Your functions should have as few dependencies on external things
+          as possible, and all of those dependencies should be passed in
+          through the parameters. If you pass the same parameters in, you
+          should get the same values out.
+        </li>
+        <li>
+          No global state. All state needs to be wrapped in something that can
+          provide a pure function interface.
+        </li>
+        <li>
+          Manipulate data. Take the time to write IO so that end users can pass
+          in configuration to change how your code works without you having to
+          be in the loop.
+        </li>
+      </ul>
+      <p>
+        With prototyping in particular, there are a few other key steps that
+        programmers can take.
+      </p>
+      <ul>
+        <li>
+          Think deeply about what parts of your program are 'tools used to make
+          the prototype' compared to 'the prototype'. Make sure the
+          dependencies only ever go from the latter to the former.
+        </li>
+        <li>
+          Take the pieces of your program that are 'tools' and separate them
+          into a different set of files. Clean them up, run a linter, get code
+          review.
+        </li>
+        <li>
+          Separate the two pieces of the program with configuration. The 'tools
+          that make the prototype' parts of your code should take in some type
+          of user input to produce the prototype.
+        </li>
+      </ul>
+      <p>
+        And if you decide that your prototype is sufficiently small, keep it
+        under 200 lines and then commit to throwing it away when it has served
+        its purpose.
+      </p>
+    </div>
+    <div class="footer">
+      <a href="./index.html">Back to Writing</a>
+    </div>
+  </div>
+  <script>
+    hljs.highlightAll();
+  </script>
+</div>
