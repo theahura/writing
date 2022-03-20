@@ -1,0 +1,287 @@
+<title>A Founder&#39;s Guide: Google From the Outside</title>
+<meta name="viewport" content="width=800" />
+
+<meta name="description" content="Cataloguing what Google got right." />
+<meta property="og:title" content="Founder's Guide: Collaboration at Google" />
+<meta property="og:type" content="website" />
+<meta property="og:description" content="Cataloguing what Google got right" />
+<meta
+  property="og:image"
+  content="https://amolkapoor.com/writing/img/hqdefault.jpg"
+/>
+<meta
+  name="twitter:title"
+  content="Founder's Guide: Collaboration at Google"
+/>
+<meta name="twitter:description" content="Cataloguing what Google got right" />
+<meta
+  name="twitter:image"
+  content="https://amolkapoor.com/writing/img/hqdefault.jpg"
+/>
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="spy.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="spy.ico" type="image/x-icon" />
+<link rel="stylesheet" href="theme.css" />
+
+<style></style>
+<!-- Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-131666667-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'UA-131666667-1');
+</script>
+
+<div class="header">
+  <h1>Writing</h1>
+  <h3>Amol Kapoor</h3>
+  <a href="./index.html">Back to table of contents.</a>
+</div>
+
+<div class="content">
+  <div class="writing-holder">
+    <h4>A Founder&#39;s Guide: Collaboration at Google</h4>
+    <h6>Written Feb, 2022. Published March, 2022.</h6>
+    <div class="writing">
+      <p>
+        Collaboration is "the action of working with someone to produce or
+        create something". This is a surprisingly nuanced definition.
+      </p>
+      <p>
+        First, collaboration is an "action". It's not something that happens
+        passively, it is something that requires an actual change from the
+        default, which in turn implies thought and planning.
+      </p>
+      <p>
+        Second, collaboration involves "working with someone". The word 'with'
+        has a lot of definitions, it's something you probably don't ever even
+        think about because it's so common but Google says there are 10 unique
+        definitions for the word. The most relevant is 'in the same direction
+        as'. You are working 'in the same direction as' someone else. This
+        implies alignment — of goals, values, techniques. You cannot
+        collaborate without being aligned.
+      </p>
+      <p>
+        And finally, collaboration requires the 'production or creation' of
+        something. You don't collaborate in a vacuum. Collaboration has an end
+        state, a goal in mind.
+      </p>
+      <p>
+        Collaboration, at some level, is baked into the DNA of every company.
+        You start a company — and hire other people and so on — because it's
+        more efficient than working on your own. But collaboration is really
+        fucking hard. Raise your hand if you've heard this story: a bunch of
+        people get together to do a thing, everyone works on their own version
+        of the idea until there's overlap and clash, nothing is agreed upon and
+        the group falls apart without accomplishing anything. You know what's
+        not hard? For people who are nominally collaborating to actually be
+        working in isolated silos.
+      </p>
+      <div class="image-holder">
+        <img src="img/cowtools.png" width="300" />
+        <p>The joke writes itself.</p>
+      </div>
+      <p>
+        Why does this happen? Well, first, because collaboration depends on
+        communication, and we
+        <a href="https://amolkapoor.com/writing/founders_5a.html"
+          >already discussed how painful that is</a
+        >. But also, people can't read minds. Even the best intentioned
+        developers cannot fully understand what another developer is doing
+        without collaborating in some way. Software is just too complex, too
+        abstract. So if there isn't a serious attempt to regularly sync on some
+        mutual understanding, people diverge until you one day realize none of
+        the pieces are actually compatible.
+      </p>
+      <p>
+        But that's in the best case. In practice, many developers don't like
+        collaborating. We all have our own styles of programming, our own way
+        of doing things. Programming is an expression of thought, and trying to
+        get into the thought process of another person is frustrating and time
+        consuming and, frankly, sometimes irrationally deeply upsetting (see:
+        tabs and spacing, single vs double quotes, 80ch line limits…). So
+        developers naturally isolate themselves.
+      </p>
+      <p>
+        From a managerial and organizational perspective, this is bad.
+        Isolation means bottlenecks. It means dependencies on individual people
+        or teams. And most importantly, it slows down development
+        <a href="https://amolkapoor.com/writing/founders_4.html">corkscrews</a>
+        — if you aren't collaborating, you have no reason to make your code
+        readable or usable for more general use cases. But you can't force
+        people to collaborate, not really, because collaboration happens at
+        every level of the company, from hundred person orgs all the way down
+        to individuals, during public all hands and 'in the gaps' when no one
+        is looking. So you have to instead make collaboration something that is
+        worthwhile, such that every person is naturally incentivized to
+        collaborate by default.
+      </p>
+      <h6>At Google...</h6>
+      <p>
+        At Google, collaboration was mostly the default. I've already written
+        about
+        <a href="https://amolkapoor.com/writing/founders_5a.html"
+          >Google's efforts to make communication seamless</a
+        >. I think Google took that foundation and did a great job setting up
+        systems that would encourage people to seek out others and work
+        together. For the most part, these systems functioned by implicitly or
+        explicitly tying collaboration to personal achievement metrics.
+      </p>
+      <p>
+        Now, before going further, I have to note that many even of these
+        systems felt frustrating for many developers. The organizational tools
+        below are often maligned for being stressful and difficult and
+        unenjoyable and inefficient. I'm not surprised. Collaboration is hard,
+        and often uncomfortable, so managerial levers that encourage
+        collaboration are looked upon with distrust and skepticism.
+        Nonetheless, I think the net effect was overwhelmingly positive for
+        Google's forward mobility.
+      </p>
+      <p>With that out of the way, let's talk about why perf is great.</p>
+      <div class="image-holder">
+        <img src="img/pitchforks.jpg" width="600" />
+      </div>
+      <i>Perf and Peer Review</i>
+      <p>
+        For those of you who have luckily avoided being within earshot of a
+        Googler in February, March, August, or September, Perf is shorthand for
+        Performance Review. It is a bi-annual (meaning twice a year) review
+        period of about a month, where engineers are asked to write somewhere
+        between 1000 and 5000 words on what they did and how awesome they are.
+        Perf is used as the primary input for calculating bonuses and,
+        eventually, promotions. And since every promotion relies on all past
+        Perf results, there is a strong incentive to write a 'good' Perf every
+        cycle.
+      </p>
+      <p>This is very stressful.</p>
+      <div class="image-holder">
+        <img src="img/perf.png" width="300" />
+      </div>
+      <p>
+        But I'm not here to talk about stress, I'm here to talk about a key
+        aspect of Perf: the peer review. See, in order to have a 'good' Perf,
+        you need to solicit short and long form reviews from peers. This
+        feedback is heavily counted when evaluating an employee's trajectory.
+        Importantly, reviews from high-level folks outside your team are
+        weighted higher than internal reviews — if your director thinks you're
+        great, that's whatever, but if a different director thinks you're
+        great, that's a big fucking deal. This is especially true as you go up
+        the promotion ladder.
+      </p>
+      <p>
+        Naturally, this system inventivizes anyone who wants a good Perf (i.e.
+        everyone) to constantly think about how they can interact with and
+        provide value to other people on other teams. That in turn encourages
+        good API design, clear documentation, and generalized multi-purpose
+        tooling (see
+        <a href="https://amolkapoor.com/writing/founders_4.html"
+          >corkscrew development</a
+        >). Critically, this works both ways. If I help you, we both can give
+        each other strong peer reviews. So we end up having a very good reason
+        to align on goals and strategy, and an equally good reason to develop a
+        process that is legible -- enough that we could write about it later.
+      </p>
+      <p>
+        Peer review happens at every level of the command hierarchy at Google.
+        As a result, there is an organic bottom-up drive to work across teams
+        and orgs.
+      </p>
+      <p>
+        Maybe not coincidentally, teams that promoted candidates without strong
+        peer reviews were, in my experience, harder to work with. They were
+        also much more likely to be re-orged or disbanded.
+      </p>
+      <i>Impact metrics</i>
+      <p>
+        Any conversation about Perf requires mentioning 'impact'. At Google,
+        'impact' is a catch-all term that means 'how much did my work change
+        the company'. Most of the time, impact is measured in dollars. But it
+        can also be measured in clicks, or latency, or engagement time. Broadly
+        speaking, the more impact, the more likely you are to get promoted. So
+        people cared a lot about impact.
+      </p>
+      <p>
+        You know what else counts as impact? Speeding up your coworkers. If you
+        can make some task faster for your peers, you can claim impact — and
+        get credit for some of the downstream impact that they showed. When I
+        was at Google, the joke was that if you wanted a fast promotion, you
+        should go work on internal infra (like
+        <a href="https://research.google/pubs/pub43438/">Borg</a>). It's easy
+        to rack up impact when every code change touches every engineer at the
+        company. But Google isn't stingy, even good tutorials count as impact.
+      </p>
+      <p>
+        This accounting system turns every engineer into a devops person. In
+        practice, I think this policy really helps smooth things out on the
+        margins. Every time an eng builds a handy bash tool, or works through
+        some tricky configuration, they might spend the extra day to write and
+        publicize some good docs on what they did and why. The usual
+        <a href="https://amolkapoor.com/writing/founders_4.html">corkscrews</a>
+        apply.
+      </p>
+      <p>
+        Generally, these sorts of libraries or utilities are win-win. Everyone
+        is looking for impact. Since speeding up other people genuinely helps
+        them achieve more, there is strong incentive to seek out and re-use
+        tools other people build. So for any given utility, the developer wants
+        as many people as possible to use it; and anyone who can benefit is
+        already seeking it out.
+      </p>
+      <i>Peer Bonuses</i>
+      <p>
+        The last piece worth highlighting in Google's arsenal of incentives is
+        the peer bonus program. A peer bonus is a $200 bonus on your paycheck.
+        Every Google employee is given five peer bonuses that they can hand out
+        each quarter. You can't give them to anyone in your direct management
+        chain, nor anyone who's given you a peer bonus that same quarter. They
+        don't roll over, and you don't benefit from keeping them, so there's no
+        reason not to use them. Generally, the recipient's manager is alerted
+        and everyone on their team reaches out to congratulate.
+      </p>
+      <p>Peer bonuses are amazing.</p>
+      <p>
+        Peer bonuses are a great way to encourage folks to go the extra mile.
+        They are a natural, decentralized mechanism that rewards kindness and
+        helpfulness. And receiving a peer bonus really does make you feel like
+        a million bucks, even if the actual change to your paycheck is minimal.
+        I think peer bonuses send a strong cultural signal about what is
+        important from top down, in a way that really impacts engineering
+        behavior in all the subtle ways that are necessary for a good
+        collaborative environment.
+      </p>
+      <p>
+        (O, and peer bonuses are a great way to rapidly identify who on a team
+        is carrying the weight or providing a lot of value.)
+      </p>
+      <h6>Closing thoughts</h6>
+      <p>
+        This ended up being a lot longer than I thought it would be, but I
+        think that's because it is hard to incentivize collaboration. But it's
+        also an incredibly critical thing to manage, whether you're building a
+        startup or any other kind of organization. It's an active process, and
+        therefore requires active attention and explicit supporting policies.
+      </p>
+      <p>
+        Google has 100k employees. Yes, there are conflicts, and yes, teams
+        aren't always on the same wavelength. But I worked with folks from
+        every part of Google — from Photos to Robotics to Ads to YouTube to
+        Health — and because every person I met was incentivized to collaborate
+        we were able to accomplish some pretty awesome things. I don't think
+        they were doing anything special, though, and the policies they put in
+        place are easy to copy. Once you nail it down, you can easily 100x your
+        organization's productivity.
+      </p>
+    </div>
+  </div>
+  <div class="footer">
+    <a href="./index.html">Back to Writing</a>
+  </div>
+</div>
