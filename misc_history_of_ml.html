@@ -1,0 +1,271 @@
+<title>A Two-Line History of ML</title>
+<meta name="viewport" content="width=800" />
+
+<meta name="description" content="I don't get GenZ humor" />
+<meta property="og:title" content="A Two-Line History of ML" />
+<meta property="og:type" content="website" />
+<meta property="og:description" content="I don't get GenZ humor" />
+<meta
+  property="og:image"
+  content="https://amolkapoor.com/writing/img/twolinejokes.png"
+/>
+
+<meta name="twitter:title" content="A Two-Line History of ML" />
+<meta name="twitter:description" content="I don't get GenZ humor" />
+<meta
+  name="twitter:image"
+  content="https://amolkapoor.com/writing/img/twolinejokes.png"
+/>
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="spy.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="spy.ico" type="image/x-icon" />
+<link rel="stylesheet" href="theme.css" />
+
+<!-- Syntax highlighting -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+
+<!-- Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-131666667-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'UA-131666667-1');
+</script>
+
+<div class="header">
+  <h1>Writing</h1>
+  <h3>Amol Kapoor</h3>
+  <a href="./index.html">Back to table of contents.</a>
+</div>
+
+<div class="content">
+  <div class="writing-holder">
+    <h4>A Two-Line History of ML</h4>
+    <h6>Written February, 2023.</h6>
+
+    <div class="writing">
+      <p>
+        I realized that a solid chunk of my
+        <a href="./misc_nostradamus.html">self-ascribed predictive prowess</a>
+        comes from a pair of pretty straightforward observation about how ML
+        has developed since the 90s:
+      </p>
+      <p>As t → ∞:</p>
+      <ul>
+        <li>
+          we develop models that have less 'human' knowledge baked into the
+          system;
+        </li>
+        <li>
+          because we have fewer priors, we (have to?) dramatically increase the
+          amount of data the model is trained on.
+        </li>
+      </ul>
+      <h6>A Just So Story</h6>
+      <p>
+        The plural of anecdote isn't data, but here are some interesting
+        observations nonetheless.
+      </p>
+      <p>
+        Early ML models (pre 1980s) are essentially statistics. Everything from
+        the data we collect to the models we use are decided by humans who have
+        deep expertise in a given field, and use that expertise to make
+        assumptions that make the task at hand computationally feasible. For
+        example, the classic
+        <a
+          href="https://www.cin.ufpe.br/~rps/Artigos/Face%20Recognition%20Using%20Eigenfaces.pdf"
+          >Eigenfaces</a
+        >
+        paper. Quoting from the abstract:
+      </p>
+      <pre><code class="language-txt">Our approach treats face recognition as a two-dimensional recognition
+problem, taking advantage of the fact that faces are normally upright
+and thus may be described by a small set of 2-D characteristic views.</code></pre>
+      <p>
+        That's a lot of assumptions! I think in this era of ML, we (have to?)
+        encode the problem in our solution in order to make any progress.
+      </p>
+      <p>
+        Neural networks, SVMs, and decision trees (1985-1995) are a step
+        towards generality. Instead of having to choose between a range of
+        models, hyperparameters, and data constraints, researchers have a
+        catch-all model that is theoretically capable of learning any function.
+        In this era, feature engineering is the name of the game — in order to
+        get your ML models to play nice, you need to feed in very specific
+        datasets. But your actual model is freed from having to encode the
+        problem space. See
+        <a href="http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf"
+          >Yann Lecun</a
+        >:
+      </p>
+      <pre><code class="language-txt">The usual method of recognizing individual patterns consists in
+dividing the system into two main modules shown in figure 1. The first
+module, called the feature extractor, transforms the input patterns so
+that they can be represented by low dimensional vectors or short
+strings of symbols that (a) can be easily matched or compared, and (b)
+are relatively invariant with respect to transformations and
+distortions of input patterns that do not change their nature. The
+feature extractor contains most of the prior knowledge and is rather
+specific to the task. It is also the focus of most of the design
+effort, because it is often entirely hand-crafted. The classifier, on
+the other hand, is often general-purpose and trainable. One of the
+main problems with this approach is that recognition accuracy is
+largely determined by the ability of the designer to come up with an
+appropriate set of features. This turns out to be a daunting task
+which, unfortunately, must be redone for each new problem. 
+</code></pre>
+      <p>
+        Right, well, feature engineering is all well and good but it also
+        sucks. Not to worry, Yann has an answer. From the same paper:
+      </p>
+      <pre><code class="language-txt">The main message of this paper is that better pattern recognition
+systems can be built by relying more on automatic learning and less on
+hand-designed heuristics. This is made possible by recent progress in
+machine learning and computer technology. Using character recognition
+as a case study, we show that hand-crafted feature extraction can be
+advantageously replaced by carefully designed learning machines that
+operate directly on pixel images. 
+</code></pre>
+      <p>
+        He's talking, of course, of convolutional networks. Convolutional
+        networks take all that pesky feature engineering out of the question.
+        No more edge detectors, no more fourier transforms. Just feed the image
+        in, and the model can do the rest.
+      </p>
+      <p>
+        This era of ML, roughly 20 years from 1998 to 2017, is all about
+        encoding human priors into the model instead of into the data. In this
+        time frame, a few core models appear for various modalities. ConvNets
+        (and their descendents, like UNets) take advantage of geospatial
+        relationships inherent to pixels in an image. RNNs, and later, LSTMs
+        exploit natural patterns occurring in sequential data like language and
+        audio. And representation learning algorithms like word2vec find
+        success by encoding human-intuitions when learning semantics.
+      </p>
+      <p>
+        This is obviously a huge time period, and I'm glossing over a lot of
+        stuff. During these 20 years, Big Data enters the lexicon, and then
+        becomes standard practice. Mobile meaningfully comes online. GPUs start
+        getting hacked by hobbyists for compute, then CUDA becomes a thing,
+        then Theano, then Tensorflow. So over this timeframe, we are able to
+        start really juicing our ML models with more data and compute. But even
+        so, our approach is broadly the same, just at different scales. The
+        same three models carried for a long time, and though people were
+        trying to come up with
+        <a href="https://en.wikipedia.org/wiki/Capsule_neural_network"
+          >new architectures</a
+        >
+        nothing was really that promising or ever really stuck. (I'm
+        consciously doing a disservice to GANs, GNNs, etc. etc. but that's why
+        this is a just-so story!)
+      </p>
+      <p>
+        In 2017, an understated paper called
+        <a href="https://arxiv.org/abs/1706.03762"
+          >Attention is all you Need</a
+        >
+        appears on arxiv, which describes the Transformer. I doubt the authors
+        of that paper knew what they were unleashing on the world; with
+        hindsight, it's rather funny just how focused the authors were on text
+        translation, when actually they had published the first meaningful
+        change to how we approach ML in over two decades. Transformers go a
+        step farther than ConvNets or RNNs — they don't make any assumptions
+        about the underlying structure of the data, and as such are much more
+        'tabula rasa'. Because the transformer does not have pre-existing
+        information about how to exploit patterns in data, you need a ton of
+        data to train it; but because it is so flexible, it can eventually,
+        with enough data, out-perform less generalized models.
+      </p>
+      <p>
+        And, in 2021, someone finally got around to collecting enough data.
+        After scraping essentially the entire internet, OpenAI releases GPT3,
+        showing how a system with essentially no baked-in assumptions and a ton
+        of data beats out everything else.
+      </p>
+      <h6>Closing Thoughts</h6>
+      <p>
+        Is anything that I've said 100% correct? No, I don't think so. This
+        post is more like evolutionary biology than genomics, reader be warned.
+        But like I've said about ML in the past: all models are wrong, but some
+        are useful.
+      </p>
+      <p>
+        What's the pattern in this model above? Increase generality. Increase
+        data.
+      </p>
+      <p>
+        This actually dovetails pretty well with my time in research/ML
+        publishing. There are, essentially, only three kinds of ML paper:
+      </p>
+      <ul>
+        <li>
+          <a
+            href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SC_-qB8AAAAJ&citation_for_view=SC_-qB8AAAAJ:LkGwnXOMwfcC"
+            >I applied {ML} to a new space/field/dataset!</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SC_-qB8AAAAJ&citation_for_view=SC_-qB8AAAAJ:W7OEmFMy1HYC"
+            >I improved {benchmark} by xyz%!</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SC_-qB8AAAAJ&citation_for_view=SC_-qB8AAAAJ:9yKSN-GCB0IC"
+          >
+            I generalized {model} to handle a new class of problem or problem
+            space!</a
+          >
+        </li>
+      </ul>
+      <p>
+        In other words, the long arc of ML is inherently towards more
+        generalized models. Bit by bit, we're clawing our way towards that holy
+        grail of generalized learning.
+      </p>
+      <h6>Epilog</h6>
+      <p>
+        O, one last thing. I love speculating wildly about the future. So, what
+        is the next big breakthrough in ML? Like as not, it's something we
+        haven't seen before. But if my intuition is correct, and I had to pick
+        from what we know in the field already, I think we should see an uptick
+        in the usage and applications of
+        <a
+          href="https://towardsdatascience.com/introduction-to-message-passing-neural-networks-e670dc103a87"
+          >message passing neural networks</a
+        >. These guys are
+        <a
+          href="https://towardsdatascience.com/transformers-are-graph-neural-networks-bca9f75412aa"
+          >strict generalizations of transformers</a
+        >, and so should be useful for a huge range of multimodal tasks.
+      </p>
+      <p>
+        The tricky thing about MPNNs is that we haven't really figured out how
+        to scale them to the size of the big transformer stacks. And they
+        require a lot more graph data (in keeping with the trend above). But
+        multimodality and generality are big watchwords in the AI world these
+        days, so I'm expecting someone to crack this nut sooner rather than
+        later.
+      </p>
+    </div>
+  </div>
+  <div class="footer">
+    <a href="./index.html">Back to Writing</a>
+  </div>
+  <script>
+    hljs.highlightAll();
+  </script>
+</div>
