@@ -1,0 +1,301 @@
+<title>Responding to Ted Chiang</title>
+<meta name="viewport" content="width=800" />
+
+<meta name="description" content="Great at scifi, eh at just sci" />
+<meta property="og:title" content="Responding to Ted Chiang" />
+<meta property="og:type" content="website" />
+<meta property="og:description" content="Great at scifi, eh at just sci" />
+<meta
+  property="og:image"
+  content="https://amolkapoor.com/writing/img/twolinejokes.png"
+/>
+
+<meta name="twitter:title" content="Responding to Ted Chiang" />
+<meta name="twitter:description" content="Great at scifi, eh at just sci" />
+<meta
+  name="twitter:image"
+  content="https://amolkapoor.com/writing/img/twolinejokes.png"
+/>
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="spy.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="spy.ico" type="image/x-icon" />
+<link rel="stylesheet" href="theme.css" />
+
+<!-- Syntax highlighting -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+
+<!-- Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-131666667-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'UA-131666667-1');
+</script>
+
+<div class="header">
+  <h1>Writing</h1>
+  <h3>Amol Kapoor</h3>
+  <a href="./index.html">Back to table of contents.</a>
+</div>
+
+<div class="content">
+  <div class="writing-holder">
+    <h4>Responding to Ted Chiang</h4>
+    <h6>Written February, 2023.</h6>
+
+    <div class="writing">
+      <p>
+        It's fun that everyone is getting into AI now. I get to feel a little
+        of what doctors might feel when their relatives talk about vaccines or
+        something.
+      </p>
+      <p>
+        Two days ago a good friend of mine sent me a
+        <a
+          href="https://www.newyorker.com/tech/annals-of-technology/chatgpt-is-a-blurry-jpeg-of-the-web"
+          >New Yorker article</a
+        >
+        by Ted Chiang, discussing ChatGPT. Ted is an excellent SciFi writer --
+        the man has won approximately a billion awards, and one of his short
+        stories became the basis for the movie Arrival. I highly recommend you
+        read his work, he's great at conveying complex ideas and has an
+        excellent grasp of visual language.
+      </p>
+      <p>
+        But, you know, I don't think that makes a person particularly qualified
+        to talk about the current state of AI/ML. Kinda like asking Matt Damon
+        about how to create a self-sustaining Mars colony.
+      </p>
+      <div class="image-holder">
+        <img src="img/martian.webp" width="500" />
+        <p>
+          Pictured: someone deeply unqualified to talk about rocket science.
+        </p>
+      </div>
+      <p>
+        Cards on the table, I think the New Yorker piece is wrong. Like, really
+        wrong. And potentially harmful, in a luddite kind of way - a strange
+        position for a scifi writer to take. So I wanted to respond, while
+        there was still a chance that anyone cared.
+      </p>
+      <p>
+        I'll start with what I like, which is that I agree that GPT can be
+        thought of as a compressed database. I think this is an excellent
+        intuition to have, a good model about how ML kinda works (remember,
+        though, all models are wrong, but some are useful).
+      </p>
+      <p>Where I disagree, in reverse order of magnitude:</p>
+      <ul>
+        <li>
+          there's an undercurrent in Ted's piece that people think about things
+          in a meaningfully different way, which I don't think is obviously
+          correct;
+        </li>
+        <li>
+          people actually explicitly are training deep models on the outputs of
+          other deep models, it's a very popular and increasingly well funded
+          field;
+        </li>
+        <li>
+          I strongly disagree that there's no use for tools like chat gpt, to
+          the point where I'm wondering if he's serious about that take.
+        </li>
+      </ul>
+      <h6>Brains in vats</h6>
+      <p>
+        Of these points, the first one is maybe the most controversial thing to
+        push back on, but I don't think it should be. Ted points out that tools
+        like ChatGPT don't know how to carry the 1, even though they've seen
+        some text to that effect.
+      </p>
+      <p>
+        That may be true, but I'm afraid Ted may be humanizing GPT more than he
+        should. GPT is as pure a tabula rasa as you can get. It doesn't get any
+        evolutionary neural structures that give humans a huge leg up in our
+        world. Worse, it only has a single sensory organ: reading text. By
+        comparison, babies, from the moment they are born, have five continuous
+        streams of data to parse. A month-old baby has terabytes of data to
+        work off. Seen from this context, the whole conversation about carrying
+        the one feels silly -- it's a wildly isolated demand for rigor. If you
+        had a deaf blind mute touchless brain in a vat with no prior
+        understanding of our universe, who's only understanding of the world
+        was through whatever text you had lying around, it would be a miracle
+        if that brain could begin to understand concepts like 'objects can't
+        occupy the same physical space at the same time' or 'gravity is a thing
+        that exists' or any other 'obvious' rules of our universe -- things
+        that a baby gets for free just from crawling arond.
+      </p>
+      <div class="image-holder">
+        <img src="img/etymology.png" width="700" />
+        <p>
+          Also GPT: what's a captain? and a millenium? and a ship? where are
+          we? what does it mean to be in a place? what is a place? what does it
+          mean to be?
+        </p>
+      </div>
+      <p>But GPT knows these things.</p>
+      <p>
+        You can ask GPT a question that demands some knowledge of physics, like
+        'if I put the mug on the table where is the mug', and it's pretty
+        amazing that it responds 'on the table' instead of 'on the floor'. I
+        think you would be very hard pressed to find any document on the web
+        that says something to the effect of 'in the real world, objects don't
+        phase through each other'. GPT just...picked this up, from how all of
+        the input text talks about the world and how things in the world
+        interact. So if that's also 'just pattern matching', I think that
+        humans basically learn the exact same way, i.e. 'learning general
+        principles by extrapolation'. (As an aside, Ted has perhaps forgotten
+        how most people learn addition. My 5yo nephews homework is basically
+        just constant repetition of two digit addition, over and over and
+        over.)
+      </p>
+      <div class="image-holder">
+        <img src="img/Braininvat.jpg" width="400" />
+        <p>GPT as an argument for solipsism.</p>
+      </div>
+      <h6>Teachers and Students</h6>
+      <p>
+        I'm going to quote Ted directly here, because I think he makes a solid
+        point in my favor.
+      </p>
+      <pre><code class="language-txt">Indeed, a useful criterion for gauging a large language model’s quality
+might be the willingness of a company to use the text that it generates
+as training material for a new model. If the output of ChatGPT isn’t
+good enough for GPT-4, we might take that as an indicator that it’s not
+good enough for us, either. Conversely, if a model starts generating
+text so good that it can be used to train new models, then that should
+give us confidence in the quality of that text. (I suspect that such an
+outcome would require a major breakthrough in the techniques used to
+build these models.) If and when we start seeing models producing
+output that’s as good as their input, then the analogy of lossy
+compression will no longer be applicable.</code></pre>
+      <p>
+        So here's <a href="https://aclanthology.org/W19-4427/">four</a>
+        <a href="https://ojs.aaai.org/index.php/AAAI/article/view/6233"
+          >synthetic</a
+        >
+        <a href="https://arxiv.org/abs/2002.09599">nlp</a>
+        <a
+          href="https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00492/112605/Generate-Annotate-and-Learn-NLP-with-Synthetic"
+          >papers</a
+        >. Here's a
+        <a href="https://www.ameliormate.com/gpt3-synthetic-data"
+          >whitepaper</a
+        >
+        arguing that models trained off GPT3 synthetic data are BETTER than
+        models trained off real world data. Here's a
+        <a href="https://www.allabtai.com/fine-tuning-gpt3/"
+          >random tutorial</a
+        >
+        about how to use GPT3 outputs to finetune GPT3.
+        <a
+          href="https://mostly.ai/synthetic-data/how-synthetic-data-changes-the-business-world/"
+          >Mostly.AI</a
+        >
+        raised $31M to generate synthetic data from text. And if we expand our
+        view even slightly, and take a peek at the computer vision world,
+        here's <a href="https://paralleldomain.com/">three</a>
+        <a
+          href="https://techcrunch.com/2022/03/23/datagen-raises-50-million-series-b-to-empower-computer-vision-teams/?guccounter=1"
+          >more</a
+        >
+        <a
+          href="https://techcrunch.com/2022/04/28/synthesis-ai-raises-17m-to-generate-synthetic-data-for-computer-vision/"
+          >companies</a
+        >
+        that have collectively raised near $150M to train models based on
+        synthetic image data. I don't think this is a big secret -- even
+        <a
+          href="https://www.forbes.com/sites/robtoews/2022/06/12/synthetic-data-is-about-to-transform-artificial-intelligence/?sh=6675af087523"
+          >Forbes</a
+        >
+        has caught on.
+      </p>
+      <p>
+        I think of the points Ted makes in the New Yorker article, this was the
+        one I was most disappointed by. There's a lot of information out there
+        about people doing this exact thing.
+      </p>
+      <h6>It's About the Process</h6>
+      <p>
+        Ted closes with a rather strong claim, which is that ChatGPT is
+        effectively useless for both creative and regular writing. Along the
+        way, he gestures towards the teaching process -- that students who rely
+        on ChatGPT to learn will be meaningfully worse at the process of
+        writing.
+      </p>
+      <p>
+        I think there's a lot of possible responses here. I could point out
+        that many authors believe something along the lines of 'Good authors
+        borrow, great authors steal'. I could mention that most writing is
+        emphatically not creative writing, and GPT will wholesale replace jobs
+        like data entry, copy writing, even work like news bulletins a la
+        associated press. I could point out that GPT will likely be integrated
+        as a very powerful auto complete, which seems perfectly in line with
+        existing tools. I could even gesture towards how in previous eras,
+        well-meaning folks would wring hands about the corrupting influence of
+        new fangled tools like 'writing', and how wrong they turned out to be.
+      </p>
+      <div class="image-holder">
+        <img src="img/death-of-socrates.jpg" width="400" />
+        <p>
+          "...this discovery of yours will create forgetfulness in the
+          learners' souls, because they will not use their memories; they will
+          trust to the external written characters and not remember of
+          themselves. The specific which you have discovered is an aid not to
+          memory, but to reminiscence, and you give your disciples not truth,
+          but only the semblance of truth; they will be hearers of many things
+          and will have learned nothing; they will appear to be omniscient and
+          will generally know nothing; they will be tiresome company, having
+          the show of wisdom without the reality." <br />--
+          <a
+            href="https://www.gutenberg.org/files/1636/1636-h/1636-h.htm#2H_4_0002"
+            >Socrates</a
+          >, on, uh, writing things down.
+        </p>
+      </div>
+      <p>
+        But the response I *want* to give, the one that I believe deep in my
+        gut, is that the best writers (and the best artists, and the best
+        programmers, and ...) are those who bring these AI tools into their
+        process. Thanks to the work I do, I get to bring AI design tools to
+        artists, and every day I watch people 100x their rate of productivity.
+        Those people iterate so much faster than everyone else, that there is
+        simply no meaningful competition. And much in the same way we have a
+        generation of 'digital natives', so I think we will have 'AI natives'
+        -- children who learn, through immersion, how to utilize these tools to
+        give themselves superhuman capabilities. And it'll be awesome to see.
+      </p>
+      <h6>All models are wrong...</h6>
+      <p>
+        Ted started out with a good idea. His 'lossy compression' model of
+        Machine Learning is useful, and provides some good intuition about what
+        these things are like. But he pushed this idea too far, and the model
+        broke at the seams. Yes, ChatGPT is in some senses <i>like</i> a blurry
+        JPG print. But it's <i>actually</i> a tangle of linear algebra, and any
+        metaphor that attempts to describe parts of it will only succeed at
+        describing, well, parts of it. In the meantime, I hope Ted takes the
+        initiative to try and integrate GPT tools into his workflow. I suspect
+        he may be pleasantly surprised at the results.
+      </p>
+    </div>
+  </div>
+  <div class="footer">
+    <a href="./index.html">Back to Writing</a>
+  </div>
+  <script>
+    hljs.highlightAll();
+  </script>
+</div>
