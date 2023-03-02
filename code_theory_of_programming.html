@@ -1,0 +1,247 @@
+<title>Theory of Programming</title>
+<meta name="viewport" content="width=800" />
+
+<meta name="description" content="Mental models are all you need." />
+<meta property="og:title" content="Theory of Programming" />
+<meta property="og:type" content="website" />
+<meta property="og:description" content="Mental models are all you need." />
+<meta property="og:image" content="" />
+
+<meta name="twitter:title" content="Theory of Programming" />
+<meta name="twitter:description" content="Mental models are all you need." />
+<meta name="twitter:image" content="" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="spy.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="spy.ico" type="image/x-icon" />
+<link rel="stylesheet" href="theme.css" />
+
+<!-- Syntax highlighting -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+
+<!-- Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-131666667-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'UA-131666667-1');
+</script>
+
+<div class="header">
+  <h1>Writing</h1>
+  <h3>Amol Kapoor</h3>
+  <a href="./index.html">Back to table of contents.</a>
+</div>
+
+<div class="content">
+  <div class="writing-holder">
+    <h4>Theory of Programming</h4>
+    <h6>Written February, 2023. Published March, 2023.</h6>
+
+    <div class="writing">
+      <h6>What is Programming?</h6>
+      <p>
+        The word "programming" has a fascinating etymology. It derives from the
+        word 'program', which in the 19th century meant 'a plan or scheme
+        announced beforehand' and in the 17th century meant 'written notice'.
+        That in turn derived from programma (Latin) and prographein (Greek),
+        meaning 'to write publicly'.
+      </p>
+      <p>Programming means 'the act of writing publicly'. Seems weird?</p>
+      <p>
+        I've recently been thinking about
+        <a href="https://www.baldurbjarnason.com/2022/theory-building/"
+          >Theory-building and why employee churn is lethal to software
+          companies</a
+        >, a blog post from one
+        <a href="https://www.baldurbjarnason.com/">Baldur Bjarnason</a>. To
+        paraphrase slightly, the post extends on the idea that programming is
+        not about writing code; rather, programming is about solving problems;
+        the code is merely a description of the solution. Without a programmer
+        who understands the code – who has essential context, a model of how
+        the code is meant to function – the code is meaningless. This concept
+        was first proposed by Peter Naur in a 1985 essay called
+        <a href="https://pablo.rauzy.name/dev/naur1985programming.pdf"
+          >Programming as Theory Building:</a
+        >
+      </p>
+
+      <pre><code class="language-txt">A main claim of the Theory Building View of programming is that an
+essential part of any program, the theory of it, is something that
+could not conceivably be expressed, but is inextricably bound to
+human beings. It follows that in describing the state of the program
+it is important to indicate the extent to which programmers having its
+theory remain in charge of it. As a way in which to emphasize this
+circumstance one might extend the notion of program building by
+notions of program life, death, and revival. The building of the
+program is the same as the building of the theory of it by and in the
+team of programmers. During the program life a programmer team
+possessing its theory remains in active control of the program, and
+in particular retains control over all modifications. The death of a
+program happens when the programmer team possessing its theory is
+dissolved. A dead program may continue to be used for execution in a
+computer and to produce useful results. The actual state of death
+becomes visible when demands for modifications of the program cannot
+be intelligently answered. Revival of a program is the rebuilding
+of its theory by a new programmer team.</code></pre>
+
+      <p>
+        I think this is actually quite insightful, and I wish I had learned
+        about it sooner. This framing helps explain many things about
+        programming that I personally found unexpectedly difficult, like:
+      </p>
+      <ul>
+        <li>
+          Why is understanding a new code base so difficult, even though all of
+          the code is freely present and available?
+        </li>
+        <li>Why is 'code discovery' a seemingly unsolved problem?</li>
+        <li>
+          How do you decide between 'learning a piece of code' and 'throwing it
+          out to start from scratch' (especially as regards to Chesterton's
+          fence)?
+        </li>
+      </ul>
+      <p>
+        I've come to believe that many of these difficulties arise from
+        cultural and internal practices that reflect the belief that code is
+        the most important output of a programmer's career. It's not; the model
+        is.
+      </p>
+      <h6>System Efficiency</h6>
+      <p>
+        How might we organize our engineering team with this new understanding?
+        What cultural practices should we adopt or change?
+      </p>
+      <p>
+        An efficient system is one that doesn't do the same work twice.
+        Engineering teams can be modeled as computational systems (see:
+        <a href="./founders_organization_as_systems.html"
+          >Oragnizations As Systems</a
+        >). If programmers solve problems by building mental models, then:
+      </p>
+      <ul>
+        <li>
+          it is vitally important to share this knowledge, because doing so
+          allows our engineers to minimize single points of failure while
+          maximizing parallelism;
+        </li>
+        <li>
+          no two programmers have to build the same mental model independently.
+        </li>
+      </ul>
+      <p>
+        In an ideal world, once the work of model-building has been done once,
+        the updated understanding of the problem space is immediately shared
+        and equally understood by everyone else on the team.
+      </p>
+      <p>
+        In practice, this isn't possible – we aren't Borg. Programmers have to
+        look over each other's work to share mental models, and there will
+        always be some information that doesn't transfer. But to avoid
+        duplicating work, we should be making this process as easy as possible.
+        In <a href="./founders_4.html">Corkscrew Development</a>, I talk about
+        how it's often more useful to write helpful documentation than it is to
+        write code:
+      </p>
+
+      <pre><code class="language-txt">There are steps you can take to increase the amount of compound
+value code will provide. Code that is well written, well documented,
+and has a clean interface is more likely to be reused – not just by
+you, but also by other people. Going a step further, code that is
+easily packaged into a binary that requires no technical knowledge
+to run is, potentially, even more valuable. These steps increase the
+number of people who can or will actually use that code later. The
+more people who can use your code, the more likely it will be
+reused, the more its compounding value.</code></pre>
+      <p>
+        As in any system optimization, we aim to target the area with the
+        biggest bottleneck to achieve the most improvement with the least work.
+        Same here. We can maximize our efficiency as a system by making the
+        model-update process as low-cost as possible.
+      </p>
+      <p>
+        Going back to our etymological definition, programming means 'the act
+        of writing publicly'. The goal of programming is not to write code, it
+        is to convey a solution to others as efficiently as possible. A piece
+        of code is a formalized solution, akin to a mathematical proof. But
+        just like academia, you need to provide a lot of context to make sure
+        your proof can be well understood. The philosophers who got the most
+        play in the Greek fora were those who could convey their point most
+        effectively, actual logic be damned.
+      </p>
+      <h6>Preventing Staleness</h6>
+      <p>
+        Unfortunately, it is insufficient to treat model-updates as static,
+        one-time processes. Codebases with multiple collaborators end up
+        behaving like shifting, organic things. Each editor is likely to have a
+        slightly outdated model; each additional update causes everyone else's
+        model to drift. This process eventually (inevitably) leads to staleness
+        – a point where a developer's internal model no longer matches the
+        actual code, and the developer must spend some amount of time updating
+        their model before they can continue their work.
+      </p>
+      <p>
+        We want to prevent staleness as much as possible, without necessarily
+        incurring the additional cost of simply having everyone keep themselves
+        updated. Below I provide an incomplete list of process improvements
+        (with the intent of growing this list over time). Note: the most
+        efficient form of model transfer is from the original developer to
+        everyone else; perhaps unsurprisingly, many of the approaches listed
+        below take advantage of this asymmetry by loading more work on the
+        original developer, while everyone else can consume the updates
+        passively.
+      </p>
+      <ul>
+        <li>
+          In-line and external documentation both help solve this problem in an
+          a la carte manner. When someone notices staleness, they can use first
+          external and then in-line documentation to help resolve their
+          questions, before diving into the code themselves. The ability for a
+          developer to choose how deep they need to go makes this a
+          particularly effective method for reducing staleness, especially when
+          paired with logical/coherent abstractions.
+        </li>
+        <li>
+          Code review guarantees that at least one other person on the team has
+          an opportunity to explicitly QA the developer. As per
+          <a href="./code_on_code_review">On Code Review</a>, it also provides
+          a chance to evaluate whether the model has been sufficiently
+          externalized.
+        </li>
+        <li>
+          Regular 'presentations' that allow engineers to share things they
+          have been working on, with an eye towards exposing and clarifying
+          complexity.
+        </li>
+        <li>
+          Descriptions of changes appearing in Slack or email as they go in,
+          ensuring that everyone is at least passively aware of what changes
+          are being made and who is responsible for making them.
+        </li>
+        <li>
+          Testing, especially integration testing, allows developers to see a
+          library in action by providing a wide range of possible use cases.
+        </li>
+      </ul>
+      <p>(and more?)</p>
+    </div>
+  </div>
+  <div class="footer">
+    <a href="./index.html">Back to Writing</a>
+  </div>
+  <script>
+    hljs.highlightAll();
+  </script>
+</div>
