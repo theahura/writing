@@ -1,0 +1,193 @@
+<title>On Code Review</title>
+<meta name="viewport" content="width=800" />
+
+<meta
+  name="description"
+  content="I know exactly one guy who loves code review. He also skydives as a hobby. I'm not sure if there's a correlation."
+/>
+<meta property="og:title" content="On Code Review" />
+<meta property="og:type" content="website" />
+<meta
+  property="og:description"
+  content="I know exactly one guy who loves code review. He also skydives as a hobby. I'm not sure if there's a correlation."
+/>
+<meta
+  property="og:image"
+  content="https://amolkapoor.com/writing/img/codereview.jpeg"
+/>
+
+<meta name="twitter:title" content="On Code Review" />
+<meta
+  name="twitter:description"
+  content="I know exactly one guy who loves code review. He also skydives as a hobby. I'm not sure if there's a correlation."
+/>
+<meta
+  name="twitter:image"
+  content="https://amolkapoor.com/writing/img/codereview.jpeg"
+/>
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="spy.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="spy.ico" type="image/x-icon" />
+<link rel="stylesheet" href="theme.css" />
+
+<!-- Syntax highlighting -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+
+<!-- Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-131666667-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'UA-131666667-1');
+</script>
+
+<div class="header">
+  <h1>Writing</h1>
+  <h3>Amol Kapoor</h3>
+  <a href="./index.html">Back to table of contents.</a>
+</div>
+
+<div class="content">
+  <div class="writing-holder">
+    <h4>On Code Review</h4>
+    <h6>Written January, 2023. Published May, 2023.</h6>
+
+    <div class="writing">
+      <h6>Code Review</h6>
+      <p>
+        In
+        <a href="./code_theory_of_programming.html">Theory of Programming</a> I
+        describe how the core of the programmer's job is building mental
+        models, not writing code. I conclude with the following:
+      </p>
+      <pre><code class="language-txt">…making code more legible is the most important thing we can do to be
+more efficient. Consider how long it takes for a programmer to really
+fully grok someone else's code. A long time! In fact, I'd bet that
+understanding code is the most time consuming thing a programmer
+spends time on.
+
+As in any system optimization, we aim to target the area with the
+biggest bottleneck to achieve the most improvement with the least
+work. Same here. We can maximize our efficiency as a system by
+making the model-update process as low-cost as possible. 
+      </code></pre>
+      <p>
+        This reframing has led me to some pretty radical (?) opinions on the
+        purpose of code review.
+      </p>
+      <p>
+        I think there are three reasons why an organization might institute a
+        code review process:
+      </p>
+      <ul>
+        <li>
+          to check the code for bugs, architectural/design decisions, and
+          stylistic consistency;
+        </li>
+        <li>
+          as a teaching/learning opportunity, whereby developers can share
+          knowledge of libraries and design patterns;
+        </li>
+        <li>
+          as a means of ensuring that more than one person on the team
+          understands the mental model of the code being written.
+        </li>
+      </ul>
+      <p>
+        I want to focus on the last of these, because I think it is
+        simultaneously the most important and the least recognized aspect of
+        code review. Having a shared understanding of a code base is
+        <a href="./founders_organizations_as_systems.html">obviously useful</a>
+        – as mentioned earlier, shared understanding directly leads to more
+        parallelism, fewer bottlenecks, and less single-points-of-failure. By
+        forcing other people to read through a PR, there is some minimal
+        guarantee that at least one other person can speak to the code being
+        written.
+      </p>
+      <p>
+        But remember, programming is about mental models, not code per se.
+        Reviewing code is only useful insofar as the code reveals the
+        underlying model. If, during a review, the reviewer is unable to
+        ascertain the decision making process behind the code, the review is
+        essentially meaningless and we cannot unlock any of the key benefits of
+        the review. Hopefully obvious.
+      </p>
+      <p>
+        More controversially, if a reviewer is only able to understand the code
+        by reading through all of it, the code is not useful – the programmer
+        has done an insufficient job conveying the model, and is as a result
+        totally, inextricably tied to the code itself.
+      </p>
+      <p>
+        In a world where the model is everything, review cannot just be about
+        the correctness of the code. It must also be about how well the code –
+        and all additional documentation, comments, etc. – communicates intent.
+        In many ways, this directly parallels the role of review in academia.
+        Researchers are evaluated on their ideas as well as their
+        communication; and bad writing, incoherent structure, or shitty figure
+        design can lead to an otherwise great paper being (rightfully!)
+        rejected.
+      </p>
+      <p>
+        When reviewing code, then, it is less important to try and read every
+        single detail. Frankly, it is rare that a code review will catch nitty
+        details like potentially corrupted state, and we shouldn't optimize for
+        that. Instead, reviewers should evaluate based on the following
+        questions:
+      </p>
+      <ul>
+        <li>
+          Did you have to read every line to understand what is going on, or
+          were comments and descriptions sufficient?
+        </li>
+        <li>
+          Is it obvious what this code is doing from APIs, function signatures,
+          and comments alone?
+        </li>
+        <li>
+          Can a talented new hire who has never seen the codebase before easily
+          blackbox how this code works?
+        </li>
+        <li>
+          How much analysis has to be done before you can feel safe changing
+          the code without violating
+          <a href="https://fs.blog/chestertons-fence/">Chesterton's Fence</a>?
+        </li>
+      </ul>
+      <p>and so on.</p>
+      <p>
+        When code is well documented and easily understandable – in other
+        words, when the programmer's internal model is externalized to the
+        entire team – anyone can use it, reason about it, change it. We get
+        access to way more parallelization, have way fewer blockers. The entire
+        team benefits, and the
+        <a href="./founders_4.html">exponential corkscrews</a> kick off in
+        earnest.
+      </p>
+      <p>
+        All this to say, reviewers should be unafraid (even eager!) to ask for
+        inline plain-English explanations. Making the programmer externalize
+        their mental models is perhaps the most important thing we reviewers
+        can do.
+      </p>
+    </div>
+  </div>
+  <div class="footer">
+    <a href="./index.html">Back to Writing</a>
+  </div>
+  <script>
+    hljs.highlightAll();
+  </script>
+</div>
