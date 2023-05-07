@@ -1,0 +1,341 @@
+<title>Organizations as Systems</title>
+<meta name="viewport" content="width=800" />
+
+<meta
+  name="description"
+  content="HR is just the kubernetes layer of the office workplace. No I will not elaborate."
+/>
+<meta property="og:title" content="Organizations as Systems" />
+<meta property="og:type" content="website" />
+<meta
+  property="og:description"
+  content="HR is just the kubernetes layer of the office workplace. No I will not elaborate."
+/>
+<meta
+  property="og:image"
+  content="https://amolkapoor.com/writing/img/robostock.jpeg"
+/>
+
+<meta name="twitter:title" content="Organizations as Systems" />
+<meta
+  name="twitter:description"
+  content="HR is just the kubernetes layer of the office workplace. No I will not elaborate."
+/>
+<meta
+  name="twitter:image"
+  content="https://amolkapoor.com/writing/img/robostock.jpeg"
+/>
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="spy.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="spy.ico" type="image/x-icon" />
+<link rel="stylesheet" href="theme.css" />
+
+<!-- Syntax highlighting -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+
+<!-- Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-131666667-1"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'UA-131666667-1');
+</script>
+
+<div class="header">
+  <h1>Writing</h1>
+  <h3>Amol Kapoor</h3>
+  <a href="./index.html">Back to table of contents.</a>
+</div>
+
+<div class="content">
+  <div class="writing-holder">
+    <h4>Organizations as Systems</h4>
+    <h6>Written February, 2023. Published May, 2023.</h6>
+
+    <div class="writing">
+      <h6>Be like the Venetian Arsenal</h6>
+      <p>
+        I want to preface this by pointing out that I am not, traditionally, a
+        systems engineer. That title/role is a pretty specific one,
+        meaningfully different from my past experiences as a SWE. That said,
+        over the last two years I have spent a lot of time thinking about
+        complex computer programs that can support a user-facing platform at
+        scale. So I might not know the latest terminology, and I might be
+        reinventing the wheel, but I figure I've picked up a thing or two worth
+        sharing when it comes to building systems.
+      </p>
+      <p>
+        First, a bit of history. Systems engineering far predates anything that
+        could be meaningfully recognized as modern day computer science. The
+        original use of the term can be traced back to Bell Labs, where it was
+        originally used to describe the telecom network. But some of the
+        principles of systems engineering go back farther – Ford factories in
+        the early 1900s, Carnegie railroads and Rockefeller oil in the 1800s.
+        My personal favorite is the Venetian Arsenal, a massive ship building
+        enterprise that, in the 1400s, was the world's first industrial
+        factory. Telecoms, manufacturing, transport, energy, shipbuilding – all
+        of these 'systems' faced the same underlying problem: "what is the
+        optimal way to leverage a set of non-fungible resources to solve a set
+        of non-fungible tasks?"
+      </p>
+      <p>
+        In my mind, system design is the act of defining a set of related
+        components, their communication channels, and their inputs/outputs, in
+        order to solve that resource allocation problem. Because inputs to the
+        system may vary significantly, it is often necessary for functional
+        systems to define a structure that is easy to adapt to changing
+        requirements, while being relatively resilient to unexpected failure
+        (including, inevitably, human error).
+      </p>
+      <h6>Core Values in a Good System</h6>
+      <p>
+        Every system is different, but good systems tend to embody a few core
+        values:
+      </p>
+      <p>
+        <b>Failure is inevitable.</b> Long-lived systems tend to assume that
+        failure will happen eventually, and as a result have comprehensive
+        fallbacks. These systems are designed to avoid single points of
+        failure, so that no one piece of the system can take down the entire
+        thing.
+      </p>
+      <p>
+        <b>Parallelization is good.</b> The more things that can happen at the
+        same time, the faster the system can operate and the more throughput it
+        can manage. The same set of tasks can be done faster, and costs can
+        easily be measured by compute resources that can be quickly dialed up
+        or down. Parallelization tends to reduce the surface area for failures.
+        This is because a parallel system abstracts what (code is being run)
+        from where (that code is being run). If there is a failure related to
+        the where, we can easily recover by shifting the task load to another
+        part of the system.
+      </p>
+      <p>
+        A necessary corollary is that <b>sequential operations are bad.</b> A
+        sequential operation forces parts of the system to wait on some other
+        part. This incurs wait time, which tends to be wasted or, at the least,
+        used inefficiently. Where possible, we want the components of our
+        system to avoid direct dependencies.
+      </p>
+      <p>
+        <b>Async is good.</b> An async system has components that can operate
+        independently of each other, on their own time frames. To accomplish
+        this, asynchronous modules collocate all of the dependencies necessary
+        to perform an atomically useful task. Async modules require async
+        communication – a byproduct of an asynchronous system is a framework
+        that emphasizes few messages packed with necessary information, instead
+        of many small updates. All of this tends to result in fewer single
+        points of failure; and such a system is more easily parallelized, with
+        lower scheduling overhead. Because an async module cannot necessarily
+        rely on responses from other modules, each individual module also tends
+        to be more independent, more easily understood, and more reusable.
+      </p>
+      <p>
+        <b>Standardized parts are good.</b> Every layer of the system should be
+        composed of plug-and-play building blocks that are in turn reusable and
+        opinionated. The process of creating the parts should be mostly
+        separated from the process of putting them together. Separating and
+        standardizing components makes a system more legible, because
+        understanding a piece of code in one area of the system can help
+        provide context for other areas of the system. It also enables
+        flexibility and better extensibility – with standardized components, it
+        is far easier to work at higher levels of abstraction.
+      </p>
+      <p>
+        <b>Externalizing information is good.</b> Complex systems are, by their
+        very nature, difficult to fully understand. Some systems may reach a
+        size where complete understanding is impossible for a single human. At
+        this scale, communication between various components is critical so
+        that the system remains legible upon inspection. In computer systems,
+        this often manifests in two ways:
+      </p>
+      <ul>
+        <li>
+          logs. Lots and lots of logs. Good, queryable system logs make it easy
+          to track down bugs, head off failures, and optimize efficiently.
+        </li>
+        <li>
+          modules over-exposing information such that future modules can ingest
+          that data, potentially without any knowledge of what the rest of the
+          system needs to know (see:
+          <a
+            href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern"
+            >pub/sub</a
+          >). Such an architecture provides natural hooks for future
+          extensibility.
+        </li>
+      </ul>
+      <p>
+        <b>And so on.</b> Many systems I've worked with, studied, or
+        implemented have other things in common – for example, Unix philosophy
+        'do one thing well' shows up a lot – but from a values perspective I
+        think the above four principles are pretty solid. A system that:
+      </p>
+      <ul>
+        <li>prepares for failure,</li>
+        <li>prioritizes parallelization,</li>
+        <li>incorporates asynchronous processes,</li>
+        <li>and externalizes information</li>
+      </ul>
+      <p>
+        is likely to be a robust, flexible, long-lived solution to the problem
+        being solved.
+      </p>
+      <h6>Human Resources</h6>
+      <p>
+        At the top, I said that all systems are trying to answer the same
+        question: "what is the optimal way to leverage a set of non-fungible
+        resources to solve a set of non-fungible tasks?"
+      </p>
+      <p>
+        Not to put too fine a point on it: this is the same problem that faces
+        every business in the world. Given a fixed set of resources (employee
+        hours), how can we { build the product, respond to customer feedback,
+        build our community, … }. Turns out, there's a few things we can learn
+        from the systems engineering principles above.
+      </p>
+      <p>
+        The throughline is simple: empower the individual. A good human system
+        is one where individual people are able to quickly and accurately make
+        important decisions about how to best accomplish their tasks within the
+        larger organization. This allows them to act asynchronously and in
+        parallel, almost by default.
+      </p>
+      <p>Within a team:</p>
+      <ul>
+        <li>
+          There should be specific procedures in place to ingest, prioritize,
+          and distribute tasks to the broader team. Individual people within
+          the team should understand a) what tasks are available in what
+          priority; b) how to 'take' a task such that no one else is working on
+          it; c) how to report task completion. To parallelize efficiently, we
+          want to avoid questions like 'what should I work on next'.
+        </li>
+        <li>
+          Related: ensure that responsiblilities are clearly defined. There
+          should never be a question about who is responsible for a task. Each
+          task should have one designated leader for whom responsibility rolls
+          up to. This ensures that there is no duplication of effort; it also
+          ensures that people cannot hide behind uncertainty.
+        </li>
+        <li>
+          As a general rule, hire generalists (pun unintended). A generalist
+          can take on a wider range of tasks, and is capable of parallelizing
+          more easily even if they take longer to complete specific sub-tasks.
+          The natural computing equivalent is choice of server – sometimes you
+          do need a GPU Accelerator for something really specific, but the bulk
+          of your work is going to be done on standard CPU machines.
+        </li>
+        <li>
+          Have a culture of documenting and sharing everything. Create a
+          glossary early on, so that there is a lingua franca. Have a way to
+          search through past documents, and hook up all of your platforms to
+          the same search tool. Make sure that any additional information can
+          be easily acquired without having to ask another person, thereby
+          avoiding sequential blockers. Have procedures in place for
+          documenting question-answers for those cases where the existing
+          tooling fails or some piece of knowledge is not institutionally
+          known. Encourage the team to 'log' loudly on (slack, email) when
+          things aren't going as expected.
+        </li>
+        <li>
+          Communicate new changes frequently. Have a meta-process (like code
+          review) that a) requires at least one other person on the team to be
+          aware of a change and b) specifically evaluates how discoverable and
+          comprehensible the change is. Randomly surface old ideas, concepts,
+          changes to increase discoverability.
+        </li>
+        <li>
+          Avoid interruptions and interrupting. Focus on asynchronous methods
+          of communication, like email, instead of synchronous messaging like
+          slack or meetings. Ensure that your asynchronous communication
+          actually contains all of the relevant information, such that it can
+          meaningfully remain asynchronous. (See:
+          <a href="./code_review.html">On Code Review</a> for more)
+        </li>
+        <li>
+          Create and follow patterns. Set and reuse templates, use the same
+          naming conventions, avoid 'uniqueness' where possible. Try and design
+          a world where people can guess what information they need and where
+          they can find it from previous observations alone.
+        </li>
+      </ul>
+      <p>Between teams:</p>
+      <ul>
+        <li>
+          Collocate decision making authority so that a team can operate
+          without needing to wait for other teams.
+        </li>
+        <li>
+          All teams should communicate regularly using a pub/sub model. Each
+          team should, on some regular interval (no more than monthly), publish
+          anything relevant about the team; and all other teams should, on some
+          regular interval, take stock of the most recent 'publications' from
+          other teams to inform their own internal agenda.
+        </li>
+        <li>
+          Make sure all documentation within a team is available to other teams
+          by default. Allow other folks from other teams to 'subscribe' to
+          updates by joining groups, slack channels, etc.
+        </li>
+        <li>
+          Treat individuals as a separate abstraction from teams. Allow
+          individuals to move between teams freely; allocate employee hours
+          based on team priority, instead of isolating resources to specific
+          teams. (However, be sure to account for context shift and onboarding
+          costs when moving folks across team boundaries. )
+        </li>
+        <li>
+          Ensure dependencies across teams (where they are unavoidable) are
+          based on milestones instead of timelines. Only start working on a
+          project when the necessary inputs are available; do not pre-deploy
+          resources expecting a certain output from another team, as this
+          creates unnecessary dependencies.
+        </li>
+      </ul>
+      <p>
+        And remember: failure is inevitable. Assume that people will
+        miscommunicate. Assume that information will be lost to the ether. Look
+        for ways to protect against these things by having a culture of
+        over-communicating and over-documenting.
+      </p>
+      <h6>One huge caveat</h6>
+      <p>All of the above only works in a high trust organization.</p>
+      <p>
+        Imagine a system where you have a set of trusted computers behind the
+        same firewall -- if you know they will all behave, you can reduce
+        systemic complexity by lowering monitoring and security costs.
+      </p>
+      <p>
+        The same applies for individuals. Empowering individuals in a team
+        necessarily means that you trust those individuals to make good
+        decisions, and you can let them operate without constant oversight. If
+        you don't trust your team, you will need to add additional layers of
+        complexity to ensure that they are doing what you expect them to do.
+        For SOOT, a deep tech company that is solving some pretty gnarly
+        technical problems, we avoided this problem by ensuring our hiring
+        funnel was extremely rigorous. For a company that is doing something
+        more basic, like a CRUD app, it may be worth having lower individual
+        autonomy in exchange for cheaper hiring.
+      </p>
+    </div>
+  </div>
+  <div class="footer">
+    <a href="./index.html">Back to Writing</a>
+  </div>
+  <script>
+    hljs.highlightAll();
+  </script>
+</div>
