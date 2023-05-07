@@ -29,6 +29,10 @@ th {
   text-align: left;
 }
 
+li {
+  margin-bottom: 5px;
+}
+
 .header {
   padding: 25px;
   background-color: #f5f5f5;
